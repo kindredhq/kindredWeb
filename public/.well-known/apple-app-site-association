@@ -1,4 +1,3 @@
-<template>
     {
       "applinks": {
           "apps": [],
@@ -10,4 +9,3 @@
         ]
       }
     }
-    </template>
