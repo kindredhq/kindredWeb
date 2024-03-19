@@ -2,13 +2,5 @@
 export default defineNuxtConfig({
  
   devtools: { enabled: true },
-  vite: ({
-    $client:{
-      build: {
-        
-        target: "safari14"
-        
-      }
-    }
-  })
+  
 })
