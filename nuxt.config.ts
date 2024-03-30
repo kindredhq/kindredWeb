@@ -39,6 +39,7 @@ export default defineNuxtConfig({
 },
   devtools: { enabled: true },
   vite: {
+    
 
   build: {
     target: "es2015"
