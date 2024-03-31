@@ -4,22 +4,22 @@
         <section class=" h-screen p-5">
             <div>
                 <img class="logo block w-fit h-16 md:h-40 m-auto" src="/icons/kindred.svg" alt="Discover Nuxt 3" />
-                <h1 class=" text-center py-4 text-4xl md:text-8xl font-bold mx-5">
+                <h1 class=" md:text-center mb-4 mt-6 md:py-4 text-4xl md:text-8xl font-bold md:mx-5">
                     One relationship at a time
                 </h1>
-                <p class=" text-center  w-full md:text-4xl py-3 md:w-2/3 mx-auto">At Kindred, We empower ambitious young people with the tools they need to nurture valuable professional and personal relationships 💜. Sign up to be first in line when we launch!</p>
+                <p class=" md:text-center  w-full md:text-4xl py-3 md:w-2/3 mx-auto">At Kindred, We empower ambitious young people with the tools they need to nurture valuable professional and personal relationships 💜. Sign up to be first in line when we launch!</p>
             </div>
             <div>
                
             <div class="list">
-                <form class="grid grid-rows-3 md:flex md:justify-center  mt-5"
+                <form class="grid grid-rows-3 md:flex md:justify-center gap-3  mt-5"
       method="post"
       action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT"
     >
-      <input type="text" class="rounded-md border border-slate-200 p-2 mb-2 md:mr-2" name="firstName" placeholder="First name" required>
-      <input type="email" class="rounded-md border border-slate-200 p-2 mb-4 md:mr-2" name="email" placeholder="Email" required>
+      <input type="text" class="rounded-md border border-slate-200 p-2  md:mr-2" name="firstName" placeholder="First name" required>
+      <input type="email" class="rounded-md border border-slate-200 p-2 md:mr-2" name="email" placeholder="Email" required>
       <input type="hidden" name="userGroup" value="Website signups">
-      <button class=" h-10 px-6 font-semibold rounded-md border  text-white bg-kindred" type="submit">Enter waitlist</button>
+      <button class=" h-14 px-6 font-semibold rounded-md border  text-white bg-kindred" type="submit">Enter waitlist</button>
     </form>
     
             </div>
