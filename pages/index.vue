@@ -11,8 +11,8 @@
             </div>
             <div>
                
-            <div class="list">
-                <form class="grid grid-rows-3 md:flex md:justify-center gap-3  mt-5"
+            <div class="list mb-6">
+                <form class="grid grid-rows-3 md:flex md:justify-center gap-3  mt-5 "
       method="post"
       action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT"
     >
