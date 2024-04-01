@@ -5,7 +5,7 @@
             <div>
                 <img class="logo block w-fit h-16 md:h-40 m-auto" src="/icons/kindred.svg" alt="Discover Nuxt 3" />
                 <h1 class=" md:text-center mb-4 mt-6 md:py-4 text-4xl md:text-6xl font-bold md:mx-5">
-                    Nurture life long connections
+                    Nurture life-long connections
                 </h1>
                 <p class=" md:text-center  w-full md:text-3xl py-3 md:w-2/3 mx-auto">At Kindred, We empower ambitious young people with the tools they need to nurture valuable professional and personal relationships 💜. Sign up to be first in line when we launch!</p>
             </div>
@@ -14,7 +14,7 @@
             <div class="list mb-6">
                 <form class="grid grid-rows-3 md:flex md:justify-center gap-3  mt-5 "
       method="post"
-      action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT"
+      action="https://app.loops.so/api/newsletter-form/clu6fo2t000vzmuw9u3mi2v84"
     >
       <input type="text" class="rounded-md border border-slate-200 p-2  md:mr-2" name="firstName" placeholder="First name" required>
       <input type="email" class="rounded-md border border-slate-200 p-2 md:mr-2" name="email" placeholder="Email" required>
