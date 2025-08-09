@@ -1,42 +1,43 @@
 
 <template>
-  <div class="min-h-screen">
+  <div class="min-h-screen w-full max-w-full overflow-x-hidden">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col overflow-hidden">
-      <!-- Clean gradient background for content area -->
-      <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/20 to-transparent"></div>
+    <section class="relative min-h-screen w-full overflow-hidden">
+      <!-- Full hero background image -->
+      <div class="absolute inset-0">
+        <img :src="heroImage" alt="Connected Community" class="w-full h-full object-cover object-center" style="max-width: 100vw;" />
+      </div>
       
-      <!-- Atmospheric background image positioned in lower portion -->
-      <div class="absolute bottom-0 left-0 right-0 h-2/5 overflow-hidden">
-        <img :src="heroImage" alt="Connected Community" class="w-full h-full object-cover object-top opacity-60" />
-        <!-- Soft fade gradient to blend with content -->
-        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-white/80"></div>
+      <!-- Gentle gradient overlay for text readability - blends into image -->
+      <div class="absolute inset-0">
+        <!-- Desktop: gradient concentrated in content area, mobile: full width -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-transparent lg:bg-gradient-to-b lg:from-white/70 lg:via-white/30 lg:to-transparent"></div>
       </div>
       
       <!-- Subtle floating elements for atmosphere -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 left-8 w-16 h-16 bg-blue-200/20 rounded-full blur-xl animate-float-slow"></div>
-        <div class="absolute top-40 right-12 w-20 h-20 bg-purple-200/15 rounded-full blur-2xl animate-float-medium delay-1000"></div>
-        <div class="absolute bottom-60 left-1/4 w-12 h-12 bg-cyan-200/25 rounded-full blur-lg animate-float-fast delay-500"></div>
+        <div class="absolute top-20 left-8 w-16 h-16 bg-white/20 rounded-full blur-xl animate-float-slow"></div>
+        <div class="absolute top-40 right-12 w-20 h-20 bg-white/15 rounded-full blur-2xl animate-float-medium delay-1000"></div>
+        <div class="absolute bottom-60 left-1/4 w-12 h-12 bg-white/25 rounded-full blur-lg animate-float-fast delay-500"></div>
       </div>
 
-      <!-- Content area in clean white space -->
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center text-center z-10 py-12">
+      <!-- Content positioned lower on desktop, centered on mobile -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 min-h-screen flex flex-col justify-center lg:justify-start lg:pt-32 text-center">
         <!-- Logo -->
         <div class="mb-6 sm:mb-8">
           <img class="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto drop-shadow-lg" :src="kindredLogo" alt="Kindred" />
         </div>
 
         <!-- Main Headline -->
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-2">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-2 drop-shadow-sm">
           Turn Your Network Into Your<br class="hidden sm:block"/>
-          <span class="text-kindred font-black">
+          <span class="text-kindred font-black drop-shadow-sm">
             Competitive Advantage
           </span>
         </h1>
 
         <!-- Subheadline -->
-        <p class="text-lg sm:text-xl md:text-2xl text-gray-800 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-medium px-2">
+        <p class="text-lg sm:text-xl md:text-2xl text-black mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-bold px-2 drop-shadow-lg">
           The relationship management system built for executives who manage 200+ business relationships. 
           <br class="hidden sm:block"/>
           Never let another $100K opportunity slip away because you forgot to follow up.
@@ -221,19 +222,12 @@
     </section>
 
     <!-- Social Proof Section -->
-    <section class="py-20 relative overflow-hidden">
-      <!-- Subtle background image -->
-      <div class="absolute inset-0">
-        <img :src="heroImage" alt="Community Background" class="w-full h-full object-cover object-center opacity-10" />
-        <div class="absolute inset-0 bg-white/95"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white/20 to-purple-50/30"></div>
-      </div>
-      
-      <!-- Enhanced floating elements that complement the background image -->
+    <section class="py-20 relative bg-gradient-to-b from-slate-50 via-blue-50/20 to-purple-50/20">
+      <!-- Clean floating elements for atmosphere -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-40 left-16 w-32 h-20 bg-gradient-to-br from-blue-200/15 to-cyan-200/15 rounded-full blur-2xl animate-float-slow"></div>
         <div class="absolute bottom-32 right-20 w-28 h-36 bg-gradient-to-br from-purple-200/15 to-pink-200/15 rounded-full blur-2xl animate-float-medium delay-1000"></div>
-        <div class="absolute top-20 right-1/4 w-24 h-24 bg-white/30 rounded-full blur-xl animate-float-fast delay-500"></div>
+        <div class="absolute top-20 right-1/4 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-float-fast delay-500"></div>
       </div>
       
       <div class="container mx-auto px-6 relative z-10">
