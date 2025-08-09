@@ -2,117 +2,120 @@
 <template>
   <div class="min-h-screen">
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <!-- Hero Background Image -->
-      <div class="absolute inset-0">
-        <img :src="heroImage" alt="Connected Community" class="w-full h-full object-cover object-center opacity-85" />
-        <!-- Balanced overlay for text readability while keeping image visible -->
-        <div class="absolute inset-0 bg-white/40"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-white/50 via-white/20 to-white/60"></div>
+    <section class="relative min-h-screen flex flex-col overflow-hidden">
+      <!-- Clean gradient background for content area -->
+      <div class="absolute inset-0 bg-gradient-to-b from-white via-blue-50/20 to-transparent"></div>
+      
+      <!-- Atmospheric background image positioned in lower portion -->
+      <div class="absolute bottom-0 left-0 right-0 h-2/5 overflow-hidden">
+        <img :src="heroImage" alt="Connected Community" class="w-full h-full object-cover object-top opacity-60" />
+        <!-- Soft fade gradient to blend with content -->
+        <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-white/80"></div>
       </div>
       
-      <!-- Additional floating elements to enhance the dreamy effect -->
+      <!-- Subtle floating elements for atmosphere -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <!-- Subtle floating orbs that complement the image -->
-        <div class="absolute top-20 left-20 w-24 h-24 bg-white/30 rounded-full blur-xl animate-float-slow"></div>
-        <div class="absolute top-40 right-32 w-32 h-32 bg-blue-300/20 rounded-full blur-2xl animate-float-medium delay-1000"></div>
-        <div class="absolute bottom-40 left-1/3 w-28 h-28 bg-purple-300/15 rounded-full blur-xl animate-float-fast delay-500"></div>
+        <div class="absolute top-20 left-8 w-16 h-16 bg-blue-200/20 rounded-full blur-xl animate-float-slow"></div>
+        <div class="absolute top-40 right-12 w-20 h-20 bg-purple-200/15 rounded-full blur-2xl animate-float-medium delay-1000"></div>
+        <div class="absolute bottom-60 left-1/4 w-12 h-12 bg-cyan-200/25 rounded-full blur-lg animate-float-fast delay-500"></div>
       </div>
 
-      <div class="container mx-auto px-6 text-center z-10">
+      <!-- Content area in clean white space -->
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center text-center z-10 py-12">
         <!-- Logo -->
-        <div class="mb-8 pt-16">
-          <img class="w-32 h-32 mx-auto drop-shadow-lg" :src="kindredLogo" alt="Kindred" />
+        <div class="mb-6 sm:mb-8">
+          <img class="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 mx-auto drop-shadow-lg" :src="kindredLogo" alt="Kindred" />
         </div>
 
         <!-- Main Headline -->
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight drop-shadow-md">
-          Turn Your Network Into Your<br/>
-          <span class="text-kindred font-black drop-shadow-md">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-2">
+          Turn Your Network Into Your<br class="hidden sm:block"/>
+          <span class="text-kindred font-black">
             Competitive Advantage
           </span>
         </h1>
 
         <!-- Subheadline -->
-        <p class="text-xl md:text-2xl text-gray-900 mb-8 max-w-4xl mx-auto leading-relaxed font-semibold drop-shadow-md">
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-800 mb-6 sm:mb-8 max-w-4xl mx-auto leading-relaxed font-medium px-2">
           The relationship management system built for executives who manage 200+ business relationships. 
+          <br class="hidden sm:block"/>
           Never let another $100K opportunity slip away because you forgot to follow up.
         </p>
 
         <!-- Value Props -->
-        <div class="flex flex-wrap justify-center gap-6 mb-12">
-          <div class="flex items-center bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-xl border border-green-200">
-            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-            <span class="text-gray-800 font-semibold">Executive-focused design</span>
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4">
+          <div class="flex items-center bg-white/95 backdrop-blur-sm px-4 sm:px-5 py-3 sm:py-3 rounded-full shadow-xl border border-green-200 min-h-[44px]">
+            <div class="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+            <span class="text-gray-800 font-semibold text-sm sm:text-base">Executive-focused design</span>
           </div>
-          <div class="flex items-center bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-xl border border-blue-200">
-            <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-            <span class="text-gray-800 font-semibold">AI-powered reminders</span>
+          <div class="flex items-center bg-white/95 backdrop-blur-sm px-4 sm:px-5 py-3 sm:py-3 rounded-full shadow-xl border border-blue-200 min-h-[44px]">
+            <div class="w-3 h-3 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+            <span class="text-gray-800 font-semibold text-sm sm:text-base">AI-powered reminders</span>
           </div>
-          <div class="flex items-center bg-white/95 backdrop-blur-sm px-5 py-3 rounded-full shadow-xl border border-purple-200">
-            <div class="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
-            <span class="text-gray-800 font-semibold">Relationship ROI tracking</span>
+          <div class="flex items-center bg-white/95 backdrop-blur-sm px-4 sm:px-5 py-3 sm:py-3 rounded-full shadow-xl border border-purple-200 min-h-[44px]">
+            <div class="w-3 h-3 bg-purple-500 rounded-full mr-3 flex-shrink-0"></div>
+            <span class="text-gray-800 font-semibold text-sm sm:text-base">Relationship ROI tracking</span>
           </div>
         </div>
 
         <!-- CTA Section -->
-        <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl max-w-lg mx-auto border border-white/50">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Join the Executive Waitlist</h3>
-          <p class="text-gray-700 mb-6 font-medium">Be first to access the relationship management system that turns connections into revenue.</p>
+        <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl max-w-lg mx-4 sm:mx-auto border border-white/50">
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Join the Executive Waitlist</h3>
+          <p class="text-gray-700 mb-6 font-medium text-sm sm:text-base">Be first to access the relationship management system that turns connections into revenue.</p>
           
           <form class="space-y-4" method="post" action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT">
-            <div class="grid md:grid-cols-2 gap-4">
+            <div class="flex flex-col sm:grid sm:grid-cols-2 gap-4">
               <input 
                 type="text" 
                 name="firstName" 
                 placeholder="First name" 
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all"
+                class="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all text-base min-h-[48px]"
                 required
               >
               <input 
                 type="email" 
                 name="email" 
                 placeholder="Work email" 
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all"
+                class="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all text-base min-h-[48px]"
                 required
               >
             </div>
             <input type="hidden" name="userGroup" value="Executive Waitlist">
             <button 
               type="submit" 
-              class="w-full bg-gradient-to-r from-kindred to-purple-600 text-white font-semibold py-4 px-8 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+              class="w-full bg-gradient-to-r from-kindred to-purple-600 text-white font-semibold py-4 px-8 rounded-lg hover:shadow-xl active:scale-95 transition-all duration-300 text-base min-h-[48px] touch-manipulation"
             >
               Get Early Access
             </button>
           </form>
           
-          <p class="text-xs text-gray-500 mt-4">Join 2,500+ executives already on the waitlist</p>
+          <p class="text-xs sm:text-sm text-gray-500 mt-4 text-center">Join 2,500+ executives already on the waitlist</p>
         </div>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-20 relative bg-gradient-to-b from-white via-blue-50/30 to-purple-50/30">
+    <section class="py-12 sm:py-16 lg:py-20 relative bg-gradient-to-b from-white via-blue-50/30 to-purple-50/30">
       <!-- Background decoration -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 right-20 w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 left-20 w-56 h-32 bg-gradient-to-br from-cyan-200/20 to-pink-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-20 right-8 sm:right-20 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-8 sm:left-20 w-32 h-20 sm:w-56 sm:h-32 bg-gradient-to-br from-cyan-200/20 to-pink-200/20 rounded-full blur-3xl"></div>
       </div>
       
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4 drop-shadow-sm">Built for Executive Success</h2>
-          <p class="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12 sm:mb-16">
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 drop-shadow-sm">Built for Executive Success</h2>
+          <p class="text-base sm:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto font-medium px-4">
             Unlike generic CRMs built for sales teams, Kindred focuses on personal relationship ROI, 
             helping you maintain and strengthen your professional networks.
           </p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           <!-- Feature 1 - Smart Contact Organization -->
-          <div class="relative group text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-blue-100/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+          <div class="relative group text-center p-6 sm:p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-blue-100/50 hover:shadow-2xl transition-all duration-500 lg:hover:-translate-y-2 overflow-hidden mx-4 sm:mx-0">
             <!-- Feature Image Placeholder -->
-            <div class="relative w-full h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+            <div class="relative w-full h-40 sm:h-48 mx-auto mb-4 sm:mb-6 rounded-xl overflow-hidden">
               <!-- Gradient placeholder that mimics your reference style -->
               <div class="absolute inset-0 bg-gradient-to-br from-blue-200 via-cyan-100 to-blue-300"></div>
               <div class="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/40"></div>
@@ -133,16 +136,16 @@
               </div>
             </div>
             
-            <h3 class="text-xl font-bold text-gray-900 mb-4 drop-shadow-sm">Smart Contact Organization</h3>
-            <p class="text-gray-700 font-medium">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 drop-shadow-sm">Smart Contact Organization</h3>
+            <p class="text-gray-700 font-medium text-sm sm:text-base">
               Group contacts into meaningful circles (Family, Work, Acquaintances). Import from any source with intelligent duplicate detection.
             </p>
           </div>
 
           <!-- Feature 2 - AI-Powered Reminders -->
-          <div class="relative group text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-purple-100/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+          <div class="relative group text-center p-6 sm:p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-purple-100/50 hover:shadow-2xl transition-all duration-500 lg:hover:-translate-y-2 overflow-hidden mx-4 sm:mx-0">
             <!-- Feature Image Placeholder -->
-            <div class="relative w-full h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+            <div class="relative w-full h-40 sm:h-48 mx-auto mb-4 sm:mb-6 rounded-xl overflow-hidden">
               <!-- Gradient placeholder matching your reference -->
               <div class="absolute inset-0 bg-gradient-to-br from-purple-200 via-pink-100 to-purple-300"></div>
               <div class="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/40"></div>
@@ -161,16 +164,16 @@
               </div>
             </div>
             
-            <h3 class="text-xl font-bold text-gray-900 mb-4 drop-shadow-sm">AI-Powered Reminders</h3>
-            <p class="text-gray-700 font-medium">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 drop-shadow-sm">AI-Powered Reminders</h3>
+            <p class="text-gray-700 font-medium text-sm sm:text-base">
               Intelligent timing suggestions for outreach based on your patterns. Context-aware reminders with conversation history.
             </p>
           </div>
 
           <!-- Feature 3 - Relationship Analytics -->
-          <div class="relative group text-center p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-green-100/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+          <div class="relative group text-center p-6 sm:p-8 rounded-2xl bg-white/90 backdrop-blur-sm border border-green-100/50 hover:shadow-2xl transition-all duration-500 lg:hover:-translate-y-2 overflow-hidden mx-4 sm:mx-0">
             <!-- Feature Image Placeholder -->
-            <div class="relative w-full h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+            <div class="relative w-full h-40 sm:h-48 mx-auto mb-4 sm:mb-6 rounded-xl overflow-hidden">
               <!-- Gradient placeholder -->
               <div class="absolute inset-0 bg-gradient-to-br from-green-200 via-emerald-100 to-teal-300"></div>
               <div class="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/40"></div>
@@ -190,8 +193,8 @@
               </div>
             </div>
             
-            <h3 class="text-xl font-bold text-gray-900 mb-4 drop-shadow-sm">Relationship Analytics</h3>
-            <p class="text-gray-700 font-medium">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 drop-shadow-sm">Relationship Analytics</h3>
+            <p class="text-gray-700 font-medium text-sm sm:text-base">
               Track business ROI from relationships. Relationship strength scoring and interaction frequency analysis.
             </p>
           </div>
