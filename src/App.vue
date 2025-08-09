@@ -115,6 +115,9 @@
           
           <p class="text-xs sm:text-sm text-gray-500 mt-4 text-center">Join 2,500+ executives already on the waitlist</p>
         </div>
+        
+        <!-- Bottom padding for hero section -->
+        <div class="pb-16 sm:pb-20 lg:pb-24"></div>
       </div>
     </section>
 
