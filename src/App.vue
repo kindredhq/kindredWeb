@@ -64,7 +64,27 @@
           <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Join the Executive Waitlist</h3>
           <p class="text-gray-700 mb-6 font-medium text-sm sm:text-base">Be first to access the relationship management system that turns connections into revenue.</p>
           
-          <form class="space-y-4" method="post" action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT">
+          <!-- Success Message -->
+          <div v-if="showSuccess" class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-green-800 font-medium">Welcome to the waitlist! You'll hear from us soon.</span>
+            </div>
+          </div>
+          
+          <!-- Error Message -->
+          <div v-if="submitError" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-red-800 font-medium">{{ submitError }}</span>
+            </div>
+          </div>
+          
+          <form class="space-y-4" @submit="(e) => handleSubmit(e, 'Executive Waitlist')">
             <div class="flex flex-col sm:grid sm:grid-cols-2 gap-4">
               <input 
                 type="text" 
@@ -72,6 +92,7 @@
                 placeholder="First name" 
                 class="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all text-base min-h-[48px]"
                 required
+                :disabled="isSubmitting"
               >
               <input 
                 type="email" 
@@ -79,14 +100,16 @@
                 placeholder="Work email" 
                 class="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kindred focus:border-transparent outline-none transition-all text-base min-h-[48px]"
                 required
+                :disabled="isSubmitting"
               >
             </div>
-            <input type="hidden" name="userGroup" value="Executive Waitlist">
             <button 
               type="submit" 
-              class="w-full bg-gradient-to-r from-kindred to-purple-600 text-white font-semibold py-4 px-8 rounded-lg hover:shadow-xl active:scale-95 transition-all duration-300 text-base min-h-[48px] touch-manipulation"
+              :disabled="isSubmitting"
+              class="w-full bg-gradient-to-r from-kindred to-purple-600 text-white font-semibold py-4 px-8 rounded-lg hover:shadow-xl active:scale-95 transition-all duration-300 text-base min-h-[48px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Get Early Access
+              <span v-if="isSubmitting">Joining...</span>
+              <span v-else>Get Early Access</span>
             </button>
           </form>
           
@@ -342,20 +365,42 @@
         </p>
         
         <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto">
-          <form class="space-y-4" method="post" action="https://app.loops.so/api/newsletter-form/YOUR_FORM_ENDPOINT">
+          <!-- Success Message -->
+          <div v-if="showSuccess" class="bg-white/20 border border-white/30 rounded-lg p-4 mb-4">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-white mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-white font-medium">Welcome to the waitlist! You'll hear from us soon.</span>
+            </div>
+          </div>
+          
+          <!-- Error Message -->
+          <div v-if="submitError" class="bg-red-500/20 border border-red-400/50 rounded-lg p-4 mb-4">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 text-red-200 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-red-200 font-medium">{{ submitError }}</span>
+            </div>
+          </div>
+          
+          <form class="space-y-4" @submit="(e) => handleSubmit(e, 'Final CTA Signup')">
             <input 
               type="email" 
               name="email" 
               placeholder="Enter your work email" 
               class="w-full px-4 py-4 border border-white/20 rounded-lg bg-white/10 backdrop-blur-sm text-white placeholder-white/70 focus:ring-2 focus:ring-white/50 focus:border-transparent outline-none"
               required
+              :disabled="isSubmitting"
             >
-            <input type="hidden" name="userGroup" value="Final CTA Signup">
             <button 
               type="submit" 
-              class="w-full bg-white text-kindred font-bold py-4 px-8 rounded-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
+              :disabled="isSubmitting"
+              class="w-full bg-white text-kindred font-bold py-4 px-8 rounded-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Get Executive Early Access
+              <span v-if="isSubmitting">Joining...</span>
+              <span v-else>Get Executive Early Access</span>
             </button>
           </form>
         </div>
@@ -391,6 +436,7 @@
   
   
 <script setup>
+import { ref } from 'vue'
 import kindredLogo from '@/assets/kindred.svg'
 import heroImage from '@/assets/image (10).png'
 
@@ -400,8 +446,53 @@ import heroImage from '@/assets/image (10).png'
 // import analyticsFeatureImage from '@/assets/analytics-feature.png'   // Floating data visualizations in clouds
 // import testimonialsBackground from '@/assets/testimonials-bg.png'    // Wide cloudscape for testimonials
 
-// The forms are now handled via standard HTML form submission
-// to the Loops.so endpoint for better reliability and simplicity
+// Form submission state
+const isSubmitting = ref(false)
+const showSuccess = ref(false)
+const submitError = ref('')
+
+// Handle form submission
+const handleSubmit = async (event, userGroup = 'Executive Waitlist') => {
+  event.preventDefault()
+  
+  const formData = new FormData(event.target)
+  const data = {
+    firstName: formData.get('firstName'),
+    email: formData.get('email'),
+    userGroup: userGroup
+  }
+  
+  isSubmitting.value = true
+  submitError.value = ''
+  
+  try {
+    const response = await fetch('https://app.loops.so/api/newsletter-form/clu6fo2t000vzmuw9u3mi2v84', {
+      method: 'POST',
+      body: new URLSearchParams(data),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+    
+    const result = await response.json()
+    
+    if (result.success) {
+      showSuccess.value = true
+      event.target.reset() // Clear the form
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        showSuccess.value = false
+      }, 5000)
+    } else {
+      submitError.value = result.message || 'Something went wrong. Please try again.'
+    }
+  } catch (error) {
+    submitError.value = 'Network error. Please check your connection and try again.'
+  } finally {
+    isSubmitting.value = false
+  }
+}
 </script>
   
 <style scoped>
