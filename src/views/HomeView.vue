@@ -23,11 +23,17 @@
           </p>
 
           <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-center gap-4 mb-8">
-            <button 
-              @click="scrollToEmailCapture"
-              class="px-8 py-4 bg-kindred text-white text-lg font-semibold rounded-lg hover:bg-kindred-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 w-full sm:w-auto"
+            <router-link
+              to="/roi-calculator"
+              class="px-8 py-4 bg-kindred text-white text-lg font-semibold rounded-lg hover:bg-kindred-600 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 w-full sm:w-auto text-center"
             >
-              See What You're Missing →
+              Calculate Your ROI →
+            </router-link>
+            <button
+              @click="scrollToEmailCapture"
+              class="px-8 py-4 border-2 border-kindred text-kindred text-lg font-semibold rounded-lg hover:bg-kindred-50 transition-all duration-300 w-full sm:w-auto"
+            >
+              Join Waitlist
             </button>
           </div>
 
@@ -91,11 +97,23 @@
           </div>
         </div>
 
-        <div class="mt-12 text-center">
+        <div class="mt-12 text-center space-y-6">
           <p class="text-xl text-slate-700 font-semibold max-w-4xl mx-auto">
-            Most executives lose <span class="text-red-600 font-bold">$300K-$2M annually</span> because relationships slip through the cracks. 
+            Most executives lose <span class="text-red-600 font-bold">$300K-$2M annually</span> because relationships slip through the cracks.
             But beyond the dollars, they lose something more valuable: <span class="text-kindred font-bold">genuine human connection.</span>
           </p>
+          <div>
+            <router-link
+              to="/roi-calculator"
+              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white text-lg font-bold rounded-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5"
+            >
+              Calculate What You're Losing
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </router-link>
+            <p class="text-sm text-slate-500 mt-3">Free 3-minute assessment • Instant results</p>
+          </div>
         </div>
       </div>
     </section>

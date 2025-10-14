@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PrivacyPolicy from '../components/PrivacyPolicy.vue'
+import AssessmentView from '../views/AssessmentView.vue'
+import ResultsView from '../views/ResultsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,6 +16,22 @@ const router = createRouter({
       path: '/privacy',
       name: 'privacy',
       component: PrivacyPolicy
+    },
+    {
+      path: '/roi-calculator',
+      name: 'roi-calculator',
+      component: AssessmentView,
+      meta: {
+        title: 'ROI Calculator | Kindred'
+      }
+    },
+    {
+      path: '/results/:id',
+      name: 'results',
+      component: ResultsView,
+      meta: {
+        title: 'Your Results | Kindred'
+      }
     }
   ],
   scrollBehavior(to, from, savedPosition) {
