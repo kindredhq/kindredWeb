@@ -658,7 +658,7 @@
             {{ getCtaDescription() }}
           </p>
 
-          <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <div class="flex justify-center pt-4">
             <a
               href="https://cal.com/trykindredapp/demo"
               target="_blank"
@@ -669,17 +669,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
               Book a Demo
-            </a>
-            <a
-              href="https://kindred.app/download"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-8 py-4 bg-kindred-500 border-2 border-white text-white font-bold rounded-xl hover:bg-kindred-600 transition-all hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-              </svg>
-              Try Kindred Free
             </a>
           </div>
 
