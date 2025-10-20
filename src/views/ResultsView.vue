@@ -660,7 +660,7 @@
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a
-              href="https://calendly.com/kindred/demo"
+              href="https://cal.com/trykindredapp/demo"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center px-8 py-4 bg-white text-kindred font-bold rounded-xl hover:bg-slate-100 transition-all hover:shadow-xl hover:-translate-y-0.5"
