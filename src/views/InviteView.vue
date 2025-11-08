@@ -190,7 +190,7 @@ onMounted(async () => {
   inviteInvalid.value = false
   
   try {
-    const response = await fetch(`${apiUrl}/invites/${inviteCode.value}/validate`)
+    const response = await fetch(`${apiUrl}/api/public/invites/${inviteCode.value}/validate`)
     
     if (!response.ok) {
       if (response.status === 404) {
