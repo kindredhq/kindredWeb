@@ -10,10 +10,18 @@
 
         <!-- Main Content -->
         <div class="text-left sm:text-center max-w-6xl mx-auto">
+          <!-- Limited Capacity Badge -->
+          <div class="flex justify-start sm:justify-center mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 border border-orange-300 rounded-full">
+              <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+              <span class="text-sm font-semibold text-orange-800">Currently serving 97 elite executives</span>
+            </div>
+          </div>
+
           <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
             Meet <span class="text-kindred">Kindred</span>
           </h1>
-          
+
           <p class="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-700 mb-6 max-w-5xl sm:mx-auto leading-tight">
             The world's first executive relationship agent.
           </p>
@@ -312,8 +320,11 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Join Thousands Building Deeper Connections
+            Join 97 Elite Executives Building Deeper Connections
           </h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">
+            Accepted exclusively through our ROI assessment or by personal invitation
+          </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
@@ -329,10 +340,13 @@
               </div>
             </div>
             <p class="text-slate-700 italic leading-relaxed">
-              "Kindred helped me identify 3 investor connections I completely forgot about. 
+              "Kindred helped me identify 3 investor connections I completely forgot about.
               Closed my seed round 2 months faster than planned."
             </p>
-            <div class="mt-4 text-sm text-green-600 font-semibold">$2M raised</div>
+            <div class="flex items-center justify-between mt-4">
+              <div class="text-sm text-green-600 font-semibold">$2M raised</div>
+              <div class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">Assessment Member</div>
+            </div>
           </div>
 
           <!-- Testimonial 2 -->
@@ -347,10 +361,13 @@
               </div>
             </div>
             <p class="text-slate-700 italic leading-relaxed">
-              "I used to spend 5 hours a week managing my CRM. Now Kindred does it automatically. 
+              "I used to spend 5 hours a week managing my CRM. Now Kindred does it automatically.
               I just review and approve—takes 15 minutes."
             </p>
-            <div class="mt-4 text-sm text-green-600 font-semibold">2+ hours saved weekly</div>
+            <div class="flex items-center justify-between mt-4">
+              <div class="text-sm text-green-600 font-semibold">2+ hours saved weekly</div>
+              <div class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">Invited Member</div>
+            </div>
           </div>
 
           <!-- Testimonial 3 -->
@@ -365,10 +382,13 @@
               </div>
             </div>
             <p class="text-slate-700 italic leading-relaxed">
-              "The executive intelligence briefings are like having a chief of staff who actually knows 
+              "The executive intelligence briefings are like having a chief of staff who actually knows
               my network better than I do."
             </p>
-            <div class="mt-4 text-sm text-green-600 font-semibold">3 successful exits</div>
+            <div class="flex items-center justify-between mt-4">
+              <div class="text-sm text-green-600 font-semibold">3 successful exits</div>
+              <div class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">Early Access</div>
+            </div>
           </div>
         </div>
       </div>
@@ -625,11 +645,16 @@
     <section id="email-capture" class="py-24 bg-white border-t-4 border-kindred">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 border border-orange-300 rounded-full mb-6">
+            <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+            <span class="text-sm font-semibold text-orange-800">Limited Onboarding Capacity</span>
+          </div>
+
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Don't Leave Money on the Table
+            Join the Waitlist
           </h2>
           <p class="text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
-            Join executives who use Kindred to turn dormant relationships into closed deals, funded rounds, and enterprise partnerships.
+            Join 97 CEOs, VPs, and Founders who use Kindred to turn dormant relationships into closed deals, funded rounds, and enterprise partnerships.
           </p>
 
           <!-- Email Form -->
@@ -689,7 +714,7 @@
               <p class="font-semibold text-slate-900">✨ What You'll Get:</p>
               <ul class="text-sm space-y-1">
                 <li>✓ Network intelligence report showing hidden opportunities</li>
-                <li>✓ Relationship gap analysis (where you're leaving money)</li>
+                <li>✓ Early access when we onboard new members</li>
                 <li>✓ Early access pricing: 50% lifetime discount</li>
                 <li>✓ Personal onboarding with relationship strategy session</li>
               </ul>

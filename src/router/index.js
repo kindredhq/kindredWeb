@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import PrivacyPolicy from '../components/PrivacyPolicy.vue'
 import AssessmentView from '../views/AssessmentView.vue'
 import ResultsView from '../views/ResultsView.vue'
+import InviteView from '../views/InviteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,14 @@ const router = createRouter({
       component: ResultsView,
       meta: {
         title: 'Your Results | Kindred'
+      }
+    },
+    {
+      path: '/invite/:inviteCode',
+      name: 'invite',
+      component: InviteView,
+      meta: {
+        title: 'Join Kindred | Invite'
       }
     }
   ],

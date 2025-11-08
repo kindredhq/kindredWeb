@@ -649,8 +649,18 @@
           </div>
         </div>
 
+        <!-- Demo Availability Banner -->
+        <DemoAvailabilityBanner
+          :health-score="results.health_score"
+          :show-countdown="results.health_score >= 75"
+        />
+
         <!-- CTA Section -->
         <div class="bg-gradient-to-br from-kindred to-purple-600 rounded-2xl shadow-2xl p-8 sm:p-12 text-white text-center space-y-6">
+          <div class="inline-block px-4 py-2 bg-white bg-opacity-20 backdrop-blur rounded-full mb-4">
+            <span class="text-sm font-bold">PRIORITY ACCESS UNLOCKED</span>
+          </div>
+
           <h2 class="text-3xl sm:text-4xl font-bold">
             {{ getCtaTitle() }}
           </h2>
@@ -663,17 +673,35 @@
               href="https://cal.com/trykindredapp/demo"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-8 py-4 bg-white text-kindred font-bold rounded-xl hover:bg-slate-100 transition-all hover:shadow-xl hover:-translate-y-0.5"
+              class="inline-flex items-center justify-center px-10 py-5 bg-white text-kindred font-bold text-lg rounded-xl hover:bg-slate-100 transition-all hover:shadow-2xl hover:-translate-y-1 transform"
             >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
-              Book a Demo
+              Claim Your Priority Demo Slot
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
             </a>
           </div>
 
-          <p class="text-sm opacity-75 pt-2">
-            Join 5,000+ professionals managing their networks with Kindred
+          <div class="grid sm:grid-cols-3 gap-4 pt-6 max-w-2xl mx-auto">
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+              <div class="text-2xl mb-1">✓</div>
+              <div class="text-sm font-semibold">Assessment Complete</div>
+            </div>
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+              <div class="text-2xl mb-1">🎯</div>
+              <div class="text-sm font-semibold">Qualified Executive</div>
+            </div>
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+              <div class="text-2xl mb-1">⚡</div>
+              <div class="text-sm font-semibold">Priority Booking</div>
+            </div>
+          </div>
+
+          <p class="text-sm opacity-75 pt-4">
+            Join 97 elite CEOs, VPs, and Founders using Kindred
           </p>
         </div>
 
@@ -718,6 +746,7 @@ import kindredLogo from '@/assets/kindred.svg'
 import TierBreakdownCard from '@/components/results/TierBreakdownCard.vue'
 import YearComparison from '@/components/results/YearComparison.vue'
 import StrategicFocusCard from '@/components/results/StrategicFocusCard.vue'
+import DemoAvailabilityBanner from '@/components/DemoAvailabilityBanner.vue'
 
 const route = useRoute()
 

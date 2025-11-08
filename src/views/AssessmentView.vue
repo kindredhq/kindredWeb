@@ -221,6 +221,43 @@
 
           <!-- Step 7: Lost Contacts + Email -->
           <div v-if="step === 7">
+            <!-- Unlock Priority Access Banner -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-6 mb-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0">
+                  <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-bold text-slate-900 mb-2">🎯 Final Step: Unlock Priority Demo Access</h3>
+                  <p class="text-sm text-slate-700 mb-3">
+                    You've completed 6/7 questions. One more step and you'll unlock:
+                  </p>
+                  <div class="grid sm:grid-cols-2 gap-2 text-sm">
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-600">✓</span>
+                      <span class="text-slate-700">Your personalized ROI results</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-600">✓</span>
+                      <span class="text-slate-700">Priority demo slot (limited)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-600">✓</span>
+                      <span class="text-slate-700">Network intelligence report</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="text-green-600">✓</span>
+                      <span class="text-slate-700">Early adopter pricing (50% off)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <QuestionCard
               title="How many important contacts have you lost touch with?"
               subtitle="People who could help you, but you haven't talked to in 6+ months"
