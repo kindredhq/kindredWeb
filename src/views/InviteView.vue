@@ -133,7 +133,7 @@ const route = useRoute()
 
 // Invite data
 const inviteCode = ref(route.params.inviteCode || '000000')
-const inviterName = ref('Someone') // Default until loaded
+const inviterName = ref('Henry') // Default inviter name (will be updated from API when available)
 const inviterPhoto = ref(null) // Will be populated from API if available
 const copied = ref(false)
 const loading = ref(true)
@@ -190,7 +190,7 @@ onMounted(async () => {
   inviteInvalid.value = false
   
   try {
-    const response = await fetch(`${apiUrl}/api/public/invites/${inviteCode.value}/validate`)
+    const response = await fetch(`${apiUrl}/invites/${inviteCode.value}/validate`)
     
     if (!response.ok) {
       if (response.status === 404) {
