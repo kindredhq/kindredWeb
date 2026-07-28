@@ -8,9 +8,26 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'Rubik', ...defaultTheme.fontFamily.sans],
+        // Fraunces carries the warmth — used large and sparingly.
+        display: ['Fraunces', 'Georgia', 'serif'],
+        // Karla is the humanist workhorse for everything readable.
+        sans: ['Karla', 'Inter', 'Rubik', ...defaultTheme.fontFamily.sans],
+        // Mono is reserved for elapsed time: it makes drift read as a record.
+        mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono],
+      },
+      maxWidth: {
+        prose: '68ch',
       },
       colors: {
+        // Night palette — intimacy, not corporate black.
+        ink: '#17121F',
+        dusk: '#241C33',
+        veil: '#332845',
+        // Warm near-white for the light half of the site.
+        paper: '#FDFBF8',
+        // Semantic pair: warmth means connection, cool grey means drift.
+        ember: '#F2A65A',
+        drift: '#8A8FA3',
         dark: '#060505',
         kindred: {
           DEFAULT: '#7868E6',

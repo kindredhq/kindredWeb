@@ -4,6 +4,9 @@ import PrivacyPolicy from '../components/PrivacyPolicy.vue'
 import AssessmentView from '../views/AssessmentView.vue'
 import ResultsView from '../views/ResultsView.vue'
 import InviteView from '../views/InviteView.vue'
+import WritingView from '../views/WritingView.vue'
+import PostView from '../views/PostView.vue'
+import TermsView from '../views/TermsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +44,25 @@ const router = createRouter({
       meta: {
         title: 'Join Kindred | Invite'
       }
+    },
+    {
+      path: '/writing',
+      name: 'writing',
+      component: WritingView,
+      meta: {
+        title: 'Writing | Kindred'
+      }
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: TermsView,
+      meta: { title: 'Terms of Use | Kindred' }
+    },
+    {
+      path: '/writing/:slug',
+      name: 'post',
+      component: PostView
     }
   ],
   scrollBehavior(to, from, savedPosition) {
