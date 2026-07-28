@@ -247,8 +247,14 @@ let timer
 onMounted(() => {
   reduced.value = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (reduced.value) return
+  // One pass through the people, then it settles. A diagram that cycles
+  // forever competes with the reading rather than supporting it.
   timer = setInterval(() => {
-    active.value = (active.value + 1) % people.length
+    if (active.value >= people.length - 1) {
+      clearInterval(timer)
+      return
+    }
+    active.value += 1
   }, 3200)
 })
 

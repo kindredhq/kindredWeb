@@ -608,7 +608,7 @@
         </div>
 
         <p class="mt-8 max-w-2xl leading-relaxed text-ink/65">
-          The sharpest version: your CRM belongs to your employer and stays
+          It comes down to this: your CRM belongs to your employer and stays
           there when you leave. Kindred is relationship capital you own and carry
           between companies for the rest of your career. Which is exactly why
           your mentor, your first investor and your oldest friend all belong in
@@ -637,6 +637,16 @@
               <span>{{ point }}</span>
             </li>
           </ul>
+
+          <p class="pt-2">
+            <router-link
+              to="/privacy"
+              class="text-kindred underline underline-offset-4 transition-colors hover:text-kindred-700"
+            >
+              Read the full privacy policy
+            </router-link>
+            <span class="text-ink/45"> — the plain-English version is at the top.</span>
+          </p>
         </div>
       </div>
     </section>
@@ -735,12 +745,12 @@
             </span>
             <p class="font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.16em] text-kindred-300">
               Founding members<br class="sm:hidden" />
-              <span class="hidden sm:inline"> · </span>$1,200 a year, locked for life · first 100
+              <span class="hidden sm:inline"> · </span>$1,200 a year, locked for life · first 50
             </p>
           </div>
 
           <h2 class="mt-8 font-display text-3xl leading-[1.14] tracking-[-0.01em] sm:text-[2.8rem]">
-            A hundred people are going to shape what this becomes. We would
+            Fifty people are going to shape what this becomes. We would
             rather choose them carefully.
           </h2>
 
@@ -755,9 +765,9 @@
               Founding membership is the most we charge and the most we give:
               <strong class="font-semibold text-paper">$1,200 a year, and that
               number never moves again</strong> — not when Pro rises, not when
-              we add a tier above it. It is capped at a hundred for an
+              we add a tier above it. It is capped at fifty for an
               unglamorous reason: we set every one of these up personally, and a
-              hundred is genuinely as many as we can do properly.
+              fifty is genuinely as many as we can do properly.
             </p>
           </div>
         </div>
@@ -1298,6 +1308,7 @@ const founding = [
     title: 'Everything, including what does not exist yet',
     items: [
       'Every feature in Pro from day one — Kindred AI, network intelligence, in-app calls, meeting briefs',
+      'Unlimited AI — no monthly allowance on chat or nudges, because fifty people is a number we can actually carry',
       'Every feature we ship after it, automatically, with no upgrade to buy',
       'Your feature requests go to the top of the list, and you will see them shipped',
       'First access to anything new, weeks before it opens up',
@@ -1330,7 +1341,7 @@ const founding = [
 
 const proTier = [
   'Everything in Plus',
-  'Kindred AI — ask your network questions in plain language',
+  'Kindred AI — a generous monthly allowance of chat and AI-written nudges, enough for daily use',
   'Gmail and Google Calendar integration',
   'Network intelligence — who has gone quiet, who is one-directional, where the openings are',
   'AI-drafted openers built from your real history with someone',
