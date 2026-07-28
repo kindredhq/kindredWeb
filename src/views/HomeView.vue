@@ -852,6 +852,8 @@
         <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             :href="demoLink"
+            target="_blank"
+            rel="noopener noreferrer"
             class="w-full rounded-full bg-ink px-8 py-4 text-center font-medium text-paper transition-colors hover:bg-dusk focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kindred sm:w-auto"
           >
             Book your onboarding call
@@ -922,8 +924,7 @@ import DriftStages from '@/components/DriftStages.vue'
 import MentalSpace from '@/components/MentalSpace.vue'
 import CtaBand from '@/components/CtaBand.vue'
 
-// TODO: replace with a real booking link (Calendly/Cal.com) when it exists.
-const demoLink = 'mailto:trykindredapp@gmail.com?subject=Kindred%20onboarding%20call&body=Hi%20Henry%2C%0A%0AI%27d%20like%20to%20book%20an%20onboarding%20call.%0A%0AWhat%20I%27m%20trying%20to%20keep%20on%20top%20of%3A%20%0APhone%3A%20iPhone%20%2F%20Android%3A%20%0A'
+const demoLink = 'https://cal.com/trykindredapp/demo'
 import KindredMark from '@/components/KindredMark.vue'
 
 const scorePreview = [

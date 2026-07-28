@@ -29,7 +29,9 @@
     <div class="flex shrink-0 flex-col gap-2 sm:flex-row sm:items-center">
       <component
         :is="primary.external ? 'a' : 'router-link'"
-        v-bind="primary.external ? { href: primary.to } : { to: primary.to }"
+        v-bind="primary.external
+          ? { href: primary.to, target: '_blank', rel: 'noopener noreferrer' }
+          : { to: primary.to }"
         class="rounded-full px-7 py-3.5 text-center font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kindred"
         :class="dark ? 'bg-paper text-ink hover:bg-white' : 'bg-ink text-paper hover:bg-dusk'"
       >
