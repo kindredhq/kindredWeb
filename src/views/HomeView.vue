@@ -647,10 +647,17 @@
         <h2 class="font-display text-3xl leading-tight tracking-[-0.01em] sm:text-[2.5rem]">
           Pricing
         </h2>
-        <p class="mt-5 max-w-xl leading-relaxed text-ink/65">
-          Start free and stay free if the free tier fits. Plus is for people
-          managing a real network.
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink/70">
+          Kindred will end up free for most people — this is a tool everyone
+          should have. But building it properly means starting with the people
+          who need it most and charging them honestly, rather than making it
+          free on day one and paying for it some other way.
         </p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-ink/60">
+          There is no other way. No ads, no selling data, no reselling your
+          network. If you are paying, you know exactly what you are paying for.
+        </p>
+
 
         <div class="mt-12 grid gap-6 lg:grid-cols-3">
           <div class="flex flex-col rounded-2xl border border-ink/10 bg-white p-7 sm:p-8">
@@ -668,49 +675,127 @@
             </a>
           </div>
 
-          <div class="flex flex-col rounded-2xl border-2 border-kindred bg-white p-7 sm:p-8">
+          <div class="flex flex-col rounded-2xl border border-ink/10 bg-white p-7 sm:p-8">
             <div class="flex items-baseline justify-between gap-4">
               <h3 class="font-display text-xl">Plus</h3>
-              <span class="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-kindred">
-                Full system
+              <span class="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink/45">
+                For your own life
               </span>
             </div>
             <p class="mt-2 font-mono text-2xl">
-              $19.99<span class="text-base text-ink/50">/mo</span>
+              $19<span class="text-base text-ink/50">/mo</span>
             </p>
-            <p class="mt-1 font-mono text-xs text-ink/45">or $199/year</p>
+            <p class="mt-1 font-mono text-xs text-ink/45">or $190/year</p>
             <ul class="mt-6 flex-1 space-y-2.5 text-ink/70">
               <li v-for="item in plusTier" :key="item">{{ item }}</li>
             </ul>
             <a
               href="#get-kindred"
-              class="mt-7 rounded-full bg-ink py-3 text-center font-medium text-paper transition-colors hover:bg-dusk"
+              class="mt-7 rounded-full border border-ink/20 py-3 text-center font-medium text-ink transition-colors hover:border-ink/40"
             >
               Get Plus
             </a>
           </div>
 
-          <div class="flex flex-col rounded-2xl border border-ink/10 bg-ink p-7 text-paper sm:p-8">
+          <div class="relative flex flex-col rounded-2xl border-2 border-kindred bg-ink p-7 text-paper sm:p-8">
             <div class="flex items-baseline justify-between gap-4">
               <h3 class="font-display text-xl">Pro</h3>
               <span class="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-kindred-300">
-                Network intelligence
+                For professionals
               </span>
             </div>
             <p class="mt-2 font-mono text-2xl">
               $49<span class="text-base text-paper/50">/mo</span>
             </p>
-            <p class="mt-1 font-mono text-xs text-paper/45">for people whose network is the job</p>
+            <p class="mt-1 font-mono text-xs text-paper/45">or $490/year</p>
             <ul class="mt-6 flex-1 space-y-2.5 text-paper/75">
               <li v-for="item in proTier" :key="item">{{ item }}</li>
             </ul>
             <a
-              href="#get-kindred"
+              :href="demoLink"
+              target="_blank"
+              rel="noopener noreferrer"
               class="mt-7 rounded-full bg-paper py-3 text-center font-medium text-ink transition-colors hover:bg-white"
             >
-              Talk to us about Pro
+              Get Pro
             </a>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Founding members: the top of the range, by application ──────── -->
+    <section id="founding" class="bg-ink px-5 py-20 text-paper sm:px-8 sm:py-28">
+      <div class="mx-auto max-w-6xl">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-4">
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-paper">
+              <KindredMark class="h-7 w-7" beat />
+            </span>
+            <p class="font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.16em] text-kindred-300">
+              Founding members<br class="sm:hidden" />
+              <span class="hidden sm:inline"> · </span>$1,200 a year, locked for life · first 100
+            </p>
+          </div>
+
+          <h2 class="mt-8 font-display text-3xl leading-[1.14] tracking-[-0.01em] sm:text-[2.8rem]">
+            A hundred people are going to shape what this becomes. We would
+            rather choose them carefully.
+          </h2>
+
+          <div class="mt-7 space-y-4 text-lg leading-relaxed text-paper/70">
+            <p>
+              Kindred is being built for a specific kind of person: someone whose
+              life genuinely runs on a few hundred relationships, who has felt
+              the cost of losing them, and who is exacting enough to tell us when
+              something is wrong.
+            </p>
+            <p>
+              Founding membership is the most we charge and the most we give:
+              <strong class="font-semibold text-paper">$1,200 a year, and that
+              number never moves again</strong> — not when Pro rises, not when
+              we add a tier above it. It is capped at a hundred for an
+              unglamorous reason: we set every one of these up personally, and a
+              hundred is genuinely as many as we can do properly.
+            </p>
+          </div>
+        </div>
+
+        <!-- What it actually includes -->
+        <div class="mt-16 grid gap-px overflow-hidden rounded-2xl bg-white/10 lg:grid-cols-3">
+          <div v-for="group in founding" :key="group.heading" class="bg-ink p-7 sm:p-8">
+            <p class="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-kindred-300">
+              {{ group.heading }}
+            </p>
+            <h3 class="mt-4 font-display text-xl leading-snug text-paper">
+              {{ group.title }}
+            </h3>
+            <ul class="mt-5 space-y-3.5">
+              <li v-for="item in group.items" :key="item" class="flex gap-3">
+                <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-kindred-300" aria-hidden="true"></span>
+                <span class="text-[0.95rem] leading-relaxed text-paper/70">{{ item }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- The ask -->
+        <div class="mt-14 flex flex-col gap-6 border-t border-white/10 pt-10 lg:flex-row lg:items-center lg:justify-between">
+          <p class="max-w-2xl text-lg leading-relaxed text-paper/75">
+            It is an application rather than a checkout because it goes both
+            ways — you are deciding whether Kindred is worth building your
+            relationships on, and we are deciding whether we can serve you
+            properly at this size.
+          </p>
+          <a
+            :href="demoLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shrink-0 self-start rounded-full bg-paper px-8 py-4 text-center font-medium text-ink transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kindred lg:self-auto"
+          >
+            Apply for founding membership
+          </a>
         </div>
       </div>
     </section>
@@ -1187,12 +1272,15 @@ const privacy = [
   'Delete your account and the data goes with it, not into a backup we keep for two years.',
 ]
 
+// Limits mirror pkg/services/limits.go on the server — keep them in sync.
 const freeTier = [
   'Unlimited contacts',
+  '3 tracked relationships',
+  '5 nudges a week',
+  '3 events a month, up to 10 invitees each',
   'Three circles: family, close friends, work',
-  'Full interaction logging and timeline',
-  'Five active reminders',
-  'Notes and birthdays',
+  'Full interaction logging, timeline and notes',
+  'Birthdays and occasions',
 ]
 
 const deliberate = [
@@ -1201,23 +1289,68 @@ const deliberate = [
   { thing: 'Reaching out to a friend', scheduled: 'Whenever it randomly occurs to you.', verdict: 'Somehow this one is supposed to be left to chance.' },
 ]
 
+// Drawn from FIRST_10_CUSTOMERS.md and KINDRED_BETA_MESSAGING.md — the
+// lifetime price lock, founder-led setup, direct line and product influence
+// were all already part of how early customers were being approached.
+const founding = [
+  {
+    heading: 'The product',
+    title: 'Everything, including what does not exist yet',
+    items: [
+      'Every feature in Pro from day one — Kindred AI, network intelligence, in-app calls, meeting briefs',
+      'Every feature we ship after it, automatically, with no upgrade to buy',
+      'Your feature requests go to the top of the list, and you will see them shipped',
+      'First access to anything new, weeks before it opens up',
+    ],
+  },
+  {
+    heading: 'The access',
+    title: 'Set up by the person who built it',
+    items: [
+      'A working session where we build your circles and cadences with you, using your real network',
+      'We handle the import and the tidying — you do not start on an empty screen',
+      'A direct line to the founder for as long as you are a member, not a support queue',
+      'A quarterly review of what is drifting and what to do about it',
+      'Unlimited invites while Kindred is still invite-only — bring in whoever you want, whenever you want',
+      'Unlimited invitees on every event you run',
+    ],
+  },
+  {
+    heading: 'The permanence',
+    title: 'The price never moves again',
+    items: [
+      'Locked for the life of your account, however far the range rises later',
+      'Grandfathered into every tier we introduce, including ones above Pro',
+      'A numbered founding member badge on your profile — yours permanently, even if you pause',
+      'Your name on the founding members page, if you want it there',
+      'Kept if you pause — come back later and your rate is still yours',
+    ],
+  },
+]
+
 const proTier = [
   'Everything in Plus',
-  'Network intelligence — who has gone quiet, who is one-directional, where the openings are',
   'Kindred AI — ask your network questions in plain language',
-  'AI-drafted openers using your real history with someone',
+  'Gmail and Google Calendar integration',
+  'Network intelligence — who has gone quiet, who is one-directional, where the openings are',
+  'AI-drafted openers built from your real history with someone',
   'In-app calls, logged automatically with notes',
-  'Introduction tracking — who you owe and who owes you',
-  'API access and priority support',
+  'Introduction tracking — who you owe, who owes you',
+  'Meeting prep briefs before every call in your calendar',
+  'Goal-linked plans that tie people to what you are trying to do',
+  'Shareable forms to collect details without the back-and-forth',
+  'API access, data export and priority support',
 ]
 
 const plusTier = [
   'Everything in Free',
+  'Unlimited tracked relationships',
+  'Nudges across everyone you track, timed to your cadences',
+  'Unlimited events and invitees',
   'All circle types, including custom circles',
-  'Unlimited reminders, with smart timing and context',
-  'Relationship strength and network insights',
-  'Email and calendar integrations',
-  'Export and priority support',
+  'Relationship strength scores',
+  'Calendar sync and birthday reminders',
+  'Export your data any time',
 ]
 
 const faq = [
