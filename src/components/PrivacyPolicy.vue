@@ -76,6 +76,8 @@
           <a href="#section-13" class="text-kindred hover:underline">13. California Rights (CCPA)</a>
           <a href="#section-14" class="text-kindred hover:underline">14. European Rights (GDPR)</a>
           <a href="#section-15" class="text-kindred hover:underline">15. Data Breach Notification</a>
+          <a href="#section-16" class="text-kindred hover:underline">16. Google API Services</a>
+          <a href="#section-17" class="text-kindred hover:underline">17. Subprocessors</a>
         </div>
       </nav>
 
@@ -109,7 +111,7 @@
           <h3 class="text-2xl font-semibold text-ink mb-4">Information from Third-Party Integrations:</h3>
           <p class="text-ink/75 mb-4">With your explicit permission, we may import data from:</p>
           <ul class="list-disc pl-6 space-y-2 text-ink/75 mb-6">
-            <li><strong>Google Services:</strong> Google Contacts, Google Calendar, Gmail metadata (sender, recipient, timestamp - NOT email content)</li>
+            <li><strong>Google Services:</strong> Google Contacts, Google Calendar, and Gmail. If you connect Gmail, Kindred requests read, send and compose access so it can match correspondence to your contacts and let you send from within the app. See <a href="#section-16" class="text-kindred underline underline-offset-4">Section 16</a> for exactly what this covers and how to revoke it.</li>
             <li><strong>Apple Services:</strong> iOS Contacts, Apple Calendar</li>
             <li><strong>Other Calendar Services:</strong> Microsoft Outlook, other calendar providers you connect</li>
           </ul>
@@ -627,6 +629,117 @@
           </div>
         </section>
 
+        <!-- 16. Google API Services -->
+        <section id="section-16" class="mb-12 scroll-mt-24">
+          <h2 class="font-display text-3xl font-medium text-ink mb-6">16. Google API Services User Data</h2>
+
+          <p class="text-ink/75 mb-4">
+            If you connect Gmail or Google Calendar, Kindred accesses Google user data with your
+            explicit consent through Google's OAuth flow. This section describes that use in
+            compliance with the
+            <a href="https://developers.google.com/terms/api-services-user-data-policy"
+               target="_blank" rel="noopener noreferrer"
+               class="text-kindred underline underline-offset-4">Google API Services User Data Policy</a>,
+            including the Limited Use requirements.
+          </p>
+
+          <h4 class="text-xl font-semibold text-ink mb-3">What we access</h4>
+          <ul class="list-disc pl-6 space-y-2 text-ink/75 mb-6">
+            <li>Basic profile information (name, email address) to identify the connected account</li>
+            <li><strong>Gmail read access</strong> (<code>gmail.readonly</code>) — to match correspondence to the people in your Kindred account and log that an interaction happened</li>
+            <li><strong>Gmail send and compose</strong> (<code>gmail.send</code>, <code>gmail.compose</code>) — so you can draft and send a message to a contact from inside Kindred. We only ever send a message you have written and chosen to send</li>
+            <li><strong>Google Calendar</strong> — events and attendees, to detect meetings and attach them to the right relationship</li>
+          </ul>
+          <p class="text-ink/75 mb-6">
+            Gmail access is a restricted scope, which means Google holds it to a higher standard and
+            so do we: we do not read your mail for any purpose other than the features above, and you
+            can use every other part of Kindred without connecting it at all.
+          </p>
+
+          <h4 class="text-xl font-semibold text-ink mb-3">What we do with it</h4>
+          <ul class="list-disc pl-6 space-y-2 text-ink/75 mb-6">
+            <li>Log interactions against the people already in your Kindred account, so your timeline reflects reality without manual entry</li>
+            <li>Detect upcoming meetings so we can surface context before them</li>
+            <li>Nothing else. It is not used to build advertising profiles or shared with other users</li>
+          </ul>
+
+          <div class="p-6 bg-kindred/[0.06] border border-kindred/30 rounded-xl mb-6">
+            <h4 class="text-xl font-semibold text-ink mb-3">Limited Use disclosure</h4>
+            <p class="text-ink/75 mb-3">
+              Kindred's use and transfer of information received from Google APIs to any other app
+              adheres to the
+              <a href="https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes"
+                 target="_blank" rel="noopener noreferrer"
+                 class="text-kindred underline underline-offset-4">Google API Services User Data Policy</a>,
+              including the Limited Use requirements. Specifically:
+            </p>
+            <ul class="list-disc pl-6 space-y-2 text-ink/75">
+              <li>We use Google user data only to provide or improve user-facing features that are prominent in Kindred's interface.</li>
+              <li>We do not transfer Google user data to third parties except as necessary to provide those features, to comply with applicable law, or with your explicit consent.</li>
+              <li>We do not use Google user data for serving advertisements of any kind.</li>
+              <li>We do not allow humans to read Google user data unless we have your affirmative agreement, it is necessary for security purposes or to comply with applicable law, or the data has been aggregated and de-identified for internal operations.</li>
+            </ul>
+          </div>
+
+          <h4 class="text-xl font-semibold text-ink mb-3">Revoking access</h4>
+          <p class="text-ink/75">
+            Disconnect Gmail or Calendar at any time from within Kindred, or revoke access directly in
+            your
+            <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer"
+               class="text-kindred underline underline-offset-4">Google Account permissions</a>.
+            On revocation we stop accessing your Google account immediately and delete the associated
+            tokens and cached Google data within 30 days.
+          </p>
+        </section>
+
+        <!-- 17. Subprocessors -->
+        <section id="section-17" class="mb-12 scroll-mt-24">
+          <h2 class="font-display text-3xl font-medium text-ink mb-6">17. Subprocessors</h2>
+
+          <p class="text-ink/75 mb-6">
+            Running Kindred means a small number of companies process some of your data on our behalf.
+            All are bound by data processing agreements. This is the complete list:
+          </p>
+
+          <div class="overflow-x-auto mb-6">
+            <table class="w-full min-w-[34rem] text-left border border-ink/10 rounded-xl overflow-hidden">
+              <thead>
+                <tr class="bg-ink/[0.04]">
+                  <th class="px-4 py-3 text-sm font-semibold text-ink">Provider</th>
+                  <th class="px-4 py-3 text-sm font-semibold text-ink">What it does</th>
+                  <th class="px-4 py-3 text-sm font-semibold text-ink">What it sees</th>
+                </tr>
+              </thead>
+              <tbody class="text-ink/75 text-sm">
+                <tr v-for="p in subprocessors" :key="p.name" class="border-t border-ink/10">
+                  <td class="px-4 py-3 font-medium text-ink">{{ p.name }}</td>
+                  <td class="px-4 py-3">{{ p.role }}</td>
+                  <td class="px-4 py-3">{{ p.sees }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-6 bg-kindred/[0.06] border border-kindred/30 rounded-xl">
+            <h4 class="text-xl font-semibold text-ink mb-3">About the AI features specifically</h4>
+            <p class="text-ink/75 mb-3">
+              Kindred's nudges and its in-app assistant are generated using Anthropic's Claude models.
+              To do that, relevant context is sent to Anthropic's API — which can include contact
+              names, the notes you have written about someone, and your interaction history with them.
+            </p>
+            <p class="text-ink/75 mb-3">
+              We send only what a given feature needs, never your whole database. Anthropic processes
+              it to return a response and, under their commercial terms, does not use it to train
+              their models.
+            </p>
+            <p class="text-ink/75">
+              We would rather say this plainly than bury it: if you would prefer no third party ever
+              sees that context, use Kindred without the AI features. Everything else — circles,
+              cadences, logging, timeline, reminders — works without them.
+            </p>
+          </div>
+        </section>
+
         <!-- Founder's Note -->
         <section class="mb-12 p-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl text-white">
           <h2 class="font-display text-3xl font-medium mb-4">The Bottom Line (From the Founder)</h2>
@@ -677,6 +790,36 @@
 
 <script setup>
 import kindredLogo from '@/assets/kindred.svg'
+
+// Keep this list complete and current — an incomplete subprocessor list is
+// worse than none, because it reads as a promise rather than an oversight.
+const subprocessors = [
+  {
+    name: 'Anthropic',
+    role: 'Generates nudges and powers the in-app assistant',
+    sees: 'Contact names, your notes and interaction history, sent per request',
+  },
+  {
+    name: 'Google Cloud',
+    role: 'Hosting, database and file storage',
+    sees: 'All stored account and relationship data, encrypted at rest',
+  },
+  {
+    name: 'Firebase (Google)',
+    role: 'Authentication and push notifications',
+    sees: 'Account identifiers, device tokens, notification contents',
+  },
+  {
+    name: 'Twilio',
+    role: 'SMS and phone verification',
+    sees: 'Your phone number and verification codes',
+  },
+  {
+    name: 'Loops',
+    role: 'Product and account emails',
+    sees: 'Your name and email address',
+  },
+]
 
 const scrollToTop = () => {
   window.scrollTo({
