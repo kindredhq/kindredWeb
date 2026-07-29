@@ -81,12 +81,15 @@ export const getHealthScoreBgColor = (score) => {
  * @param {Number} score - Health score (0-100)
  * @returns {String} Percentile description
  */
+// Describes the score band. Deliberately not a percentile — we have no
+// population data to rank anyone against, and inventing one would be a
+// fabricated statistic.
 export const getPercentileText = (score) => {
-  if (score >= 90) return 'Top 1%'
-  if (score >= 70) return 'Top 10%'
-  if (score >= 50) return 'Top 50%'
-  if (score >= 30) return 'Bottom 50%'
-  return 'Bottom 10%'
+  if (score >= 90) return 'Very well maintained'
+  if (score >= 70) return 'Holding up well'
+  if (score >= 50) return 'Starting to slip'
+  if (score >= 30) return 'Drifting'
+  return 'Largely unmanaged'
 }
 
 /**

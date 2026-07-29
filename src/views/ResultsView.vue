@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+  <div class="min-h-screen bg-paper">
     <!-- Loading State -->
     <div v-if="loading" class="flex items-center justify-center min-h-screen">
       <div class="text-center space-y-6">
@@ -10,8 +10,8 @@
           </div>
         </div>
         <div>
-          <p class="text-xl font-semibold text-slate-900 mb-2">Calculating Your ROI...</p>
-          <p class="text-slate-600">Analyzing your network and opportunities</p>
+          <p class="text-xl font-semibold text-ink mb-2">Calculating Your ROI...</p>
+          <p class="text-ink/60">Analyzing your network and opportunities</p>
         </div>
       </div>
     </div>
@@ -24,11 +24,11 @@
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
           </svg>
         </div>
-        <h2 class="text-2xl font-bold text-slate-900 mb-2">Unable to Load Results</h2>
-        <p class="text-slate-600 mb-6">{{ error }}</p>
+        <h2 class="font-display text-2xl font-medium text-ink mb-2">Unable to Load Results</h2>
+        <p class="text-ink/60 mb-6">{{ error }}</p>
         <router-link
           to="/assess"
-          class="inline-block px-6 py-3 bg-kindred text-white font-semibold rounded-lg hover:bg-kindred-600 transition-all"
+          class="inline-block px-6 py-3 bg-kindred text-white font-semibold rounded-xl hover:bg-kindred-600 transition-all"
         >
           Take Assessment Again
         </router-link>
@@ -38,9 +38,9 @@
     <!-- Results Display -->
     <div v-else-if="results" class="pb-20">
       <!-- Header -->
-      <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+      <header class="bg-white border-b border-ink/12 sticky top-0 z-50 shadow-sm">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <router-link to="/" class="flex items-center text-slate-900 hover:text-kindred transition-colors">
+          <router-link to="/" class="flex items-center text-ink hover:text-kindred transition-colors">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
             </svg>
@@ -48,7 +48,7 @@
           </router-link>
           <button
             @click="shareResults"
-            class="flex items-center text-slate-600 hover:text-kindred transition-colors font-medium"
+            class="flex items-center text-ink/60 hover:text-kindred transition-colors font-medium"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
@@ -67,46 +67,46 @@
 
         <!-- Hero Section -->
         <div class="text-center space-y-4 animate-fade-in">
-          <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900">
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-ink">
             Your Relationship ROI Analysis
           </h1>
-          <p v-if="results.name" class="text-xl sm:text-2xl text-slate-600">
+          <p v-if="results.name" class="text-xl sm:text-2xl text-ink/60">
             Hi {{ results.name }}! Here's what we discovered...
           </p>
         </div>
 
         <!-- High Performer Badge (90+) -->
-        <div v-if="results.health_score >= 90" class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
+        <div v-if="results.health_score >= 90" class="bg-ink rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
           <div class="flex items-center justify-center mb-3">
             <span class="text-5xl mr-3">🏆</span>
-            <h2 class="text-3xl font-bold">Exceptional Network Management!</h2>
+            <h2 class="font-display text-3xl font-medium">Exceptional Network Management!</h2>
           </div>
           <p class="text-lg opacity-95 max-w-2xl mx-auto">
-            You're in the <strong>top 5% of professionals</strong> when it comes to maintaining strategic relationships. Your network is one of your greatest assets!
+            You are keeping your closest relationships genuinely warm — which, given how easily this slips, is harder than it sounds.
           </p>
         </div>
 
         <!-- Great Performer Badge (75-89) -->
-        <div v-else-if="results.health_score >= 75" class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
+        <div v-else-if="results.health_score >= 75" class="bg-ink rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
           <div class="flex items-center justify-center mb-3">
             <span class="text-5xl mr-3">⭐</span>
-            <h2 class="text-3xl font-bold">Great Work on Your Network!</h2>
+            <h2 class="font-display text-3xl font-medium">Great Work on Your Network!</h2>
           </div>
           <p class="text-lg opacity-95 max-w-2xl mx-auto">
-            You're doing <strong>much better than most professionals</strong> at maintaining relationships. You're close to joining the elite top 5%!
+            Most of your important relationships are in good shape. The gaps below are the ones worth closing first.
           </p>
         </div>
 
         <!-- Key Metrics Grid -->
         <div class="grid md:grid-cols-2 gap-6">
           <!-- Conservative ROI -->
-          <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-2xl shadow-xl p-8">
+          <div class="bg-ink text-white rounded-2xl shadow-xl p-8">
             <div class="space-y-4">
               <p class="text-sm uppercase tracking-wide opacity-90 font-semibold">
                 Annual Opportunity Cost
               </p>
               <div>
-                <p class="text-5xl sm:text-6xl font-bold mb-2">
+                <p class="font-display text-5xl sm:text-6xl font-medium mb-2">
                   {{ formatCurrency(results.conservative_roi) }}
                 </p>
                 <p class="text-sm opacity-90 leading-relaxed">
@@ -133,7 +133,7 @@
               </p>
               <div>
                 <div class="flex items-end gap-2 mb-2">
-                  <p class="text-5xl sm:text-6xl font-bold">
+                  <p class="font-display text-5xl sm:text-6xl font-medium">
                     {{ results.health_score }}
                   </p>
                   <p class="text-2xl opacity-75 pb-1">/100</p>
@@ -145,7 +145,7 @@
               </div>
               <div class="pt-4 border-t border-white border-opacity-20">
                 <p class="text-sm font-medium">
-                  📊 <strong>Your ranking:</strong> {{ getPercentileText(results.health_score) }}
+                  <strong>Where this sits:</strong> {{ getPercentileText(results.health_score) }}
                 </p>
                 <p class="text-xs opacity-75 mt-2">
                   {{ getHealthScoreAdvice(results.health_score) }}
@@ -180,12 +180,12 @@
         />
 
         <!-- ROI Breakdown -->
-        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-8">
+        <div class="bg-white rounded-2xl shadow-lg border border-ink/12 p-6 sm:p-8">
           <div class="mb-6">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2">
               Where You're Leaving Money
             </h2>
-            <p class="text-slate-600">
+            <p class="text-ink/60">
               Here's how we calculated your opportunity cost broken down by category:
             </p>
           </div>
@@ -203,7 +203,7 @@
                 </p>
               </div>
               <div class="text-right ml-4">
-                <p class="text-2xl sm:text-3xl font-bold text-red-600">
+                <p class="font-display text-2xl sm:text-3xl font-medium text-red-600">
                   {{ formatCurrency(results.breakdown.missed_pipeline) }}
                 </p>
               </div>
@@ -221,7 +221,7 @@
                 </p>
               </div>
               <div class="text-right ml-4">
-                <p class="text-2xl sm:text-3xl font-bold text-orange-600">
+                <p class="font-display text-2xl sm:text-3xl font-medium text-orange-600">
                   {{ formatCurrency(results.breakdown.lost_referrals) }}
                 </p>
               </div>
@@ -239,7 +239,7 @@
                 </p>
               </div>
               <div class="text-right ml-4">
-                <p class="text-2xl sm:text-3xl font-bold text-yellow-600">
+                <p class="font-display text-2xl sm:text-3xl font-medium text-yellow-600">
                   {{ formatCurrency(results.breakdown.cold_partnerships) }}
                 </p>
               </div>
@@ -247,9 +247,9 @@
           </div>
 
           <!-- Total -->
-          <div class="mt-6 pt-6 border-t-2 border-slate-200">
+          <div class="mt-6 pt-6 border-t-2 border-ink/12">
             <div class="flex items-center justify-between">
-              <h3 class="text-xl font-bold text-slate-900">Total Opportunity Cost</h3>
+              <h3 class="text-xl font-bold text-ink">Total Opportunity Cost</h3>
               <p class="text-3xl sm:text-4xl font-bold text-kindred">
                 {{ formatCurrency(results.conservative_roi) }}
               </p>
@@ -258,23 +258,23 @@
         </div>
 
         <!-- Key Insights - Visual Breakdown -->
-        <div class="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-lg border-2 border-slate-200 p-6 sm:p-8 space-y-8">
+        <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 space-y-8">
           <div class="text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2">
               Your Network Analysis
             </h2>
-            <p class="text-slate-600">Here's the full breakdown of your relationship management</p>
+            <p class="text-ink/60">Here's the full breakdown of your relationship management</p>
           </div>
 
           <!-- Contact Breakdown -->
           <div class="grid md:grid-cols-3 gap-6">
             <!-- Total Contacts -->
-            <div class="bg-white rounded-xl p-6 border-2 border-slate-200 text-center">
-              <div class="text-4xl font-bold text-slate-900 mb-2">
+            <div class="bg-white rounded-xl p-6 border-2 border-ink/12 text-center">
+              <div class="text-4xl font-bold text-ink mb-2">
                 {{ formatNumber(results.total_contacts) }}
               </div>
-              <div class="text-sm font-medium text-slate-600 mb-1">Total Contacts</div>
-              <div class="text-xs text-slate-500">Your entire network</div>
+              <div class="text-sm font-medium text-ink/60 mb-1">Total Contacts</div>
+              <div class="text-xs text-ink/45">Your entire network</div>
             </div>
 
             <!-- Business-Relevant -->
@@ -282,8 +282,8 @@
               <div class="text-4xl font-bold text-blue-600 mb-2">
                 {{ formatNumber(getBusinessRelevantContacts()) }}
               </div>
-              <div class="text-sm font-medium text-slate-700 mb-1">Business-Relevant</div>
-              <div class="text-xs text-slate-500">
+              <div class="text-sm font-medium text-ink/75 mb-1">Business-Relevant</div>
+              <div class="text-xs text-ink/45">
                 {{ getBusinessRelevantPercent() }}% can generate opportunities
               </div>
             </div>
@@ -293,8 +293,8 @@
               <div class="text-4xl font-bold text-green-600 mb-2">
                 {{ results.active_maintained }}
               </div>
-              <div class="text-sm font-medium text-slate-700 mb-1">Actively Maintaining</div>
-              <div class="text-xs text-slate-500">
+              <div class="text-sm font-medium text-ink/75 mb-1">Actively Maintaining</div>
+              <div class="text-xs text-ink/45">
                 {{ getMaintainedPercent() }}% of business contacts
               </div>
             </div>
@@ -302,14 +302,14 @@
 
           <!-- The Opportunity Gap / Optimization Potential -->
           <div class="rounded-xl p-6 border-2"
-               :class="results.health_score >= 90 ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200' : 'bg-gradient-to-r from-orange-50 to-red-50 border-orange-200'">
+               :class="results.health_score >= 90 ? 'bg-kindred/[0.06] border-kindred/25' : 'bg-ember/[0.1] border-ember/30'">
             <div class="flex items-center justify-between mb-4">
               <div>
-                <h3 class="text-xl font-bold text-slate-900 mb-1">
+                <h3 class="text-xl font-bold text-ink mb-1">
                   <span v-if="results.health_score >= 90">Optimization Potential</span>
                   <span v-else>The Opportunity Gap</span>
                 </h3>
-                <p class="text-sm text-slate-600">
+                <p class="text-sm text-ink/60">
                   <span v-if="results.health_score >= 90">How Kindred can help you exceed your limits</span>
                   <span v-else>What you're missing by not maintaining more relationships</span>
                 </p>
@@ -321,18 +321,18 @@
             </div>
 
             <div class="grid sm:grid-cols-2 gap-4">
-              <div class="bg-white rounded-lg p-4">
-                <div class="text-sm text-slate-600 mb-1">You're maintaining</div>
-                <div class="text-2xl font-bold text-slate-900">
+              <div class="bg-white rounded-xl p-4">
+                <div class="text-sm text-ink/60 mb-1">You're maintaining</div>
+                <div class="font-display text-2xl font-medium text-ink">
                   {{ results.active_maintained }} contacts
                 </div>
               </div>
-              <div class="bg-white rounded-lg p-4">
-                <div class="text-sm text-slate-600 mb-1">
+              <div class="bg-white rounded-xl p-4">
+                <div class="text-sm text-ink/60 mb-1">
                   <span v-if="hasTierBreakdown">Full capacity (all tiers)</span>
                   <span v-else>You could be maintaining</span>
                 </div>
-                <div class="text-2xl font-bold text-green-600">
+                <div class="font-display text-2xl font-medium text-green-600">
                   {{ getOptimalContacts() }} contacts
                 </div>
                 <div class="text-xs text-green-700 mt-1 font-medium">
@@ -342,11 +342,11 @@
               </div>
             </div>
 
-            <div class="mt-4 p-6 rounded-lg border-2"
-                 :class="results.health_score >= 90 ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-400' : 'bg-gradient-to-r from-orange-50 to-yellow-50 border-orange-400'">
+            <div class="mt-4 p-6 rounded-xl border-2"
+                 :class="results.health_score >= 90 ? 'bg-kindred/[0.08] border-kindred/40' : 'bg-ember/[0.12] border-ember/40'">
               <div class="text-center space-y-3">
                 <div v-if="hasTierBreakdown" class="space-y-2">
-                  <div class="text-sm text-slate-700 font-medium">
+                  <div class="text-sm text-ink/75 font-medium">
                     <span v-if="results.health_score >= 90">
                       With Kindred's automation, you could optimize:
                     </span>
@@ -354,11 +354,11 @@
                       But to unlock maximum value, focus on adding:
                     </span>
                   </div>
-                  <div class="text-6xl font-bold"
+                  <div class="font-display text-6xl font-medium"
                        :class="results.health_score >= 90 ? 'text-green-600' : 'text-orange-600'">
                     {{ getStrategicGapContacts() }}
                   </div>
-                  <div class="text-base text-slate-700 font-semibold">
+                  <div class="text-base text-ink/75 font-semibold">
                     <span v-if="results.health_score >= 90">
                       more VIP & Partner relationships
                     </span>
@@ -367,7 +367,7 @@
                     </span>
                   </div>
                 </div>
-                <div v-else class="text-sm text-slate-700 font-medium">
+                <div v-else class="text-sm text-ink/75 font-medium">
                   By maintaining just <strong class="text-3xl text-orange-600 block my-2">{{ getGapContacts() }}</strong> more strategic relationships
                 </div>
 
@@ -375,16 +375,16 @@
                   <div class="text-4xl font-bold text-green-600">
                     {{ formatCurrency(hasTierBreakdown ? topTierValue : results.conservative_roi) }}
                   </div>
-                  <div class="text-sm text-slate-600 font-medium mt-2">
+                  <div class="text-sm text-ink/60 font-medium mt-2">
                     <span v-if="hasTierBreakdown">
                       Value from these strategic relationships (3-5 years)
-                      <span class="block text-xs text-slate-500 mt-1">
+                      <span class="block text-xs text-ink/45 mt-1">
                         Year 1 conservative: {{ formatCurrency(Math.round(topTierValue * 0.15)) }}
                       </span>
                     </span>
                     <span v-else>
                       Year 1 opportunity you could capture
-                      <span class="block text-xs text-slate-500 mt-1">
+                      <span class="block text-xs text-ink/45 mt-1">
                         (3-5 year potential: {{ formatCurrency(results.calculated_roi) }})
                       </span>
                     </span>
@@ -395,21 +395,21 @@
                   <div v-if="results.active_maintained < getOptimalContacts()">
                     <!-- User is below capacity -->
                     <div class="grid sm:grid-cols-2 gap-4 text-center">
-                      <div class="bg-white bg-opacity-60 rounded-lg p-3">
-                        <div class="text-xs text-slate-600 mb-1">Strategic relationships</div>
-                        <div class="text-2xl font-bold text-orange-600">
+                      <div class="bg-white bg-opacity-60 rounded-xl p-3">
+                        <div class="text-xs text-ink/60 mb-1">Strategic relationships</div>
+                        <div class="font-display text-2xl font-medium text-orange-600">
                           {{ results.active_maintained + getStrategicGapContacts() }}
                         </div>
-                        <div class="text-xs text-slate-500">
+                        <div class="text-xs text-ink/45">
                           ({{ results.active_maintained }} current + {{ getStrategicGapContacts() }} new)
                         </div>
                       </div>
-                      <div class="bg-white bg-opacity-60 rounded-lg p-3">
-                        <div class="text-xs text-slate-600 mb-1">Remaining capacity</div>
-                        <div class="text-2xl font-bold text-green-600">
+                      <div class="bg-white bg-opacity-60 rounded-xl p-3">
+                        <div class="text-xs text-ink/60 mb-1">Remaining capacity</div>
+                        <div class="font-display text-2xl font-medium text-green-600">
                           {{ getOptimalContacts() - (results.active_maintained + getStrategicGapContacts()) }}
                         </div>
-                        <div class="text-xs text-slate-500">
+                        <div class="text-xs text-ink/45">
                           for other relationships
                         </div>
                       </div>
@@ -417,67 +417,67 @@
                   </div>
                   <div v-else>
                     <!-- User already exceeds optimal capacity - focus on quality -->
-                    <div class="bg-white bg-opacity-60 rounded-lg p-4 text-center">
-                      <div class="text-sm text-slate-700 font-semibold mb-2">
+                    <div class="bg-white bg-opacity-60 rounded-xl p-4 text-center">
+                      <div class="text-sm text-ink/75 font-semibold mb-2">
                         🎯 You're already maintaining {{ results.active_maintained }} relationships!
                       </div>
-                      <div class="text-xs text-slate-600">
+                      <div class="text-xs text-ink/60">
                         Focus on upgrading <strong class="text-orange-600">{{ getStrategicGapContacts() }}</strong> of your existing relationships to VIP/Partner quality for maximum impact
                       </div>
                     </div>
                   </div>
-                  <div class="text-xs text-slate-600 mt-3 text-center">
-                    These {{ getStrategicGapContacts() }} strategic relationships generate <strong class="text-slate-900">{{ topTierPercent }}% of your total network value</strong>
+                  <div class="text-xs text-ink/60 mt-3 text-center">
+                    These {{ getStrategicGapContacts() }} strategic relationships generate <strong class="text-ink">{{ topTierPercent }}% of your total network value</strong>
                   </div>
                 </div>
                 <div v-else class="mt-3 pt-3 border-t border-orange-300">
-                  <div class="text-xs text-slate-600 mb-1">That's approximately</div>
-                  <div class="text-2xl font-bold text-orange-600">
+                  <div class="text-xs text-ink/60 mb-1">That's approximately</div>
+                  <div class="font-display text-2xl font-medium text-orange-600">
                     {{ formatCurrency(Math.round(results.conservative_roi / getGapContacts())) }}
                   </div>
-                  <div class="text-xs text-slate-600">per relationship nurtured</div>
+                  <div class="text-xs text-ink/60">per relationship nurtured</div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Missed Deals Breakdown -->
-          <div class="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-lg border-2 border-slate-200 p-6 sm:p-8">
+          <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8">
             <div class="text-center mb-6">
-              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 flex items-center justify-center">
+              <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2 flex items-center justify-center">
                 <span class="mr-2">📉</span>
                 Missed Deals Breakdown
               </h2>
-              <p class="text-slate-600">You're missing <strong class="text-red-600 text-xl">{{ results.breakdown.missed_deals }} deals</strong> annually</p>
+              <p class="text-ink/60">You're missing <strong class="text-red-600 text-xl">{{ results.breakdown.missed_deals }} deals</strong> annually</p>
             </div>
 
             <div class="grid sm:grid-cols-2 gap-6">
               <!-- Left: Stats -->
-              <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-6 space-y-4">
+              <div class="bg-ember/[0.1] rounded-xl p-6 space-y-4">
                 <div class="text-center pb-4 border-b border-red-200">
-                  <div class="text-5xl font-bold text-red-600 mb-2">{{ results.breakdown.missed_deals }}</div>
-                  <div class="text-sm font-medium text-slate-700">Deals Lost Annually</div>
+                  <div class="font-display text-5xl font-medium text-red-600 mb-2">{{ results.breakdown.missed_deals }}</div>
+                  <div class="text-sm font-medium text-ink/75">Deals Lost Annually</div>
                 </div>
                 <div class="text-center pb-4 border-b border-red-200">
-                  <div class="text-2xl font-bold text-orange-600 mb-1">
+                  <div class="font-display text-2xl font-medium text-orange-600 mb-1">
                     1 every {{ Math.ceil(12 / results.breakdown.missed_deals) }} months
                   </div>
-                  <div class="text-xs text-slate-600">That's how often you're missing deals</div>
+                  <div class="text-xs text-ink/60">That's how often you're missing deals</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-slate-900 mb-1">{{ formatCurrency(results.avg_deal_value) }}</div>
-                  <div class="text-xs text-slate-600">Average value per deal</div>
+                  <div class="font-display text-2xl font-medium text-ink mb-1">{{ formatCurrency(results.avg_deal_value) }}</div>
+                  <div class="text-xs text-ink/60">Average value per deal</div>
                 </div>
               </div>
 
               <!-- Right: Total Impact -->
-              <div class="bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-xl p-6 flex flex-col items-center justify-center text-center">
+              <div class="bg-ink text-paper rounded-xl p-6 flex flex-col items-center justify-center text-center">
                 <div class="text-sm uppercase tracking-wide opacity-90 mb-3">Total Annual Impact</div>
-                <div class="text-5xl font-bold mb-3">{{ formatCurrency(results.conservative_roi) }}</div>
+                <div class="font-display text-5xl font-medium mb-3">{{ formatCurrency(results.conservative_roi) }}</div>
                 <p class="text-sm opacity-90 leading-relaxed mb-4">This is what you're leaving on the table every year from neglected relationships</p>
                 <div class="pt-4 border-t border-white border-opacity-30 w-full">
                   <div class="text-xs opacity-75 mb-1">Each nurtured relationship =</div>
-                  <div class="text-2xl font-bold">
+                  <div class="font-display text-2xl font-medium">
                     {{ formatCurrency(Math.round(results.conservative_roi / getGapContacts())) }}
                   </div>
                   <div class="text-xs opacity-75 mt-1">in annual value</div>
@@ -487,21 +487,21 @@
           </div>
 
           <!-- Kindred Advantage Banner -->
-          <div class="bg-gradient-to-r from-kindred to-purple-600 rounded-xl p-6 border-2 border-kindred text-white">
+          <div class="bg-ink rounded-xl p-6 border-2 border-kindred text-white">
             <h3 class="text-xl font-bold mb-4 flex items-center">
               <span class="mr-2">🚀</span>
               The Kindred Advantage
             </h3>
 
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
-              <div class="bg-white bg-opacity-20 backdrop-blur rounded-lg p-4 text-center">
+              <div class="bg-white bg-opacity-20 backdrop-blur rounded-xl p-4 text-center">
                 <div class="text-sm opacity-90 mb-1">Without Tools</div>
-                <div class="text-3xl font-bold">80-100</div>
+                <div class="font-display text-3xl font-medium">80-100</div>
                 <div class="text-xs opacity-75 mt-1">Active relationships (manual effort)</div>
               </div>
-              <div class="bg-white bg-opacity-30 backdrop-blur rounded-lg p-4 text-center border-2 border-white border-opacity-40">
+              <div class="bg-white bg-opacity-30 backdrop-blur rounded-xl p-4 text-center border-2 border-white border-opacity-40">
                 <div class="text-sm opacity-90 mb-1">With Kindred</div>
-                <div class="text-3xl font-bold">{{ getRoleMaintenanceCap() }}</div>
+                <div class="font-display text-3xl font-medium">{{ getRoleMaintenanceCap() }}</div>
                 <div class="text-xs opacity-75 mt-1">Active relationships ({{ getCapacityIncrease() }}% increase)</div>
               </div>
             </div>
@@ -512,8 +512,8 @@
           </div>
 
           <!-- Benchmark Comparison -->
-          <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border-2 border-purple-200">
-            <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+          <div class="bg-kindred/[0.06] rounded-xl p-6 border border-kindred/25">
+            <h3 class="text-xl font-bold text-ink mb-4 flex items-center">
               <span class="mr-2">📊</span>
               How You Compare
             </h3>
@@ -522,10 +522,10 @@
               <!-- Your Current Performance -->
               <div>
                 <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-slate-700">You ({{ getMaintainedPercent() }}%)</span>
-                  <span class="text-slate-500">{{ results.active_maintained }} contacts maintained</span>
+                  <span class="font-medium text-ink/75">You ({{ getMaintainedPercent() }}%)</span>
+                  <span class="text-ink/45">{{ results.active_maintained }} contacts maintained</span>
                 </div>
-                <div class="w-full bg-slate-200 rounded-full h-3">
+                <div class="w-full bg-ink/10 rounded-full h-3">
                   <div
                     class="bg-red-500 h-3 rounded-full transition-all"
                     :style="{ width: getMaintainedPercent() + '%' }"
@@ -536,10 +536,10 @@
               <!-- Average Performance -->
               <div>
                 <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-slate-700">Average Professional (15%)</span>
-                  <span class="text-slate-500">{{ Math.round(getBusinessRelevantContacts() * 0.15) }} contacts</span>
+                  <span class="font-medium text-ink/75">Average Professional (15%)</span>
+                  <span class="text-ink/45">{{ Math.round(getBusinessRelevantContacts() * 0.15) }} contacts</span>
                 </div>
-                <div class="w-full bg-slate-200 rounded-full h-3">
+                <div class="w-full bg-ink/10 rounded-full h-3">
                   <div class="bg-yellow-500 h-3 rounded-full w-[15%]"></div>
                 </div>
               </div>
@@ -547,10 +547,10 @@
               <!-- Top Performer -->
               <div>
                 <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-slate-700">Top {{ getRoleLabel() }} ({{ getTopPerformerPercent() }}%)</span>
-                  <span class="text-slate-500">{{ getTopPerformerContacts() }} contacts</span>
+                  <span class="font-medium text-ink/75">Top {{ getRoleLabel() }} ({{ getTopPerformerPercent() }}%)</span>
+                  <span class="text-ink/45">{{ getTopPerformerContacts() }} contacts</span>
                 </div>
-                <div class="w-full bg-slate-200 rounded-full h-3">
+                <div class="w-full bg-ink/10 rounded-full h-3">
                   <div
                     class="bg-green-500 h-3 rounded-full transition-all"
                     :style="{ width: getTopPerformerPercent() + '%' }"
@@ -559,12 +559,12 @@
               </div>
             </div>
 
-            <div class="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border-l-4 border-purple-500">
+            <div class="mt-6 p-4 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
               <div class="flex items-start">
                 <span class="text-2xl mr-3">📊</span>
                 <div class="flex-1">
-                  <div class="font-semibold text-slate-900 mb-1">Industry Benchmark:</div>
-                  <p class="text-sm text-slate-700 leading-relaxed">
+                  <div class="font-semibold text-ink mb-1">Industry Benchmark:</div>
+                  <p class="text-sm text-ink/75 leading-relaxed">
                     {{ results.insights.benchmark_comparison }}
                   </p>
                 </div>
@@ -573,19 +573,19 @@
           </div>
 
           <!-- AI-Generated Insights -->
-          <div class="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-lg border-2 border-slate-200 p-6 sm:p-8 space-y-4">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 flex items-center">
+          <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 space-y-4">
+            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-6 flex items-center">
               <span class="mr-2">💡</span>
               Personalized Insights
             </h2>
 
             <!-- Primary Message -->
-            <div class="p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500">
+            <div class="p-5 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
               <div class="flex items-start">
                 <span class="text-3xl mr-3">📍</span>
                 <div class="flex-1">
                   <div class="font-bold text-blue-900 mb-2 text-lg">Your Situation</div>
-                  <p class="text-slate-700 leading-relaxed">
+                  <p class="text-ink/75 leading-relaxed">
                     {{ results.insights.primary_message }}
                   </p>
                 </div>
@@ -593,12 +593,12 @@
             </div>
 
             <!-- Actionable Advice -->
-            <div class="p-5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500">
+            <div class="p-5 bg-ember/[0.1] rounded-xl border-l-2 border-ember">
               <div class="flex items-start">
                 <span class="text-3xl mr-3">🎯</span>
                 <div class="flex-1">
                   <div class="font-bold text-green-900 mb-2 text-lg">Your Action Plan</div>
-                  <p class="text-slate-700 leading-relaxed">
+                  <p class="text-ink/75 leading-relaxed">
                     {{ results.insights.actionable_advice }}
                   </p>
                 </div>
@@ -606,12 +606,12 @@
             </div>
 
             <!-- Benchmark Comparison -->
-            <div class="p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-l-4 border-purple-500">
+            <div class="p-5 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
               <div class="flex items-start">
                 <span class="text-3xl mr-3">📊</span>
                 <div class="flex-1">
                   <div class="font-bold text-purple-900 mb-2 text-lg">How You Compare</div>
-                  <p class="text-slate-700 leading-relaxed">
+                  <p class="text-ink/75 leading-relaxed">
                     {{ results.insights.benchmark_comparison }}
                   </p>
                 </div>
@@ -620,8 +620,8 @@
           </div>
 
           <!-- Action Items -->
-          <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200">
-            <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+          <div class="bg-kindred/[0.06] rounded-xl p-6 border border-kindred/25">
+            <h3 class="text-xl font-bold text-ink mb-4 flex items-center">
               <span class="mr-2">⚡</span>
               {{ getActionTitle() }}
             </h3>
@@ -630,7 +630,7 @@
               <div
                 v-for="(item, index) in getActionItems()"
                 :key="index"
-                class="bg-white rounded-lg p-4"
+                class="bg-white rounded-xl p-4"
                 :class="{
                   'border-l-4 border-green-500': item.color === 'green',
                   'border-l-4 border-blue-500': item.color === 'blue',
@@ -640,8 +640,8 @@
                 <div class="flex items-start">
                   <span class="text-2xl mr-3">{{ item.emoji }}</span>
                   <div>
-                    <div class="font-semibold text-slate-900 mb-1">{{ item.title }}</div>
-                    <p class="text-sm text-slate-600">{{ item.description }}</p>
+                    <div class="font-semibold text-ink mb-1">{{ item.title }}</div>
+                    <p class="text-sm text-ink/60">{{ item.description }}</p>
                   </div>
                 </div>
               </div>
@@ -649,16 +649,10 @@
           </div>
         </div>
 
-        <!-- Demo Availability Banner -->
-        <DemoAvailabilityBanner
-          :health-score="results.health_score"
-          :show-countdown="results.health_score >= 75"
-        />
-
         <!-- CTA Section -->
-        <div class="bg-gradient-to-br from-kindred to-purple-600 rounded-2xl shadow-2xl p-8 sm:p-12 text-white text-center space-y-6">
-          <div class="inline-block px-4 py-2 bg-white bg-opacity-20 backdrop-blur rounded-full mb-4">
-            <span class="text-sm font-bold">PRIORITY ACCESS UNLOCKED</span>
+        <div class="bg-ink rounded-2xl p-8 sm:p-12 text-paper text-center space-y-6">
+          <div class="inline-block px-4 py-2 rounded-full mb-4 border border-white/15">
+            <span class="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-kindred-300">Your next step</span>
           </div>
 
           <h2 class="text-3xl sm:text-4xl font-bold">
@@ -673,7 +667,7 @@
               href="https://cal.com/trykindredapp/demo"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-10 py-5 bg-white text-kindred font-bold text-lg rounded-xl hover:bg-slate-100 transition-all hover:shadow-2xl hover:-translate-y-1 transform"
+              class="inline-flex items-center justify-center px-10 py-5 bg-paper text-ink font-medium text-lg rounded-full hover:bg-white transition-colors"
             >
               <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -686,15 +680,15 @@
           </div>
 
           <div class="grid sm:grid-cols-3 gap-4 pt-6 max-w-2xl mx-auto">
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
               <div class="text-2xl mb-1">✓</div>
               <div class="text-sm font-semibold">Assessment Complete</div>
             </div>
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
               <div class="text-2xl mb-1">🎯</div>
               <div class="text-sm font-semibold">Qualified Executive</div>
             </div>
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-lg p-4">
+            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
               <div class="text-2xl mb-1">⚡</div>
               <div class="text-sm font-semibold">Priority Booking</div>
             </div>
@@ -707,8 +701,8 @@
 
         <!-- Social Proof -->
         <div class="text-center space-y-6">
-          <p class="text-slate-600 font-medium">Trusted by professionals at:</p>
-          <div class="flex flex-wrap justify-center gap-4 sm:gap-8 text-slate-400 text-sm sm:text-base">
+          <p class="text-ink/60 font-medium">Trusted by professionals at:</p>
+          <div class="flex flex-wrap justify-center gap-4 sm:gap-8 text-ink/35 text-sm sm:text-base">
             <span class="font-semibold">Fortune 500 Companies</span>
             <span class="hidden sm:inline">•</span>
             <span class="font-semibold">Leading Startups</span>
@@ -718,13 +712,13 @@
         </div>
 
         <!-- Share Encouragement -->
-        <div class="bg-slate-100 border border-slate-300 rounded-xl p-6 text-center">
-          <p class="text-slate-700 mb-4">
+        <div class="bg-ink/[0.04] border border-ink/15 rounded-xl p-6 text-center">
+          <p class="text-ink/75 mb-4">
             Know someone who could benefit from this assessment?
           </p>
           <button
             @click="shareResults"
-            class="inline-flex items-center px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-all"
+            class="inline-flex items-center px-6 py-3 bg-ink text-paper font-medium rounded-full hover:bg-dusk transition-all"
           >
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
@@ -746,7 +740,6 @@ import kindredLogo from '@/assets/kindred.svg'
 import TierBreakdownCard from '@/components/results/TierBreakdownCard.vue'
 import YearComparison from '@/components/results/YearComparison.vue'
 import StrategicFocusCard from '@/components/results/StrategicFocusCard.vue'
-import DemoAvailabilityBanner from '@/components/DemoAvailabilityBanner.vue'
 
 const route = useRoute()
 
@@ -947,7 +940,7 @@ const getCtaDescription = () => {
     return 'You already maintain great relationships. Kindred can help you take it to the next level with automation, intelligent insights, and strategic recommendations.'
   }
   if (score >= 75) {
-    return 'You\'re managing your network well. Kindred can help you scale your efforts and join the top 5% of professionals without extra time investment.'
+    return 'You\'re managing your network well. Kindred can help you scale your efforts and keep more of them warm without spending more time on it.'
   }
   if (score >= 60) {
     return 'You have a solid foundation. Kindred can help you systematically nurture more relationships and unlock the full potential of your network.'
@@ -996,7 +989,7 @@ const getActionItems = () => {
       {
         emoji: '🎯',
         title: 'You\'re Close to Elite Status',
-        description: results.value.insights.actionable_advice || 'Focus on maintaining just 10-15 more strategic relationships to join the top 5%',
+        description: results.value.insights.actionable_advice || 'Focus on the 10-15 relationships most likely to slip in the next six months',
         color: 'green'
       },
       {
@@ -1104,16 +1097,16 @@ const shareResults = async () => {
 
 // Helper functions for better context
 const getHealthScoreGradient = (score) => {
-  if (score >= 90) return 'bg-gradient-to-br from-green-500 to-green-600'
-  if (score >= 70) return 'bg-gradient-to-br from-blue-500 to-blue-600'
-  if (score >= 50) return 'bg-gradient-to-br from-yellow-500 to-yellow-600'
-  if (score >= 30) return 'bg-gradient-to-br from-orange-500 to-orange-600'
-  return 'bg-gradient-to-br from-red-500 to-red-600'
+  if (score >= 90) return 'bg-ink'
+  if (score >= 70) return 'bg-ink'
+  if (score >= 50) return 'bg-ink'
+  if (score >= 30) return 'bg-ink'
+  return 'bg-ink'
 }
 
 const getHealthScoreExplanation = (score) => {
   if (score >= 90) {
-    return 'Outstanding! You actively maintain strong relationships across your network—you\'re in the top 5% of professionals'
+    return 'Outstanding. You actively maintain strong relationships across your network, which is genuinely uncommon'
   }
   if (score >= 75) {
     return 'Excellent! You maintain relationships much better than most professionals—you\'re doing great'
@@ -1135,7 +1128,7 @@ const getHealthScoreAdvice = (score) => {
     return 'You\'re a networking superstar—keep up the amazing work! 🌟'
   }
   if (score >= 75) {
-    return 'You\'re doing fantastic! With just a bit more effort, you could join the elite top 5%'
+    return 'You\'re doing fantastic! A small amount of structure would close the remaining gaps'
   }
   if (score >= 60) {
     return 'You\'re on the right track! Maintaining 15-20 more relationships could boost you to the top tier'
