@@ -700,7 +700,9 @@
               <li v-for="item in plusTier" :key="item">{{ item }}</li>
             </ul>
             <a
-              href="#get-kindred"
+              :href="plusCheckoutLink"
+              target="_blank"
+              rel="noopener noreferrer"
               class="mt-7 rounded-full border border-ink/20 py-3 text-center font-medium text-ink transition-colors hover:border-ink/40"
             >
               Get Plus
@@ -722,7 +724,7 @@
               <li v-for="item in proTier" :key="item">{{ item }}</li>
             </ul>
             <a
-              :href="demoLink"
+              :href="proCheckoutLink"
               target="_blank"
               rel="noopener noreferrer"
               class="mt-7 rounded-full bg-paper py-3 text-center font-medium text-ink transition-colors hover:bg-white"
@@ -1021,6 +1023,8 @@ import MentalSpace from '@/components/MentalSpace.vue'
 import CtaBand from '@/components/CtaBand.vue'
 
 const demoLink = 'https://cal.com/trykindredapp/demo'
+const proCheckoutLink = 'https://buy.stripe.com/dRm28r5V69Sa16t6I80gw02'
+const plusCheckoutLink = 'https://buy.stripe.com/eVq4gz1EQc0icPbfeE0gw03'
 import KindredMark from '@/components/KindredMark.vue'
 
 const scorePreview = [
