@@ -745,7 +745,7 @@
             </span>
             <p class="font-mono text-[0.65rem] uppercase leading-relaxed tracking-[0.16em] text-kindred-300">
               Founding members<br class="sm:hidden" />
-              <span class="hidden sm:inline"> · </span>$1,200 a year, locked for life · first 50
+              <span class="hidden sm:inline"> · </span>Locked for life · first 50 · by application
             </p>
           </div>
 
@@ -762,12 +762,13 @@
               something is wrong.
             </p>
             <p>
-              Founding membership is the most we charge and the most we give:
-              <strong class="font-semibold text-paper">$1,200 a year, and that
-              number never moves again</strong> — not when Pro rises, not when
-              we add a tier above it. It is capped at fifty for an
-              unglamorous reason: we set every one of these up personally, and a
-              fifty is genuinely as many as we can do properly.
+              Founding membership is the most we charge and the most we give.
+              <strong class="font-semibold text-paper">Whatever the rate is when
+              you join, it is locked for as long as you stay</strong> — not when
+              Pro rises, not when we add a tier above it. Pricing is shared when
+              you apply. It is capped at fifty for an unglamorous reason: we set
+              every one of these up personally, and fifty is genuinely as many
+              as we can do properly.
             </p>
           </div>
         </div>
