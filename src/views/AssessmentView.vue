@@ -1,53 +1,33 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-    <!-- Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4">
-        <router-link to="/" class="flex items-center text-slate-600 hover:text-kindred transition-colors text-sm sm:text-base">
-          <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-          <span class="font-medium">Back</span>
-        </router-link>
-      </div>
-    </header>
+  <div class="min-h-screen bg-paper font-sans text-ink antialiased">
+    <SiteNav />
 
     <!-- Main Content -->
     <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12">
       <!-- Header Section -->
-      <div class="text-center mb-12" v-if="step === 1">
-        <!-- Logo centered above title -->
-        <div class="flex justify-center mb-8">
-          <img :src="kindredLogo" alt="Kindred" class="h-16 w-16 sm:h-20 sm:w-20" />
-        </div>
-
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-          Calculate Your Relationship ROI
-        </h1>
-        <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto">
-          Answer 7 quick questions to discover how much revenue you're leaving on the table from neglected relationships
+      <div class="mb-12" v-if="step === 1">
+        <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+          Relationship check
         </p>
-        <div class="flex items-center justify-center gap-4 mt-6 text-sm text-slate-500">
-          <span class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            Takes 3 minutes
-          </span>
-          <span class="flex items-center">
-            <svg class="w-5 h-5 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            100% Free
-          </span>
-        </div>
+
+        <h1 class="mt-5 font-display text-3xl sm:text-4xl md:text-[3rem] font-medium leading-[1.12] tracking-tight text-ink">
+          Find out which relationships you are quietly losing.
+        </h1>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink/70">
+          Seven questions about how you actually keep in touch. At the end you
+          get your Network Health Score, the layers that have thinned out, and
+          the people most likely to slip in the next six months.
+        </p>
+        <p class="mt-6 font-mono text-xs text-ink/45">
+          2 minutes · No account · Your answers stay yours
+        </p>
       </div>
 
       <!-- Progress Bar -->
       <ProgressBar :current-step="step" :total-steps="7" />
 
       <!-- Assessment Form -->
-      <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-8 md:p-10">
+      <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 md:p-10">
         <form @submit.prevent="handleSubmit">
           <!-- Step 1: Role -->
           <QuestionCard
@@ -63,8 +43,8 @@
                 :key="option.value"
                 type="button"
                 @click="selectAndAdvance('role', option.value)"
-                class="p-4 text-left border-2 rounded-lg transition-all hover:border-kindred hover:bg-kindred-50"
-                :class="formData.role === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                class="p-4 text-left border rounded-xl transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.role === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
               >
                 <div class="flex items-start">
                   <span class="text-2xl mr-3 flex-shrink-0">{{ option.emoji }}</span>
@@ -87,9 +67,9 @@
             :can-proceed="formData.total_contacts > 0"
           >
             <!-- Context Banner -->
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <p class="text-sm text-slate-700 leading-relaxed">
-                <span class="font-semibold text-blue-700">ℹ️ Context:</span> Most professionals have <strong>500-3000 contacts</strong> but can only actively maintain <strong>80-100 without tools</strong>. With Kindred, top performers maintain <strong>180-250+ key relationships</strong>.
+            <div class="bg-kindred/[0.06] border border-kindred/25 rounded-lg p-4 mb-4">
+              <p class="text-sm text-ink/75 leading-relaxed">
+                <span class="font-semibold text-kindred-700">Context:</span> Most professionals accumulate <strong>500–3,000 contacts</strong> over a career. Research on social groups puts the number a person can hold unaided at around <strong>150</strong>, with far fewer kept genuinely close.
               </p>
             </div>
 
@@ -99,8 +79,8 @@
                 :key="option.value"
                 type="button"
                 @click="formData.total_contacts = option.value"
-                class="w-full p-4 text-left border-2 rounded-lg font-medium transition-all hover:border-kindred hover:bg-kindred-50"
-                :class="formData.total_contacts === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                class="w-full p-4 text-left border rounded-xl font-medium transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.total_contacts === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
               >
                 {{ option.label }}
               </button>
@@ -117,9 +97,9 @@
             :can-proceed="formData.active_maintained >= 0"
           >
             <!-- Context Banner -->
-            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
-              <p class="text-sm text-slate-700 leading-relaxed">
-                <span class="font-semibold text-purple-700">💡 Good news:</span> You don't need to maintain everyone—just the <strong>RIGHT 100-200 people</strong>. Kindred helps you identify and nurture your most valuable relationships without burning out.
+            <div class="bg-ember/[0.1] border border-ember/30 rounded-lg p-4 mb-4">
+              <p class="text-sm text-ink/75 leading-relaxed">
+                <span class="font-semibold text-[#A8632C]">Worth saying:</span> you are not meant to maintain everyone. A low number here is normal — the useful question is whether the people you <em>do</em> maintain are the ones you would have chosen.
               </p>
             </div>
 
@@ -129,8 +109,8 @@
                 :key="option.value"
                 type="button"
                 @click="formData.active_maintained = option.value"
-                class="w-full p-4 text-left border-2 rounded-lg font-medium transition-all hover:border-kindred hover:bg-kindred-50"
-                :class="formData.active_maintained === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                class="w-full p-4 text-left border rounded-xl font-medium transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.active_maintained === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
               >
                 {{ option.label }}
               </button>
@@ -152,8 +132,8 @@
                 :key="option.value"
                 type="button"
                 @click="formData.avg_deal_value = option.value"
-                class="w-full p-4 text-left border-2 rounded-lg font-medium transition-all hover:border-kindred hover:bg-kindred-50"
-                :class="formData.avg_deal_value === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                class="w-full p-4 text-left border rounded-xl font-medium transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.avg_deal_value === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
               >
                 {{ option.label }}
               </button>
@@ -171,7 +151,7 @@
           >
             <div class="space-y-6">
               <div class="text-center">
-                <div class="text-6xl font-bold text-kindred mb-4">
+                <div class="font-display text-6xl font-medium text-kindred mb-4">
                   {{ formData.relationship_percent }}%
                 </div>
               </div>
@@ -181,9 +161,9 @@
                 max="100"
                 step="5"
                 v-model.number="formData.relationship_percent"
-                class="w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer slider"
+                class="w-full h-3 bg-ink/10 rounded-lg appearance-none cursor-pointer slider"
               />
-              <div class="flex justify-between text-xs text-slate-500">
+              <div class="flex justify-between text-xs text-ink/45">
                 <span>0%</span>
                 <span>25%</span>
                 <span>50%</span>
@@ -208,8 +188,8 @@
                 :key="option.value"
                 type="button"
                 @click="formData.last_outreach = option.value"
-                class="w-full p-4 text-left border-2 rounded-lg font-medium transition-all hover:border-kindred hover:bg-kindred-50"
-                :class="formData.last_outreach === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                class="w-full p-4 text-left border rounded-xl font-medium transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.last_outreach === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
               >
                 <div class="flex items-center justify-between">
                   <span>{{ option.label }}</span>
@@ -222,36 +202,24 @@
           <!-- Step 7: Lost Contacts + Email -->
           <div v-if="step === 7">
             <!-- Unlock Priority Access Banner -->
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-6 mb-6">
+            <div class="bg-kindred/[0.06] border border-kindred/30 rounded-xl p-6 mb-6">
               <div class="flex items-start gap-4">
                 <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                  <div class="w-12 h-12 bg-kindred rounded-xl flex items-center justify-center">
                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                     </svg>
                   </div>
                 </div>
                 <div class="flex-1">
-                  <h3 class="text-lg font-bold text-slate-900 mb-2">🎯 Final Step: Unlock Priority Demo Access</h3>
-                  <p class="text-sm text-slate-700 mb-3">
-                    You've completed 6/7 questions. One more step and you'll unlock:
+                  <h3 class="font-display text-lg font-medium text-ink mb-2">Last question</h3>
+                  <p class="text-sm text-ink/75 mb-3">
+                    Six of seven done. Answer this one and you get:
                   </p>
-                  <div class="grid sm:grid-cols-2 gap-2 text-sm">
-                    <div class="flex items-center gap-2">
-                      <span class="text-green-600">✓</span>
-                      <span class="text-slate-700">Your personalized ROI results</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-green-600">✓</span>
-                      <span class="text-slate-700">Priority demo slot (limited)</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-green-600">✓</span>
-                      <span class="text-slate-700">Network intelligence report</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="text-green-600">✓</span>
-                      <span class="text-slate-700">Early adopter pricing (50% off)</span>
+                  <div class="grid sm:grid-cols-2 gap-2.5 text-sm">
+                    <div v-for="item in unlocks" :key="item" class="flex items-start gap-2.5">
+                      <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-kindred" aria-hidden="true"></span>
+                      <span class="text-ink/75 leading-snug">{{ item }}</span>
                     </div>
                   </div>
                 </div>
@@ -271,8 +239,8 @@
                   :key="option.value"
                   type="button"
                   @click="formData.lost_contacts = option.value"
-                  class="w-full p-4 text-left border-2 rounded-lg font-medium transition-all hover:border-kindred hover:bg-kindred-50"
-                  :class="formData.lost_contacts === option.value ? 'border-kindred bg-kindred-50 text-kindred-700' : 'border-slate-200 text-slate-700 hover:shadow-md'"
+                  class="w-full p-4 text-left border rounded-xl font-medium transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                  :class="formData.lost_contacts === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
                 >
                   {{ option.label }}
                 </button>
@@ -286,14 +254,14 @@
               />
 
               <!-- Industry Selection (Optional) -->
-              <div class="mt-6 pt-6 border-t border-slate-200">
-                <label for="industry" class="block text-sm font-medium text-slate-700 mb-2">
+              <div class="mt-6 pt-6 border-t border-ink/12">
+                <label for="industry" class="block text-sm font-medium text-ink/75 mb-2">
                   Industry (Optional)
                 </label>
                 <select
                   id="industry"
                   v-model="formData.industry"
-                  class="w-full px-4 py-3 bg-white border-2 border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-kindred focus:border-kindred transition-all"
+                  class="w-full px-4 py-3 bg-white border-2 border-ink/15 rounded-lg text-ink focus:outline-none focus:ring-2 focus:ring-kindred focus:border-kindred transition-all"
                 >
                   <option value="">Select your industry</option>
                   <option value="technology">Technology</option>
@@ -306,7 +274,7 @@
                   <option value="media">Media</option>
                   <option value="manufacturing">Manufacturing</option>
                 </select>
-                <p class="text-xs text-slate-500 mt-2">
+                <p class="text-xs text-ink/45 mt-2">
                   Helps us provide more accurate ROI calculations based on industry benchmarks
                 </p>
               </div>
@@ -317,7 +285,7 @@
               <button
                 type="submit"
                 :disabled="isSubmitting || !canSubmit"
-                class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-kindred to-purple-600 text-white text-lg font-bold rounded-xl hover:shadow-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-0.5"
+                class="w-full sm:w-auto px-10 py-4 bg-ink text-paper font-medium text-lg rounded-full hover:bg-dusk transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span v-if="isSubmitting" class="flex items-center justify-center">
                   <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
@@ -353,8 +321,8 @@
 
       <!-- Trust Indicators -->
       <div class="mt-8 text-center">
-        <p class="text-sm text-slate-500 mb-4">Trusted by executives at:</p>
-        <div class="flex justify-center items-center gap-6 text-slate-400">
+        <p class="text-sm text-ink/45 mb-4">Trusted by executives at:</p>
+        <div class="flex justify-center items-center gap-6 text-ink/35">
           <span class="font-semibold">Fortune 500 Companies</span>
           <span>•</span>
           <span class="font-semibold">Top Startups</span>
@@ -363,6 +331,8 @@
         </div>
       </div>
     </main>
+
+    <SiteFooter />
   </div>
 </template>
 
@@ -373,7 +343,16 @@ import ProgressBar from '@/components/assessment/ProgressBar.vue'
 import QuestionCard from '@/components/assessment/QuestionCard.vue'
 import EmailCapture from '@/components/assessment/EmailCapture.vue'
 import { submitAssessment, validateAssessmentData } from '@/services/assessmentApi'
-import kindredLogo from '@/assets/kindred.svg'
+import SiteNav from '@/components/SiteNav.vue'
+import SiteFooter from '@/components/SiteFooter.vue'
+
+// Only things we actually deliver — no invented discounts or scarce slots.
+const unlocks = [
+  'Your Network Health Score, and what is dragging it down',
+  'Which relationship layers have thinned out',
+  'The people most likely to slip in the next six months',
+  'A cadence you could realistically keep',
+]
 
 const router = useRouter()
 

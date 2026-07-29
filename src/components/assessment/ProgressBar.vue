@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mb-8">
     <!-- Progress Bar -->
-    <div class="relative w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+    <div class="relative w-full bg-ink/10 rounded-full h-3 overflow-hidden">
       <div
         class="absolute top-0 left-0 h-full bg-gradient-to-r from-kindred to-purple-600 transition-all duration-500 ease-out rounded-full"
         :style="{ width: `${progress}%` }"
@@ -12,7 +12,7 @@
 
     <!-- Step Counter -->
     <div class="flex justify-between items-center mt-3">
-      <p class="text-sm font-medium text-slate-600">
+      <p class="text-sm font-medium text-ink/60">
         Step {{ currentStep }} of {{ totalSteps }}
       </p>
       <p class="text-sm font-semibold text-kindred">

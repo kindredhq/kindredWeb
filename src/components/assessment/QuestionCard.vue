@@ -2,10 +2,10 @@
   <div class="animate-fade-in">
     <!-- Question Header -->
     <div class="mb-6">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
+      <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-3">
         {{ title }}
       </h2>
-      <p v-if="subtitle" class="text-base sm:text-lg text-slate-600">
+      <p v-if="subtitle" class="text-base sm:text-lg text-ink/60">
         {{ subtitle }}
       </p>
     </div>
@@ -16,12 +16,12 @@
     </div>
 
     <!-- Navigation Buttons -->
-    <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-200">
+    <div class="flex items-center justify-between mt-8 pt-6 border-t border-ink/12">
       <button
         v-if="showBack"
         type="button"
         @click="$emit('back')"
-        class="flex items-center text-slate-600 hover:text-slate-900 font-medium transition-colors"
+        class="flex items-center text-ink/60 hover:text-ink font-medium transition-colors"
       >
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -35,7 +35,7 @@
         type="button"
         @click="$emit('next')"
         :disabled="!canProceed"
-        class="px-6 py-3 bg-kindred text-white font-semibold rounded-lg hover:bg-kindred-600 transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+        class="px-6 py-3 bg-kindred text-white font-semibold rounded-xl hover:bg-kindred-600 transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
       >
         Continue
       </button>
