@@ -11,10 +11,10 @@
 
       <div class="flex items-center gap-5 sm:gap-7">
         <router-link
-          to="/roi-calculator"
+          to="/#pricing"
           class="hidden rounded text-sm text-ink/60 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-kindred sm:block"
         >
-          Free score
+          Pricing
         </router-link>
         <router-link
           to="/writing"
