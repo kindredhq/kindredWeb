@@ -93,7 +93,8 @@ their relationships. Section order matters — it maps to the buyer journey from
   inference costs, so a lifetime fee would buy a permanent liability
 
 ### Assessment (`/roi-calculator`)
-Restyled onto site tokens, now uses shared nav and footer.
+Restyled onto site tokens, shared nav and footer, now 8 questions. The results
+page was rebuilt separately — see below.
 
 ---
 
@@ -118,49 +119,83 @@ Dunbar is citable because it is real published research.
 
 ---
 
-## Next up: mental space in the assessment
+## Done: mental load in the assessment
 
-The idea: the assessment currently outputs a **dollar figure**, which sits
-awkwardly against a site whose strongest argument is that the real cost is
-**mental**. Recognition converts better than argument — "yes, that is exactly
-it" beats "how would they know?".
+Shipped 2026-07-30. The assessment answered "what is this costing me?" only in
+money, which is the weaker half — people discount a dollar figure a stranger
+calculated for them. Attention they can check against their own week, and
+recognition converts better than argument.
 
-### The plan
-Lead the results with **reclaimed attention**, keep the dollar figure as a
-supporting stat.
+### The model
+`kindredserver/pkg/services/mental_load.go`. Attention out of 100 units,
+matching the grid `MentalSpace.vue` uses on the homepage, so the same picture
+appears either side of the click.
 
-**Derivable from existing answers, no new questions needed:**
-- *The carry* — attention consumed maintaining `active_maintained` unaided
-- *The gap* — `total_contacts − active_maintained`, the people you know about
-  but are not acting on. This is the vague-debt population
-- *The reclaim* — what a system takes off you
+| Input | Feeds |
+|---|---|
+| `active_maintained` | the carry — saturating, never runaway |
+| `lost_contacts` | the debt — people you know you have dropped |
+| `mental_load_frequency` *(new question)* | intrusion — the direct measure |
+| `last_outreach` | staleness multiplier, 0.85–1.25 |
 
-**One question worth adding:** "How often does a name pop into your head that
-you feel you should reach out to?" (daily / few times a week / weekly / rarely).
-It measures intrusive-thought load directly, and people answer it honestly
-because it is not about performance.
+Output: occupied / free / residual / reclaimed, plus named bands that always
+sum to 100. Ceiling of 78 so it never claims someone has nothing left.
 
-**Reuse `MentalSpace.vue`** so the results page speaks the same visual language
-as the section that persuaded them to take the test.
+**It is a model, not a measurement.** The response carries a `note` saying so
+and the UI always renders it. Do not remove that.
 
-### What it touches
-| Change | Backend | Frontend | DB migration |
-|---|---|---|---|
-| Reorder to lead with mental space | — | ✅ | — |
-| Derived metric (existing answers) | ✅ calc + response fields | ✅ | ✅ |
-| New question | ✅ model, validator, request struct | ✅ | ✅ |
+**The new question** — "How often does a name pop into your head that you feel
+you should reach out to?" — is step 4 of 8. It is the only question that
+measures the cost directly rather than inferring it, and people answer honestly
+because there is no right answer to perform. Optional on the wire so older
+clients keep working; a blank scores as the **middle** case, never the worst.
 
-The assessment is fully server-side: frontend POSTs to
-`/api/public/assessment`, scoring happens in `assessment_roi_calculator.go` and
-`roi_calculator.go`, results persist to Postgres.
+### What it touched
+- `055_add_mental_load_to_assessments.sql` — two nullable columns. Pre-2026-07
+  rows have no honest value to backfill, so the results page omits the section
+  rather than invent one
+- `models.MentalLoad` + JSONB round-trip, 4 SELECTs, the INSERT, the validator
+- Loops now gets `mental_load_occupied` / `_reclaimed` / `_level` as merge fields
+- `MentalLoadCard.vue` leads the results page
 
-**Cheapest first step:** the results page already receives `total_contacts`,
-`active_maintained` and `health_score`, so a rough attention estimate can be
-derived **client-side with zero backend work** — enough to test whether the
-framing lands before committing to schema changes.
+### Verified end to end
+Real Go server against the local `kindred` DB, real form submission, real
+round-trip out of Postgres — matching the unit tests exactly (54 occupied /
+47 reclaimed / 93 free for the reference founder). Run with
+`LOOPS_API_KEY=dev-invalid-no-outbound` so no email is sent; two
+`@example.invalid` rows are in the dev DB from those runs.
 
-**Do the backend work on `feat/pulse-and-env`**, which deploys to lab-core and
-is isolated from what currently serves the live app.
+**Note for anyone testing this:** `CreateAssessment` spawns a goroutine that
+calls Loops *and sends a real email*. Always override the key locally.
+
+---
+
+## Results page rebuild
+
+The results page had never actually been restyled — only the questionnaire had.
+It was still on the pre-rebuild palette: `bg-red-50` / `bg-orange-50` cost rows,
+`text-blue-900` / `text-purple-900` insight headings, emoji-led action items,
+`bg-opacity` + `backdrop-blur` panels, and three components
+(`TierBreakdownCard`, `YearComparison`, `StrategicFocusCard`) that were entirely
+gradient-and-slate. All now on paper/ink/kindred with Fraunces + Plex Mono.
+
+**Bugs found while doing it:**
+- `priorityOrder[a.priority] || 4` — `critical` maps to `0`, and `0 || 4` is
+  `4`, so the **most valuable tier sorted last**, contradicting the copy above
+  it. Now `?? 4`
+- Seven-figure currency at `text-5xl` in a half-width column overflowed on
+  mobile. Compact format + responsive sizing
+- The `% of portfolio` label sat *inside* the bar fill, so narrow tiers clipped it
+- Insight strings divided by 1000 unconditionally, printing **`$6423K`**. Added
+  `compactMoney` → `$6.4M`
+
+**The money/warmth balance.** Henry: *"the report a bit too money focus."* The
+page now leads with attention, and carries a deliberately number-free section —
+*"The people who never show up in a figure like that"* — about family, old
+friends and mentors. Step 2 of the action plan is the same at every score:
+write down five people no deal depends on. The `lost_contacts` question was
+reframed to include them, which is safe because that field feeds **no** money
+calculation — only the attention model.
 
 ---
 
@@ -168,6 +203,11 @@ is isolated from what currently serves the live app.
 
 **Site**
 - Founding membership price undecided
+- Results-page hero still says "Your Network Analysis" in one mid-page heading;
+  the rest now leads with attention
+- The assessment still asks for a deal value up front, which sets a
+  transactional tone before the attention question lands. Worth testing the
+  reverse order
 - Founding members page is promised in copy but does not exist
 - Three older blog posts still in the pre-ICP voice
 - 39 dependabot vulnerabilities (pre-existing, from the old Vue/Vite tree)

@@ -1,126 +1,83 @@
 <template>
-  <div class="bg-white rounded-2xl shadow-xl border-2 border-slate-200 p-6 sm:p-8 space-y-6 animate-slide-up">
+  <div class="rounded-2xl border border-ink/12 bg-white p-6 sm:p-10">
     <!-- Header -->
-    <div class="text-center">
-      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-full mb-4">
-        <span class="text-4xl">🎯</span>
+    <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+      Your strategic focus
+    </p>
+    <h3 class="mt-4 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+      {{ totalTopTierCount }} relationships carry {{ topTierPercent }}% of the value
+    </h3>
+    <p class="mt-3 max-w-2xl leading-relaxed text-ink/60">
+      That is {{ topTierPercentOfPortfolio }}% of your portfolio doing most of the
+      work. If you only ever fix one thing, fix these.
+    </p>
+
+    <!-- The two tiers that matter -->
+    <div class="mt-8 grid divide-y divide-ink/10 border-y border-ink/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+      <div v-if="vipTier" class="px-1 py-6 sm:pr-8 sm:pl-0">
+        <div class="font-display text-4xl font-medium text-ink">
+          {{ vipTier.target_count }}
+        </div>
+        <div class="mt-2 font-medium text-ink">{{ vipTier.name }}</div>
+        <p class="mt-2 text-sm leading-relaxed text-ink/55">{{ vipTier.description }}</p>
+        <div class="mt-4 flex items-baseline gap-2 border-t border-ink/10 pt-4">
+          <span class="font-display text-xl font-medium text-kindred">
+            {{ formatCurrency(vipTier.total_value) }}
+          </span>
+          <span class="font-mono text-xs text-ink/45">{{ vipTier.value_multiplier }}×</span>
+        </div>
       </div>
-      <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
-        Your Strategic Focus
-      </h3>
-      <p class="text-slate-600 text-sm sm:text-base">
-        Where to focus for maximum ROI
+
+      <div v-if="partnerTier" class="px-1 py-6 sm:pl-8 sm:pr-0">
+        <div class="font-display text-4xl font-medium text-ink">
+          {{ partnerTier.target_count }}
+        </div>
+        <div class="mt-2 font-medium text-ink">{{ partnerTier.name }}</div>
+        <p class="mt-2 text-sm leading-relaxed text-ink/55">{{ partnerTier.description }}</p>
+        <div class="mt-4 flex items-baseline gap-2 border-t border-ink/10 pt-4">
+          <span class="font-display text-xl font-medium text-kindred">
+            {{ formatCurrency(partnerTier.total_value) }}
+          </span>
+          <span class="font-mono text-xs text-ink/45">{{ partnerTier.value_multiplier }}×</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action plan -->
+    <div class="mt-10">
+      <p class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+        In what order
       </p>
+      <ol class="mt-5 divide-y divide-ink/10 border-t border-ink/10">
+        <li v-for="(step, i) in steps" :key="i" class="flex gap-5 py-5">
+          <span class="mt-0.5 font-mono text-sm text-kindred">
+            {{ String(i + 1).padStart(2, '0') }}
+          </span>
+          <div class="min-w-0">
+            <div class="font-medium text-ink">{{ step.title }}</div>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink/60">{{ step.body }}</p>
+          </div>
+        </li>
+      </ol>
     </div>
 
-    <!-- Top Tiers Highlight -->
-    <div class="bg-gradient-to-br from-slate-50 to-white rounded-xl p-6 space-y-4 border-2 border-slate-200">
-      <div class="text-center mb-4">
-        <div class="text-5xl font-bold text-slate-900 mb-2">{{ totalTopTierCount }}</div>
-        <div class="text-sm text-slate-600 font-medium">strategic relationships</div>
+    <!-- Bottom stat -->
+    <div class="mt-8 grid gap-6 border-t border-ink/15 pt-6 sm:grid-cols-2">
+      <div>
+        <p class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+          Value per strategic relationship
+        </p>
+        <p class="mt-2 font-display text-2xl font-medium text-ink">
+          {{ formatCurrency(valuePerStrategicRelationship) }}
+        </p>
       </div>
-
-      <!-- Two Top Tiers -->
-      <div class="grid sm:grid-cols-2 gap-4">
-        <!-- VIP Tier -->
-        <div
-          v-if="vipTier"
-          class="bg-gradient-to-br from-red-500 to-red-600 text-white rounded-lg p-4 text-center transform hover:scale-105 transition-transform shadow-lg"
-        >
-          <div class="text-3xl font-bold mb-1">{{ vipTier.target_count }}</div>
-          <div class="text-sm font-medium opacity-90 mb-2">{{ vipTier.name }}</div>
-          <div class="text-xs opacity-75 mb-2">{{ vipTier.description }}</div>
-          <div class="pt-2 border-t border-white border-opacity-30">
-            <div class="text-lg font-bold">{{ formatCurrency(vipTier.total_value) }}</div>
-            <div class="text-xs opacity-75">{{ vipTier.value_multiplier }}x value</div>
-          </div>
-        </div>
-
-        <!-- Strategic Partner Tier -->
-        <div
-          v-if="partnerTier"
-          class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-lg p-4 text-center transform hover:scale-105 transition-transform shadow-lg"
-        >
-          <div class="text-3xl font-bold mb-1">{{ partnerTier.target_count }}</div>
-          <div class="text-sm font-medium opacity-90 mb-2">{{ partnerTier.name }}</div>
-          <div class="text-xs opacity-75 mb-2">{{ partnerTier.description }}</div>
-          <div class="pt-2 border-t border-white border-opacity-30">
-            <div class="text-lg font-bold">{{ formatCurrency(partnerTier.total_value) }}</div>
-            <div class="text-xs opacity-75">{{ partnerTier.value_multiplier }}x value</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Combined Value -->
-      <div class="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-4 text-center">
-        <div class="text-sm text-slate-700 font-medium mb-1">Combined 3-5 Year Value</div>
-        <div class="text-3xl sm:text-4xl font-bold text-green-700">{{ formatCurrency(topTierValue) }}</div>
-        <div class="text-xs text-slate-600 mt-1">
-          {{ topTierPercent }}% of your total network value from {{ topTierPercentOfPortfolio }}% of relationships
-        </div>
-      </div>
-    </div>
-
-    <!-- Action Plan -->
-    <div class="space-y-3">
-      <div class="flex items-center gap-2 text-slate-900 font-semibold text-sm sm:text-base">
-        <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
-          <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
-        </svg>
-        <span>Your Priority Action Plan:</span>
-      </div>
-
-      <div class="space-y-2">
-        <div class="flex items-start gap-3 bg-green-50 border border-green-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-          <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-            1
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-slate-900 mb-1">Identify Your VIPs</p>
-            <p class="text-sm text-slate-700 leading-relaxed">
-              Start with {{ Math.round(vipTier?.target_count * 0.5) || 10 }}-{{ Math.round(vipTier?.target_count * 0.75) || 15 }} decision-makers who can unlock significant opportunities
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-          <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-            2
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-slate-900 mb-1">Nurture Strategic Partners</p>
-            <p class="text-sm text-slate-700 leading-relaxed">
-              Build relationships with {{ Math.round(partnerTier?.target_count * 0.5) || 15 }}-{{ Math.round(partnerTier?.target_count * 0.75) || 20 }} connectors who can refer you to their networks
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-3 bg-purple-50 border border-purple-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-          <div class="flex-shrink-0 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-            3
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-slate-900 mb-1">Let Network Effects Multiply</p>
-            <p class="text-sm text-slate-700 leading-relaxed">
-              Year 1: {{ formatCurrency(year1Impact) }}. Years 3-5: {{ formatCurrency(topTierValue) }} as referrals compound
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Stat -->
-    <div class="pt-6 border-t-2 border-slate-200">
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-4 border border-indigo-200">
-          <p class="text-xs text-slate-600 mb-1 font-medium">Value per strategic relationship</p>
-          <p class="text-2xl font-bold text-indigo-700">{{ formatCurrency(valuePerStrategicRelationship) }}</p>
-        </div>
-        <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-lg p-4 border border-orange-200">
-          <p class="text-xs text-slate-600 mb-1 font-medium">vs. general network contact</p>
-          <p class="text-2xl font-bold text-orange-700">{{ strategicMultiplier }}x</p>
-        </div>
+      <div>
+        <p class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+          Against a general contact
+        </p>
+        <p class="mt-2 font-display text-2xl font-medium text-kindred">
+          {{ strategicMultiplier }}×
+        </p>
       </div>
     </div>
   </div>
@@ -192,23 +149,19 @@ const strategicMultiplier = computed(() => {
 
   return (valuePerStrategicRelationship.value / generalValue).toFixed(1)
 })
+
+const steps = computed(() => [
+  {
+    title: 'Name your VIPs',
+    body: `Start with ${Math.round((vipTier.value?.target_count || 20) * 0.5)}–${Math.round((vipTier.value?.target_count || 20) * 0.75)} people who can genuinely change what happens next. Not the biggest names — the ones who would take your call.`,
+  },
+  {
+    title: 'Then the connectors',
+    body: `${Math.round((partnerTier.value?.target_count || 30) * 0.5)}–${Math.round((partnerTier.value?.target_count || 30) * 0.75)} people whose networks are worth more to you than their own business. These compound hardest.`,
+  },
+  {
+    title: 'Then let it run',
+    body: `Year one is about ${formatCurrency(props.year1Impact)}. The rest arrives later, from referrals you cannot schedule — which is exactly why the cadence has to hold without you remembering it.`,
+  },
+])
 </script>
-
-<style scoped>
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-slide-up {
-  animation: slideUp 0.6s ease-out;
-  animation-fill-mode: both;
-  animation-delay: 0.4s;
-}
-</style>

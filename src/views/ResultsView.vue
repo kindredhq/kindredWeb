@@ -5,13 +5,11 @@
       <div class="text-center space-y-6">
         <div class="relative">
           <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-kindred mx-auto"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <span class="text-3xl">🧠</span>
-          </div>
+
         </div>
         <div>
-          <p class="text-xl font-semibold text-ink mb-2">Calculating Your ROI...</p>
-          <p class="text-ink/60">Analyzing your network and opportunities</p>
+          <p class="font-display text-xl font-medium text-ink mb-2">Working out your results…</p>
+          <p class="text-ink/60">This takes a moment</p>
         </div>
       </div>
     </div>
@@ -66,21 +64,24 @@
         </div>
 
         <!-- Hero Section -->
-        <div class="text-center space-y-4 animate-fade-in">
-          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-ink">
-            Your Relationship ROI Analysis
+        <div class="mx-auto max-w-3xl space-y-5 text-center animate-fade-in">
+          <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+            <span v-if="results.name">{{ results.name }}'s relationship check</span>
+            <span v-else>Your relationship check</span>
+          </p>
+          <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-medium leading-[1.1] tracking-tight text-ink">
+            What keeping up with people is actually costing you
           </h1>
-          <p v-if="results.name" class="text-xl sm:text-2xl text-ink/60">
-            Hi {{ results.name }}! Here's what we discovered...
+          <p class="text-lg leading-relaxed text-ink/65 sm:text-xl">
+            Two currencies, in this order: the attention it takes from you, and
+            the money it takes from the business. The first one is the reason the
+            second one happens.
           </p>
         </div>
 
         <!-- High Performer Badge (90+) -->
         <div v-if="results.health_score >= 90" class="bg-ink rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
-          <div class="flex items-center justify-center mb-3">
-            <span class="text-5xl mr-3">🏆</span>
-            <h2 class="font-display text-3xl font-medium">Exceptional Network Management!</h2>
-          </div>
+          <h2 class="font-display text-3xl font-medium">You are doing this unusually well</h2>
           <p class="text-lg opacity-95 max-w-2xl mx-auto">
             You are keeping your closest relationships genuinely warm — which, given how easily this slips, is harder than it sounds.
           </p>
@@ -88,14 +89,17 @@
 
         <!-- Great Performer Badge (75-89) -->
         <div v-else-if="results.health_score >= 75" class="bg-ink rounded-2xl shadow-xl p-6 text-white text-center animate-fade-in">
-          <div class="flex items-center justify-center mb-3">
-            <span class="text-5xl mr-3">⭐</span>
-            <h2 class="font-display text-3xl font-medium">Great Work on Your Network!</h2>
-          </div>
+          <h2 class="font-display text-3xl font-medium">Most of this is in good shape</h2>
           <p class="text-lg opacity-95 max-w-2xl mx-auto">
             Most of your important relationships are in good shape. The gaps below are the ones worth closing first.
           </p>
         </div>
+
+        <!-- Mental load leads. It is the argument people can check against
+             their own week, which the dollar figure below is not. Assessments
+             taken before this model existed have no mental_load, and we show
+             nothing rather than invent a number for them. -->
+        <MentalLoadCard v-if="results.mental_load" :load="results.mental_load" />
 
         <!-- Key Metrics Grid -->
         <div class="grid md:grid-cols-2 gap-6">
@@ -110,12 +114,14 @@
                   {{ formatCurrency(results.conservative_roi) }}
                 </p>
                 <p class="text-sm opacity-90 leading-relaxed">
-                  This is how much revenue you're likely missing each year from neglected professional relationships
+                  The same drift, priced. This is what the relationships that
+                  went quiet are likely costing the business each year.
                 </p>
               </div>
               <div class="pt-4 border-t border-white border-opacity-20 space-y-2">
-                <p class="text-sm font-medium">
-                  💡 <strong>What this means:</strong> By not actively maintaining your network, you're leaving deals, referrals, and partnerships on the table
+                <p class="text-sm leading-relaxed opacity-90">
+                  Deals that never opened, referrals that went elsewhere, partnerships
+                  that cooled — counted at your own deal size.
                 </p>
                 <p class="text-xs opacity-75">
                   Full potential: {{ formatCurrency(results.calculated_roi) }} (we show conservative 15% estimate)
@@ -150,6 +156,10 @@
                 <p class="text-xs opacity-75 mt-2">
                   {{ getHealthScoreAdvice(results.health_score) }}
                 </p>
+                <p v-if="results.mental_load" class="text-xs opacity-75 mt-2">
+                  Holding this together by memory is what the
+                  {{ results.mental_load.occupied_units }} units above are being spent on.
+                </p>
               </div>
             </div>
           </div>
@@ -180,78 +190,85 @@
         />
 
         <!-- ROI Breakdown -->
-        <div class="bg-white rounded-2xl shadow-lg border border-ink/12 p-6 sm:p-8">
-          <div class="mb-6">
-            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2">
-              Where You're Leaving Money
-            </h2>
-            <p class="text-ink/60">
-              Here's how we calculated your opportunity cost broken down by category:
-            </p>
-          </div>
+        <div class="rounded-2xl border border-ink/12 bg-white p-6 sm:p-10">
+          <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+            Where the cost shows up
+          </p>
+          <h2 class="mt-4 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+            The same cost, counted in money
+          </h2>
+          <p class="mt-3 max-w-2xl leading-relaxed text-ink/60">
+            Broken down by where the opportunity goes when a relationship goes quiet.
+          </p>
 
-          <div class="space-y-4">
-            <!-- Missed Pipeline -->
-            <div class="flex items-center justify-between p-4 sm:p-6 bg-red-50 border border-red-200 rounded-xl hover:shadow-md transition-shadow">
-              <div class="flex-1">
-                <div class="flex items-center mb-2">
-                  <span class="text-2xl mr-3">💸</span>
-                  <h3 class="font-bold text-red-900 text-lg">Missed Pipeline</h3>
-                </div>
-                <p class="text-sm text-red-700">
-                  {{ results.breakdown.missed_deals }} potential deals from inactive relationships
-                </p>
+          <!-- A ledger, not three alarm-coloured boxes. The severity is carried
+               by the numbers and the ember rule, not by red/orange/yellow. -->
+          <dl class="mt-8 divide-y divide-ink/10 border-t border-ink/10">
+            <div
+              v-for="row in costRows"
+              :key="row.label"
+              class="flex items-baseline justify-between gap-6 border-l-2 py-5 pl-5"
+              :class="row.emphasis ? 'border-ember' : 'border-transparent'"
+            >
+              <div class="min-w-0">
+                <dt class="font-medium text-ink">{{ row.label }}</dt>
+                <p class="mt-1 text-sm leading-relaxed text-ink/55">{{ row.detail }}</p>
               </div>
-              <div class="text-right ml-4">
-                <p class="font-display text-2xl sm:text-3xl font-medium text-red-600">
-                  {{ formatCurrency(results.breakdown.missed_pipeline) }}
-                </p>
-              </div>
+              <dd class="shrink-0 font-display text-2xl font-medium text-ink sm:text-3xl">
+                {{ formatCurrency(row.value) }}
+              </dd>
             </div>
-
-            <!-- Lost Referrals -->
-            <div class="flex items-center justify-between p-4 sm:p-6 bg-orange-50 border border-orange-200 rounded-xl hover:shadow-md transition-shadow">
-              <div class="flex-1">
-                <div class="flex items-center mb-2">
-                  <span class="text-2xl mr-3">🤝</span>
-                  <h3 class="font-bold text-orange-900 text-lg">Lost Referrals</h3>
-                </div>
-                <p class="text-sm text-orange-700">
-                  Referral opportunities from contacts you've lost touch with
-                </p>
-              </div>
-              <div class="text-right ml-4">
-                <p class="font-display text-2xl sm:text-3xl font-medium text-orange-600">
-                  {{ formatCurrency(results.breakdown.lost_referrals) }}
-                </p>
-              </div>
-            </div>
-
-            <!-- Cold Partnerships -->
-            <div class="flex items-center justify-between p-4 sm:p-6 bg-yellow-50 border border-yellow-200 rounded-xl hover:shadow-md transition-shadow">
-              <div class="flex-1">
-                <div class="flex items-center mb-2">
-                  <span class="text-2xl mr-3">❄️</span>
-                  <h3 class="font-bold text-yellow-900 text-lg">Cold Partnerships</h3>
-                </div>
-                <p class="text-sm text-yellow-700">
-                  Untapped opportunities from neglected strategic relationships
-                </p>
-              </div>
-              <div class="text-right ml-4">
-                <p class="font-display text-2xl sm:text-3xl font-medium text-yellow-600">
-                  {{ formatCurrency(results.breakdown.cold_partnerships) }}
-                </p>
-              </div>
-            </div>
-          </div>
+          </dl>
 
           <!-- Total -->
-          <div class="mt-6 pt-6 border-t-2 border-ink/12">
-            <div class="flex items-center justify-between">
-              <h3 class="text-xl font-bold text-ink">Total Opportunity Cost</h3>
-              <p class="text-3xl sm:text-4xl font-bold text-kindred">
-                {{ formatCurrency(results.conservative_roi) }}
+          <div class="mt-8 flex items-baseline justify-between gap-6 border-t border-ink/15 pt-6">
+            <h3 class="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-ink/50">
+              Total, per year
+            </h3>
+            <p class="font-display text-3xl font-medium text-kindred sm:text-4xl">
+              {{ formatCurrency(results.conservative_roi) }}
+            </p>
+          </div>
+        </div>
+
+        <!-- The counterweight to everything above it. A page that only counts
+             money implies the people without a deal attached do not count, and
+             those are usually the ones that actually slip. Nothing here is
+             measured — it is deliberately the one section with no number in it. -->
+        <div class="rounded-2xl bg-ink p-6 text-paper sm:p-12">
+          <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred-300">
+            What the numbers leave out
+          </p>
+          <h2 class="mt-5 max-w-3xl font-display text-2xl font-medium leading-tight tracking-tight sm:text-4xl">
+            The people who never show up in a figure like that
+          </h2>
+
+          <div class="mt-8 grid gap-10 lg:grid-cols-2">
+            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
+              <p>
+                Everything above prices relationships by what they return. Your
+                mother does not have a deal value. Neither does the friend who
+                sat with you through the bad year, or the mentor who took the
+                call when nobody else would.
+              </p>
+              <p>
+                They are in that contact list too. They are also, almost always,
+                the ones that go quiet first — because a client chasing you
+                creates a deadline and a brother does not.
+              </p>
+            </div>
+
+            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
+              <p>
+                This is the part we cannot put a number on, and would not want
+                to. But it is the part most people are actually thinking about
+                when a name arrives at 2am — and it is counted in the attention
+                figure at the top of this page, because that cost is real
+                whether or not anything is riding on it.
+              </p>
+              <p class="border-l-2 border-kindred pl-6 text-paper">
+                Kindred was built for the whole list. The business case is what
+                makes it easy to justify; the rest is what makes it worth doing.
               </p>
             </div>
           </div>
@@ -266,37 +283,42 @@
             <p class="text-ink/60">Here's the full breakdown of your relationship management</p>
           </div>
 
-          <!-- Contact Breakdown -->
-          <div class="grid md:grid-cols-3 gap-6">
-            <!-- Total Contacts -->
-            <div class="bg-white rounded-xl p-6 border-2 border-ink/12 text-center">
-              <div class="text-4xl font-bold text-ink mb-2">
+          <!-- Contact Breakdown. A funnel from everyone you know down to the
+               few you actually keep — the narrowing is the point, so the three
+               read as one row rather than three unrelated coloured tiles. -->
+          <div class="grid divide-y divide-ink/10 border-y border-ink/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+            <div class="px-2 py-6 md:px-6">
+              <div class="font-display text-4xl font-medium text-ink">
                 {{ formatNumber(results.total_contacts) }}
               </div>
-              <div class="text-sm font-medium text-ink/60 mb-1">Total Contacts</div>
-              <div class="text-xs text-ink/45">Your entire network</div>
+              <div class="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                Total contacts
+              </div>
+              <p class="mt-2 text-sm text-ink/55">Everyone you have collected</p>
             </div>
 
-            <!-- Business-Relevant -->
-            <div class="bg-blue-50 rounded-xl p-6 border-2 border-blue-200 text-center">
-              <div class="text-4xl font-bold text-blue-600 mb-2">
+            <div class="px-2 py-6 md:px-6">
+              <div class="font-display text-4xl font-medium text-ink">
                 {{ formatNumber(getBusinessRelevantContacts()) }}
               </div>
-              <div class="text-sm font-medium text-ink/75 mb-1">Business-Relevant</div>
-              <div class="text-xs text-ink/45">
-                {{ getBusinessRelevantPercent() }}% can generate opportunities
+              <div class="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                Business-relevant
               </div>
+              <p class="mt-2 text-sm text-ink/55">
+                About {{ getBusinessRelevantPercent() }}% for your role
+              </p>
             </div>
 
-            <!-- Currently Maintaining -->
-            <div class="bg-green-50 rounded-xl p-6 border-2 border-green-200 text-center">
-              <div class="text-4xl font-bold text-green-600 mb-2">
+            <div class="px-2 py-6 md:px-6">
+              <div class="font-display text-4xl font-medium text-kindred">
                 {{ results.active_maintained }}
               </div>
-              <div class="text-sm font-medium text-ink/75 mb-1">Actively Maintaining</div>
-              <div class="text-xs text-ink/45">
-                {{ getMaintainedPercent() }}% of business contacts
+              <div class="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                Actively maintained
               </div>
+              <p class="mt-2 text-sm text-ink/55">
+                {{ getMaintainedPercent() }}% of the ones that matter
+              </p>
             </div>
           </div>
 
@@ -305,7 +327,7 @@
                :class="results.health_score >= 90 ? 'bg-kindred/[0.06] border-kindred/25' : 'bg-ember/[0.1] border-ember/30'">
             <div class="flex items-center justify-between mb-4">
               <div>
-                <h3 class="text-xl font-bold text-ink mb-1">
+                <h3 class="font-display text-xl font-medium text-ink mb-1">
                   <span v-if="results.health_score >= 90">Optimization Potential</span>
                   <span v-else>The Opportunity Gap</span>
                 </h3>
@@ -314,10 +336,7 @@
                   <span v-else>What you're missing by not maintaining more relationships</span>
                 </p>
               </div>
-              <span class="text-4xl">
-                <span v-if="results.health_score >= 90">🚀</span>
-                <span v-else>⚠️</span>
-              </span>
+
             </div>
 
             <div class="grid sm:grid-cols-2 gap-4">
@@ -332,10 +351,10 @@
                   <span v-if="hasTierBreakdown">Full capacity (all tiers)</span>
                   <span v-else>You could be maintaining</span>
                 </div>
-                <div class="font-display text-2xl font-medium text-green-600">
+                <div class="font-display text-2xl font-medium text-kindred">
                   {{ getOptimalContacts() }} contacts
                 </div>
-                <div class="text-xs text-green-700 mt-1 font-medium">
+                <div class="text-xs text-kindred-700 mt-1 font-medium">
                   <span v-if="hasTierBreakdown">(With Kindred's help)</span>
                   <span v-else>(With Kindred's help)</span>
                 </div>
@@ -354,8 +373,7 @@
                       But to unlock maximum value, focus on adding:
                     </span>
                   </div>
-                  <div class="font-display text-6xl font-medium"
-                       :class="results.health_score >= 90 ? 'text-green-600' : 'text-orange-600'">
+                  <div class="font-display text-6xl font-medium text-kindred">
                     {{ getStrategicGapContacts() }}
                   </div>
                   <div class="text-base text-ink/75 font-semibold">
@@ -368,12 +386,14 @@
                   </div>
                 </div>
                 <div v-else class="text-sm text-ink/75 font-medium">
-                  By maintaining just <strong class="text-3xl text-orange-600 block my-2">{{ getGapContacts() }}</strong> more strategic relationships
+                  By maintaining just <strong class="text-3xl text-kindred block my-2">{{ getGapContacts() }}</strong> more strategic relationships
                 </div>
 
-                <div class="pt-4 border-t border-orange-300">
-                  <div class="text-4xl font-bold text-green-600">
-                    {{ formatCurrency(hasTierBreakdown ? topTierValue : results.conservative_roi) }}
+                <div class="pt-4 border-t border-ink/15">
+                  <!-- Compact: at full precision this overflows its column on
+                       a phone. -->
+                  <div class="font-display text-3xl font-medium text-ink sm:text-4xl">
+                    {{ formatCurrency(hasTierBreakdown ? topTierValue : results.conservative_roi, true) }}
                   </div>
                   <div class="text-sm text-ink/60 font-medium mt-2">
                     <span v-if="hasTierBreakdown">
@@ -391,22 +411,22 @@
                   </div>
                 </div>
 
-                <div v-if="hasTierBreakdown" class="mt-3 pt-3 border-t border-orange-300">
+                <div v-if="hasTierBreakdown" class="mt-3 pt-3 border-t border-ink/15">
                   <div v-if="results.active_maintained < getOptimalContacts()">
                     <!-- User is below capacity -->
                     <div class="grid sm:grid-cols-2 gap-4 text-center">
-                      <div class="bg-white bg-opacity-60 rounded-xl p-3">
+                      <div class="rounded-xl border border-ink/12 bg-white p-3">
                         <div class="text-xs text-ink/60 mb-1">Strategic relationships</div>
-                        <div class="font-display text-2xl font-medium text-orange-600">
+                        <div class="font-display text-2xl font-medium text-kindred">
                           {{ results.active_maintained + getStrategicGapContacts() }}
                         </div>
                         <div class="text-xs text-ink/45">
                           ({{ results.active_maintained }} current + {{ getStrategicGapContacts() }} new)
                         </div>
                       </div>
-                      <div class="bg-white bg-opacity-60 rounded-xl p-3">
+                      <div class="rounded-xl border border-ink/12 bg-white p-3">
                         <div class="text-xs text-ink/60 mb-1">Remaining capacity</div>
-                        <div class="font-display text-2xl font-medium text-green-600">
+                        <div class="font-display text-2xl font-medium text-ink">
                           {{ getOptimalContacts() - (results.active_maintained + getStrategicGapContacts()) }}
                         </div>
                         <div class="text-xs text-ink/45">
@@ -417,12 +437,12 @@
                   </div>
                   <div v-else>
                     <!-- User already exceeds optimal capacity - focus on quality -->
-                    <div class="bg-white bg-opacity-60 rounded-xl p-4 text-center">
+                    <div class="rounded-xl border border-ink/12 bg-white p-4 text-center">
                       <div class="text-sm text-ink/75 font-semibold mb-2">
                         🎯 You're already maintaining {{ results.active_maintained }} relationships!
                       </div>
                       <div class="text-xs text-ink/60">
-                        Focus on upgrading <strong class="text-orange-600">{{ getStrategicGapContacts() }}</strong> of your existing relationships to VIP/Partner quality for maximum impact
+                        Focus on upgrading <strong class="text-kindred">{{ getStrategicGapContacts() }}</strong> of your existing relationships to VIP/Partner quality for maximum impact
                       </div>
                     </div>
                   </div>
@@ -430,9 +450,9 @@
                     These {{ getStrategicGapContacts() }} strategic relationships generate <strong class="text-ink">{{ topTierPercent }}% of your total network value</strong>
                   </div>
                 </div>
-                <div v-else class="mt-3 pt-3 border-t border-orange-300">
+                <div v-else class="mt-3 pt-3 border-t border-ink/15">
                   <div class="text-xs text-ink/60 mb-1">That's approximately</div>
-                  <div class="font-display text-2xl font-medium text-orange-600">
+                  <div class="font-display text-2xl font-medium text-ink">
                     {{ formatCurrency(Math.round(results.conservative_roi / getGapContacts())) }}
                   </div>
                   <div class="text-xs text-ink/60">per relationship nurtured</div>
@@ -443,63 +463,49 @@
 
           <!-- Missed Deals Breakdown -->
           <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8">
-            <div class="text-center mb-6">
-              <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2 flex items-center justify-center">
-                <span class="mr-2">📉</span>
-                Missed Deals Breakdown
-              </h2>
-              <p class="text-ink/60">You're missing <strong class="text-red-600 text-xl">{{ results.breakdown.missed_deals }} deals</strong> annually</p>
-            </div>
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+              At your deal size
+            </p>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+              What that works out to
+            </h2>
 
-            <div class="grid sm:grid-cols-2 gap-6">
-              <!-- Left: Stats -->
-              <div class="bg-ember/[0.1] rounded-xl p-6 space-y-4">
-                <div class="text-center pb-4 border-b border-red-200">
-                  <div class="font-display text-5xl font-medium text-red-600 mb-2">{{ results.breakdown.missed_deals }}</div>
-                  <div class="text-sm font-medium text-ink/75">Deals Lost Annually</div>
-                </div>
-                <div class="text-center pb-4 border-b border-red-200">
-                  <div class="font-display text-2xl font-medium text-orange-600 mb-1">
-                    1 every {{ Math.ceil(12 / results.breakdown.missed_deals) }} months
-                  </div>
-                  <div class="text-xs text-ink/60">That's how often you're missing deals</div>
-                </div>
-                <div class="text-center">
-                  <div class="font-display text-2xl font-medium text-ink mb-1">{{ formatCurrency(results.avg_deal_value) }}</div>
-                  <div class="text-xs text-ink/60">Average value per deal</div>
-                </div>
+            <!-- Currency uses a compact format and a responsive size here: at
+                 full precision a seven-figure number overflows its column on a
+                 phone. -->
+            <dl class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div v-for="stat in dealStats" :key="stat.label" class="min-w-0">
+                <dd class="font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+                  {{ stat.value }}
+                </dd>
+                <dt class="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                  {{ stat.label }}
+                </dt>
               </div>
+            </dl>
 
-              <!-- Right: Total Impact -->
-              <div class="bg-ink text-paper rounded-xl p-6 flex flex-col items-center justify-center text-center">
-                <div class="text-sm uppercase tracking-wide opacity-90 mb-3">Total Annual Impact</div>
-                <div class="font-display text-5xl font-medium mb-3">{{ formatCurrency(results.conservative_roi) }}</div>
-                <p class="text-sm opacity-90 leading-relaxed mb-4">This is what you're leaving on the table every year from neglected relationships</p>
-                <div class="pt-4 border-t border-white border-opacity-30 w-full">
-                  <div class="text-xs opacity-75 mb-1">Each nurtured relationship =</div>
-                  <div class="font-display text-2xl font-medium">
-                    {{ formatCurrency(Math.round(results.conservative_roi / getGapContacts())) }}
-                  </div>
-                  <div class="text-xs opacity-75 mt-1">in annual value</div>
-                </div>
-              </div>
-            </div>
+            <p class="mt-8 border-l-2 border-ember pl-6 leading-relaxed text-ink/70">
+              None of this arrives as a single missable event. It goes one quiet
+              relationship at a time, which is exactly why it does not get noticed.
+            </p>
           </div>
 
           <!-- Kindred Advantage Banner -->
           <div class="bg-ink rounded-xl p-6 border-2 border-kindred text-white">
-            <h3 class="text-xl font-bold mb-4 flex items-center">
-              <span class="mr-2">🚀</span>
-              The Kindred Advantage
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred-300">
+              The ceiling
+            </p>
+            <h3 class="mt-4 mb-6 font-display text-2xl font-medium tracking-tight">
+              What changes when you are not the one remembering
             </h3>
 
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
-              <div class="bg-white bg-opacity-20 backdrop-blur rounded-xl p-4 text-center">
+              <div class="rounded-xl border border-white/15 p-4 text-center">
                 <div class="text-sm opacity-90 mb-1">Without Tools</div>
                 <div class="font-display text-3xl font-medium">80-100</div>
                 <div class="text-xs opacity-75 mt-1">Active relationships (manual effort)</div>
               </div>
-              <div class="bg-white bg-opacity-30 backdrop-blur rounded-xl p-4 text-center border-2 border-white border-opacity-40">
+              <div class="rounded-xl border-2 border-kindred/60 p-4 text-center">
                 <div class="text-sm opacity-90 mb-1">With Kindred</div>
                 <div class="font-display text-3xl font-medium">{{ getRoleMaintenanceCap() }}</div>
                 <div class="text-xs opacity-75 mt-1">Active relationships ({{ getCapacityIncrease() }}% increase)</div>
@@ -507,145 +513,117 @@
             </div>
 
             <p class="text-sm leading-relaxed opacity-95">
-              <strong>Smart reminders, conversation context, and AI automation</strong> let you maintain 2-3x more relationships without burning out. Top Kindred users achieve what was previously impossible—maintaining {{ getRoleMaintenanceCap() }}+ strategic relationships simultaneously.
+              <strong>Reminders, conversation context, and the nudges Kindred writes for you</strong>
+              move the ceiling because they take the remembering off you. The
+              figure on the right is what that models out to for your role — not
+              a measured result from other users.
             </p>
           </div>
 
           <!-- Benchmark Comparison -->
-          <div class="bg-kindred/[0.06] rounded-xl p-6 border border-kindred/25">
-            <h3 class="text-xl font-bold text-ink mb-4 flex items-center">
-              <span class="mr-2">📊</span>
-              How You Compare
+          <div class="rounded-2xl border border-ink/12 bg-white p-6 sm:p-10">
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+              Where you sit
+            </p>
+            <h3 class="mt-4 mb-8 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+              Against the only two numbers worth comparing to
             </h3>
+            <!--
+              This used to rank people against an "average professional" and a
+              "top performer" percentage. We have no population to rank anyone
+              against, so those bars were invented. It compares you to the two
+              things we can actually defend: the ~150 Dunbar puts within reach
+              unaided, and your own modelled capacity with a system.
+            -->
 
-            <div class="space-y-4">
-              <!-- Your Current Performance -->
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-ink/75">You ({{ getMaintainedPercent() }}%)</span>
-                  <span class="text-ink/45">{{ results.active_maintained }} contacts maintained</span>
+            <div class="space-y-6">
+              <div v-for="row in sitRows" :key="row.label">
+                <div class="mb-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <span class="text-ink/75">{{ row.label }}</span>
+                  <span class="font-mono text-xs text-ink/45">{{ row.note }}</span>
                 </div>
-                <div class="w-full bg-ink/10 rounded-full h-3">
+                <div class="h-2 w-full overflow-hidden rounded-full bg-ink/8">
                   <div
-                    class="bg-red-500 h-3 rounded-full transition-all"
-                    :style="{ width: getMaintainedPercent() + '%' }"
-                  ></div>
-                </div>
-              </div>
-
-              <!-- Average Performance -->
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-ink/75">Average Professional (15%)</span>
-                  <span class="text-ink/45">{{ Math.round(getBusinessRelevantContacts() * 0.15) }} contacts</span>
-                </div>
-                <div class="w-full bg-ink/10 rounded-full h-3">
-                  <div class="bg-yellow-500 h-3 rounded-full w-[15%]"></div>
-                </div>
-              </div>
-
-              <!-- Top Performer -->
-              <div>
-                <div class="flex justify-between text-sm mb-2">
-                  <span class="font-medium text-ink/75">Top {{ getRoleLabel() }} ({{ getTopPerformerPercent() }}%)</span>
-                  <span class="text-ink/45">{{ getTopPerformerContacts() }} contacts</span>
-                </div>
-                <div class="w-full bg-ink/10 rounded-full h-3">
-                  <div
-                    class="bg-green-500 h-3 rounded-full transition-all"
-                    :style="{ width: getTopPerformerPercent() + '%' }"
+                    class="h-full rounded-full transition-all duration-700"
+                    :style="{ width: barWidth(row.value), backgroundColor: row.color }"
                   ></div>
                 </div>
               </div>
             </div>
 
-            <div class="mt-6 p-4 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
-              <div class="flex items-start">
-                <span class="text-2xl mr-3">📊</span>
-                <div class="flex-1">
-                  <div class="font-semibold text-ink mb-1">Industry Benchmark:</div>
-                  <p class="text-sm text-ink/75 leading-relaxed">
-                    {{ results.insights.benchmark_comparison }}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <p class="mt-8 border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-ink/55">
+              {{ results.insights.benchmark_comparison }}
+            </p>
           </div>
 
-          <!-- AI-Generated Insights -->
-          <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 space-y-4">
-            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-6 flex items-center">
-              <span class="mr-2">💡</span>
-              Personalized Insights
+          <!-- Insights -->
+          <div class="rounded-2xl border border-ink/12 bg-white p-6 sm:p-10">
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+              Read on your answers
+            </p>
+            <h2 class="mt-4 mb-8 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+              What this looks like for you
             </h2>
 
-            <!-- Primary Message -->
-            <div class="p-5 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
-              <div class="flex items-start">
-                <span class="text-3xl mr-3">📍</span>
-                <div class="flex-1">
-                  <div class="font-bold text-blue-900 mb-2 text-lg">Your Situation</div>
-                  <p class="text-ink/75 leading-relaxed">
-                    {{ results.insights.primary_message }}
-                  </p>
+            <div class="space-y-8">
+              <!-- Primary Message -->
+              <div class="border-l-2 border-kindred pl-6">
+                <div class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                  Your situation
                 </div>
+                <p class="mt-3 leading-relaxed text-ink/75">
+                  {{ results.insights.primary_message }}
+                </p>
               </div>
-            </div>
 
-            <!-- Actionable Advice -->
-            <div class="p-5 bg-ember/[0.1] rounded-xl border-l-2 border-ember">
-              <div class="flex items-start">
-                <span class="text-3xl mr-3">🎯</span>
-                <div class="flex-1">
-                  <div class="font-bold text-green-900 mb-2 text-lg">Your Action Plan</div>
-                  <p class="text-ink/75 leading-relaxed">
-                    {{ results.insights.actionable_advice }}
-                  </p>
+              <!-- Actionable Advice -->
+              <div class="border-l-2 border-ember pl-6">
+                <div class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                  Your action plan
                 </div>
+                <p class="mt-3 leading-relaxed text-ink/75">
+                  {{ results.insights.actionable_advice }}
+                </p>
               </div>
-            </div>
 
-            <!-- Benchmark Comparison -->
-            <div class="p-5 bg-kindred/[0.06] rounded-xl border-l-2 border-kindred">
-              <div class="flex items-start">
-                <span class="text-3xl mr-3">📊</span>
-                <div class="flex-1">
-                  <div class="font-bold text-purple-900 mb-2 text-lg">How You Compare</div>
-                  <p class="text-ink/75 leading-relaxed">
-                    {{ results.insights.benchmark_comparison }}
-                  </p>
+              <!-- Benchmark Comparison -->
+              <div class="border-l-2 border-ink/20 pl-6">
+                <div class="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
+                  Worth knowing
                 </div>
+                <p class="mt-3 leading-relaxed text-ink/75">
+                  {{ results.insights.benchmark_comparison }}
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- Action Items -->
-          <div class="bg-kindred/[0.06] rounded-xl p-6 border border-kindred/25">
-            <h3 class="text-xl font-bold text-ink mb-4 flex items-center">
-              <span class="mr-2">⚡</span>
+          <!-- Action Items. Numbered rather than emoji-led: this is the part
+               someone might actually work through, so it should read as a list
+               of moves, in order. -->
+          <div class="rounded-2xl border border-ink/12 bg-white p-6 sm:p-8">
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+              Three moves
+            </p>
+            <h3 class="mt-4 font-display text-2xl font-medium tracking-tight text-ink">
               {{ getActionTitle() }}
             </h3>
 
-            <div class="space-y-3">
-              <div
+            <ol class="mt-8 divide-y divide-ink/10 border-t border-ink/10">
+              <li
                 v-for="(item, index) in getActionItems()"
                 :key="index"
-                class="bg-white rounded-xl p-4"
-                :class="{
-                  'border-l-4 border-green-500': item.color === 'green',
-                  'border-l-4 border-blue-500': item.color === 'blue',
-                  'border-l-4 border-purple-500': item.color === 'purple'
-                }"
+                class="flex gap-5 py-5"
               >
-                <div class="flex items-start">
-                  <span class="text-2xl mr-3">{{ item.emoji }}</span>
-                  <div>
-                    <div class="font-semibold text-ink mb-1">{{ item.title }}</div>
-                    <p class="text-sm text-ink/60">{{ item.description }}</p>
-                  </div>
+                <span class="mt-0.5 font-mono text-sm text-kindred">
+                  {{ String(index + 1).padStart(2, '0') }}
+                </span>
+                <div class="min-w-0">
+                  <div class="font-medium text-ink">{{ item.title }}</div>
+                  <p class="mt-1.5 text-sm leading-relaxed text-ink/60">{{ item.description }}</p>
                 </div>
-              </div>
-            </div>
+              </li>
+            </ol>
           </div>
         </div>
 
@@ -655,7 +633,7 @@
             <span class="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-kindred-300">Your next step</span>
           </div>
 
-          <h2 class="text-3xl sm:text-4xl font-bold">
+          <h2 class="font-display text-3xl sm:text-4xl font-medium tracking-tight">
             {{ getCtaTitle() }}
           </h2>
           <p class="text-lg sm:text-xl opacity-90 max-w-2xl mx-auto">
@@ -672,7 +650,7 @@
               <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
               </svg>
-              Claim Your Priority Demo Slot
+              Book a 20-minute call
               <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
               </svg>
@@ -680,35 +658,23 @@
           </div>
 
           <div class="grid sm:grid-cols-3 gap-4 pt-6 max-w-2xl mx-auto">
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
-              <div class="text-2xl mb-1">✓</div>
-              <div class="text-sm font-semibold">Assessment Complete</div>
+            <div class="rounded-xl border border-white/15 p-4">
+              <div class="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-kindred-300">Length</div>
+              <div class="mt-1.5 text-sm">20 minutes</div>
             </div>
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
-              <div class="text-2xl mb-1">🎯</div>
-              <div class="text-sm font-semibold">Qualified Executive</div>
+            <div class="rounded-xl border border-white/15 p-4">
+              <div class="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-kindred-300">Format</div>
+              <div class="mt-1.5 text-sm">We walk your results</div>
             </div>
-            <div class="bg-white bg-opacity-10 backdrop-blur rounded-xl p-4">
-              <div class="text-2xl mb-1">⚡</div>
-              <div class="text-sm font-semibold">Priority Booking</div>
+            <div class="rounded-xl border border-white/15 p-4">
+              <div class="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-kindred-300">Commitment</div>
+              <div class="mt-1.5 text-sm">None</div>
             </div>
           </div>
 
           <p class="text-sm opacity-75 pt-4">
-            Join 97 elite CEOs, VPs, and Founders using Kindred
+            Or start on the free plan and skip the call entirely.
           </p>
-        </div>
-
-        <!-- Social Proof -->
-        <div class="text-center space-y-6">
-          <p class="text-ink/60 font-medium">Trusted by professionals at:</p>
-          <div class="flex flex-wrap justify-center gap-4 sm:gap-8 text-ink/35 text-sm sm:text-base">
-            <span class="font-semibold">Fortune 500 Companies</span>
-            <span class="hidden sm:inline">•</span>
-            <span class="font-semibold">Leading Startups</span>
-            <span class="hidden sm:inline">•</span>
-            <span class="font-semibold">Top Consulting Firms</span>
-          </div>
         </div>
 
         <!-- Share Encouragement -->
@@ -740,6 +706,7 @@ import kindredLogo from '@/assets/kindred.svg'
 import TierBreakdownCard from '@/components/results/TierBreakdownCard.vue'
 import YearComparison from '@/components/results/YearComparison.vue'
 import StrategicFocusCard from '@/components/results/StrategicFocusCard.vue'
+import MentalLoadCard from '@/components/results/MentalLoadCard.vue'
 
 const route = useRoute()
 
@@ -853,45 +820,78 @@ const getGapContacts = () => {
   return gap > 0 ? gap : 0
 }
 
-const getGapROI = () => {
-  if (!results.value) return 0
+// The money breakdown as data rather than three hand-built coloured panels.
+const costRows = computed(() => {
+  if (!results.value) return []
+  const b = results.value.breakdown
+  return [
+    {
+      label: 'Missed pipeline',
+      detail: `${b.missed_deals} opportunities that never started, from relationships that went quiet`,
+      value: b.missed_pipeline,
+      emphasis: true,
+    },
+    {
+      label: 'Lost referrals',
+      detail: 'Introductions that do not happen because you are no longer front of mind',
+      value: b.lost_referrals,
+      emphasis: false,
+    },
+    {
+      label: 'Cold partnerships',
+      detail: 'Strategic relationships that have cooled past the point of an easy ask',
+      value: b.cold_partnerships,
+      emphasis: false,
+    },
+  ]
+})
 
-  const currentMaintained = results.value.active_maintained
-  const optimal = getOptimalContacts()
-  const gapContacts = getGapContacts()
+// Compact currency throughout: full precision overflows a narrow column.
+const dealStats = computed(() => {
+  if (!results.value) return []
+  const missed = results.value.breakdown.missed_deals || 1
+  return [
+    { value: missed, label: 'Opportunities a year' },
+    { value: `1 / ${Math.ceil(12 / missed)} mo`, label: 'How often one slips' },
+    { value: formatCurrency(results.value.avg_deal_value, true), label: 'Your average deal' },
+    { value: formatCurrency(results.value.conservative_roi, true), label: 'Total, per year' },
+  ]
+})
 
-  // The conservative_roi represents what you're missing from not maintaining enough contacts
-  // If you close the gap, you recover a proportional amount of that ROI
-  const currentPercent = currentMaintained / optimal
-  const targetPercent = 1.0 // Closing the gap = 100% of optimal
+// The three comparison bars. This used to rank people against an "average
+// professional" and a "top performer" percentage — both invented, since we have
+// no population to rank anyone against. These are the two we can defend: the
+// ~150 Dunbar puts within reach unaided, and their own modelled capacity.
+const sitRows = computed(() => {
+  if (!results.value) return []
+  return [
+    {
+      label: 'You maintain now',
+      note: `${results.value.active_maintained} relationships`,
+      value: results.value.active_maintained,
+      color: '#F2A65A',
+    },
+    {
+      label: 'Within reach unaided',
+      note: "~150 · Dunbar's number",
+      value: 150,
+      color: 'rgba(23,18,31,0.35)',
+    },
+    {
+      label: 'With a system carrying the tracking',
+      note: `${getOptimalContacts()} relationships`,
+      value: getOptimalContacts(),
+      color: '#7868E6',
+    },
+  ]
+})
 
-  // Recovery: How much of the conservative ROI you can capture by closing the gap
-  // If you're at 25% (50/200) and move to 100% (200/200), you capture 75% of the ROI
-  const recoveryPercent = Math.min(targetPercent - currentPercent, 0.8) // Cap at 80% recovery
-
-  return Math.round(results.value.conservative_roi * recoveryPercent)
-}
-
-const getTopPerformerContacts = () => {
-  if (!results.value) return 0
-  const businessContacts = getBusinessRelevantContacts()
-  return Math.round(businessContacts * (getTopPerformerPercent() / 100))
-}
-
-const getRoleLabel = () => {
-  if (!results.value) return 'Professional'
-  const role = results.value.role
-  const labels = {
-    'vp-sales': 'Sales Leaders',
-    'founder': 'Founders',
-    'vc-investor': 'VCs',
-    'real-estate': 'Real Estate Agents',
-    'lawyer': 'Attorneys',
-    'consultant': 'Consultants',
-    'business-development': 'BD Leaders',
-    'recruiter': 'Recruiters'
-  }
-  return labels[role] || 'Professionals'
+// Scales the comparison bars against whichever of the three is largest, so the
+// widths stay honest relative to each other rather than to a fixed 100%.
+const barWidth = (value) => {
+  if (!results.value) return '0%'
+  const max = Math.max(results.value.active_maintained, 150, getOptimalContacts(), 1)
+  return `${Math.round((value / max) * 100)}%`
 }
 
 const getRoleMaintenanceCap = () => {
@@ -918,140 +918,121 @@ const getCapacityIncrease = () => {
 }
 
 // Dynamic messaging based on score
+// Reclaimed attention, when we have it — it is the number people actually
+// respond to, and it is the one that covers family as well as clients.
+const reclaimed = () => results.value?.mental_load?.reclaimed_units || 0
+
 const getCtaTitle = () => {
-  if (!results.value) return 'Ready to Stop Leaving Money on the Table?'
+  if (!results.value) return 'Stop carrying this in your head'
   const score = results.value.health_score
-  if (score >= 90) {
-    return 'You\'re Already a Pro—Let\'s Make It Even Better'
-  }
-  if (score >= 75) {
-    return 'You\'re Doing Great—Ready to Reach Elite Status?'
-  }
-  if (score >= 60) {
-    return 'You\'re on the Right Track—Let\'s Unlock More Value'
-  }
-  return 'Ready to Stop Leaving Money on the Table?'
+  if (score >= 90) return 'You are doing this well. It should not cost you this much.'
+  if (score >= 75) return 'You are close. The gap is upkeep, not effort.'
+  if (score >= 60) return 'The foundation is there. The system is not.'
+  return 'Stop carrying this in your head'
 }
 
 const getCtaDescription = () => {
-  if (!results.value) return 'Kindred helps you identify, track, and nurture the relationships that drive your success. Turn those missed opportunities into closed deals.'
+  const units = reclaimed()
+  const back = units > 0
+    ? ` On your answers, that is about ${units} units of attention back.`
+    : ''
+
+  if (!results.value) {
+    return 'Kindred keeps the cadence so you do not have to remember it.' + back
+  }
   const score = results.value.health_score
   if (score >= 90) {
-    return 'You already maintain great relationships. Kindred can help you take it to the next level with automation, intelligent insights, and strategic recommendations.'
+    return 'You already keep these relationships warm — by holding it all yourself. Kindred takes over the remembering so the same warmth costs you less.' + back
   }
   if (score >= 75) {
-    return 'You\'re managing your network well. Kindred can help you scale your efforts and keep more of them warm without spending more time on it.'
+    return 'Most of your relationships are in good shape. Kindred watches the rest, so the ones drifting reach you before they are gone.' + back
   }
   if (score >= 60) {
-    return 'You have a solid foundation. Kindred can help you systematically nurture more relationships and unlock the full potential of your network.'
+    return 'You have the relationships. What is missing is anything catching them when they go quiet — which is the part a system is genuinely better at than a person.' + back
   }
-  return 'Kindred helps you identify, track, and nurture the relationships that drive your success. Turn those missed opportunities into closed deals.'
+  return 'Kindred keeps the cadence so you do not have to remember it — for clients, and for the people no deal depends on.' + back
 }
 
 const getActionTitle = () => {
-  if (!results.value) return 'Take Action Today'
+  if (!results.value) return 'Where to start'
   const score = results.value.health_score
-  if (score >= 90) return 'Keep Up Your Momentum'
-  if (score >= 75) return 'Level Up Your Network'
-  if (score >= 60) return 'Reach Your Full Potential'
-  return 'Take Action Today'
+  if (score >= 90) return 'Keep it going without carrying it'
+  if (score >= 75) return 'Close the last gaps'
+  if (score >= 60) return 'Turn the foundation into a system'
+  return 'Where to start'
 }
 
 const getActionItems = () => {
   if (!results.value) return []
   const score = results.value.health_score
+  const gap = getGapContacts()
+
+  // Step two is deliberately the same at every score: whatever the business
+  // case says, the people without a deal attached are the ones that actually
+  // go quiet, and no ROI figure will ever prompt anyone to call them.
+  const personalStep = {
+    title: 'Write down five people no deal depends on',
+    description:
+      'Family, old friends, the mentor who took your call. They are the ones with nothing forcing the issue, so they slip first and quietest. Put them in the same system as everyone else.',
+  }
+
+  const systemStep = {
+    title: 'Hand the remembering over',
+    description:
+      'Set a cadence per person and let it run. This is the part that frees the attention — not tracking harder, but not having to track at all.',
+  }
 
   if (score >= 90) {
     return [
       {
-        emoji: '🌟',
-        title: 'Maintain Your Excellence',
-        description: results.value.insights.actionable_advice || 'Keep doing what you\'re doing—you\'re already in the top tier of professionals',
-        color: 'green'
+        title: 'Keep the top tier exactly as it is',
+        description:
+          results.value.insights.actionable_advice ||
+          'You are already keeping these warm. The problem is not the outcome, it is what it costs you to get it.',
       },
-      {
-        emoji: '🚀',
-        title: 'Automate the Hard Work',
-        description: 'Let Kindred handle tracking and reminders so you can focus on the conversations that matter',
-        color: 'blue'
-      },
-      {
-        emoji: '💎',
-        title: 'Optimize Your Time',
-        description: 'Use Kindred\'s AI to identify which relationships deserve more attention and which are healthy',
-        color: 'purple'
-      }
+      personalStep,
+      systemStep,
     ]
   }
 
   if (score >= 75) {
     return [
       {
-        emoji: '🎯',
-        title: 'You\'re Close to Elite Status',
-        description: results.value.insights.actionable_advice || 'Focus on the 10-15 relationships most likely to slip in the next six months',
-        color: 'green'
+        title: 'Put the top tier on a cadence',
+        description:
+          results.value.insights.actionable_advice ||
+          'Find the ten or fifteen most likely to slip in the next six months. They are rarely the ones you are worried about.',
       },
-      {
-        emoji: '📊',
-        title: 'Identify Your Top Opportunities',
-        description: 'Review your network to find the highest-value relationships that need more attention',
-        color: 'blue'
-      },
-      {
-        emoji: '⚡',
-        title: 'Let Kindred Scale Your Efforts',
-        description: 'Automate relationship tracking and reminders to maintain more connections without extra time',
-        color: 'purple'
-      }
+      personalStep,
+      systemStep,
     ]
   }
 
   if (score >= 60) {
     return [
       {
-        emoji: '📈',
-        title: 'Build on Your Solid Foundation',
-        description: results.value.insights.actionable_advice || 'You\'re doing well—let\'s get you to the next level by maintaining 15-20 more relationships',
-        color: 'green'
+        title: 'Start where the value is concentrated',
+        description:
+          results.value.insights.actionable_advice ||
+          `You have the relationships — about ${gap} have gone cold. Reopening one is far cheaper than finding a new one.`,
       },
-      {
-        emoji: '🎯',
-        title: 'Prioritize High-Value Contacts',
-        description: `Identify your top ${getGapContacts()} high-value relationships that have gone cold`,
-        color: 'blue'
-      },
-      {
-        emoji: '🔄',
-        title: 'Set Up a System',
-        description: 'Use Kindred to automatically track and remind you to maintain these relationships',
-        color: 'purple'
-      }
+      personalStep,
+      systemStep,
     ]
   }
 
-  // Default for scores < 60
   return [
     {
-      emoji: '🚀',
-      title: 'Start Small',
-      description: results.value.insights.actionable_advice || 'Begin by reconnecting with 5-10 of your most valuable contacts this week',
-      color: 'green'
+      title: 'Start where the value is concentrated',
+      description:
+        results.value.insights.actionable_advice ||
+        'Not a campaign. A handful of messages. The bar is lower than the guilt suggests.',
     },
-    {
-      emoji: '📋',
-      title: 'Review Your Network',
-      description: `Identify your top ${getGapContacts()} high-value relationships that have gone cold`,
-      color: 'blue'
-    },
-    {
-      emoji: '⚙️',
-      title: 'Set a System',
-      description: 'Use Kindred to automatically track and remind you to maintain these relationships',
-      color: 'purple'
-    }
+    personalStep,
+    systemStep,
   ]
 }
+
 
 // Methods
 const fetchResults = async () => {

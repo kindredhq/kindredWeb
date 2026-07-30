@@ -14,7 +14,7 @@
           Find out which relationships you are quietly losing.
         </h1>
         <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink/70">
-          Seven questions about how you actually keep in touch. At the end you
+          Eight questions about how you actually keep in touch. At the end you
           get your Network Health Score, the layers that have thinned out, and
           the people most likely to slip in the next six months.
         </p>
@@ -24,7 +24,7 @@
       </div>
 
       <!-- Progress Bar -->
-      <ProgressBar :current-step="step" :total-steps="7" />
+      <ProgressBar :current-step="step" :total-steps="8" />
 
       <!-- Assessment Form -->
       <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 md:p-10">
@@ -117,9 +117,47 @@
             </div>
           </QuestionCard>
 
-          <!-- Step 4: Deal Value -->
+          <!-- Step 4: Mental load -->
           <QuestionCard
             v-if="step === 4"
+            title="How often does a name pop into your head that you feel you should reach out to?"
+            subtitle="The thought that arrives on its own — in a meeting, on a walk, at 2am"
+            @back="prevStep"
+            @next="nextStep"
+            :can-proceed="!!formData.mental_load_frequency"
+          >
+            <!--
+              The only question here that measures the cost directly rather than
+              inferring it. People answer it honestly because, unlike contact
+              counts, there is no right answer to perform.
+            -->
+            <div class="bg-kindred/[0.06] border border-kindred/25 rounded-lg p-4 mb-4">
+              <p class="text-sm text-ink/75 leading-relaxed">
+                <span class="font-semibold text-kindred-700">Why we ask:</span>
+                the cost of an unmanaged network is not only the relationships you
+                lose. It is the background attention spent half-remembering who you owe
+                a message. This question is the one that measures that directly.
+              </p>
+            </div>
+
+            <div class="space-y-3">
+              <button
+                v-for="option in mentalLoadOptions"
+                :key="option.value"
+                type="button"
+                @click="formData.mental_load_frequency = option.value"
+                class="w-full p-4 text-left border rounded-xl transition-all hover:border-kindred hover:bg-kindred/[0.06]"
+                :class="formData.mental_load_frequency === option.value ? 'border-kindred bg-kindred/10 text-kindred-700' : 'border-ink/12 text-ink/75 hover:shadow-md'"
+              >
+                <div class="font-medium">{{ option.label }}</div>
+                <div class="text-xs opacity-75 mt-1">{{ option.description }}</div>
+              </button>
+            </div>
+          </QuestionCard>
+
+          <!-- Step 5: Deal Value -->
+          <QuestionCard
+            v-if="step === 5"
             title="What's your typical deal/opportunity value?"
             subtitle="Average value of a sale, client project, or business opportunity"
             @back="prevStep"
@@ -140,9 +178,9 @@
             </div>
           </QuestionCard>
 
-          <!-- Step 5: Relationship Percent -->
+          <!-- Step 6: Relationship Percent -->
           <QuestionCard
-            v-if="step === 5"
+            v-if="step === 6"
             title="What percentage of your opportunities come through relationships?"
             subtitle="vs. cold outreach, paid advertising, or inbound leads"
             @back="prevStep"
@@ -173,9 +211,9 @@
             </div>
           </QuestionCard>
 
-          <!-- Step 6: Last Outreach -->
+          <!-- Step 7: Last Outreach -->
           <QuestionCard
-            v-if="step === 6"
+            v-if="step === 7"
             title="When did you last reach out to your top 20 contacts?"
             subtitle="Think about your most important relationships"
             @back="prevStep"
@@ -199,8 +237,8 @@
             </div>
           </QuestionCard>
 
-          <!-- Step 7: Lost Contacts + Email -->
-          <div v-if="step === 7">
+          <!-- Step 8: Lost Contacts + Email -->
+          <div v-if="step === 8">
             <!-- Unlock Priority Access Banner -->
             <div class="bg-kindred/[0.06] border border-kindred/30 rounded-xl p-6 mb-6">
               <div class="flex items-start gap-4">
@@ -214,7 +252,7 @@
                 <div class="flex-1">
                   <h3 class="font-display text-lg font-medium text-ink mb-2">Last question</h3>
                   <p class="text-sm text-ink/75 mb-3">
-                    Six of seven done. Answer this one and you get:
+                    Seven of eight done. Answer this one and you get:
                   </p>
                   <div class="grid sm:grid-cols-2 gap-2.5 text-sm">
                     <div v-for="item in unlocks" :key="item" class="flex items-start gap-2.5">
@@ -227,8 +265,8 @@
             </div>
 
             <QuestionCard
-              title="How many important contacts have you lost touch with?"
-              subtitle="People who could help you, but you haven't talked to in 6+ months"
+              title="How many people who matter to you have gone quiet?"
+              subtitle="Anyone you haven't spoken to in six months and feel you should have — colleagues, but also family, old friends, the people who got you here"
               @back="prevStep"
               :show-next="false"
               :can-proceed="false"
@@ -319,16 +357,10 @@
         </form>
       </div>
 
-      <!-- Trust Indicators -->
       <div class="mt-8 text-center">
-        <p class="text-sm text-ink/45 mb-4">Trusted by executives at:</p>
-        <div class="flex justify-center items-center gap-6 text-ink/35">
-          <span class="font-semibold">Fortune 500 Companies</span>
-          <span>•</span>
-          <span class="font-semibold">Top Startups</span>
-          <span>•</span>
-          <span class="font-semibold">Consulting Firms</span>
-        </div>
+        <p class="text-sm text-ink/45">
+          Your answers are used to generate your results and are not sold or shared.
+        </p>
       </div>
     </main>
 
@@ -368,7 +400,8 @@ const formData = ref({
   relationship_percent: 60,
   last_outreach: '',
   lost_contacts: 0,
-  industry: ''
+  industry: '',
+  mental_load_frequency: ''
 })
 
 // Form state
@@ -459,6 +492,31 @@ const maintainedRanges = [
   { value: 150, label: '100+ contacts' }
 ]
 
+// Values must match the constants in services/mental_load.go — the server
+// rejects anything it does not recognise rather than scoring it as neutral.
+const mentalLoadOptions = [
+  {
+    value: 'daily',
+    label: 'Most days',
+    description: 'Someone surfaces almost every day, and usually I do nothing about it'
+  },
+  {
+    value: 'few_times_week',
+    label: 'A few times a week',
+    description: 'It happens often enough that I have stopped noticing it happening'
+  },
+  {
+    value: 'weekly',
+    label: 'About once a week',
+    description: 'Now and then something reminds me of someone I have not spoken to'
+  },
+  {
+    value: 'rarely',
+    label: 'Rarely',
+    description: 'I mostly reach out when I think of it, so it does not sit there'
+  }
+]
+
 const dealValueRanges = [
   { value: 5000, label: 'Under $10K' },
   { value: 30000, label: '$10K - $50K' },
@@ -493,7 +551,7 @@ const canSubmit = computed(() => {
 
 // Methods
 const nextStep = () => {
-  if (step.value < 7) {
+  if (step.value < 8) {
     step.value++
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

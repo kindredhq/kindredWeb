@@ -112,6 +112,12 @@ export const validateAssessmentData = (data) => {
   if (data.lost_contacts === undefined || data.lost_contacts < 0) {
     errors.push('Lost contacts is required')
   }
+  // Must match services/mental_load.go. Optional on the wire so older clients
+  // keep working, but the current form always asks.
+  const validFrequencies = ['daily', 'few_times_week', 'weekly', 'rarely']
+  if (data.mental_load_frequency && !validFrequencies.includes(data.mental_load_frequency)) {
+    errors.push('Invalid answer for how often a name comes to mind')
+  }
 
   return {
     isValid: errors.length === 0,
