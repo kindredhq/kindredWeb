@@ -189,13 +189,31 @@ gradient-and-slate. All now on paper/ink/kindred with Fraunces + Plex Mono.
 - Insight strings divided by 1000 unconditionally, printing **`$6423K`**. Added
   `compactMoney` → `$6.4M`
 
-**The money/warmth balance.** Henry: *"the report a bit too money focus."* The
-page now leads with attention, and carries a deliberately number-free section —
-*"The people who never show up in a figure like that"* — about family, old
-friends and mentors. Step 2 of the action plan is the same at every score:
-write down five people no deal depends on. The `lost_contacts` question was
-reframed to include them, which is safe because that field feeds **no** money
-calculation — only the attention model.
+**The money/warmth balance.** Henry: *"the report a bit too money focus."*
+
+The first pass at this was additive — a counterweight section bolted on while
+every money section kept its full length — which did not fix the proportion and
+left the page arguing against itself. The real problem was redundancy: seven
+money blocks, three of which (`YearComparison`, `StrategicFocusCard`,
+`TierBreakdownCard`) all said *your top relationships are worth a lot*.
+
+Now:
+- **Order**: attention → the people who are not in the numbers → money.
+  Nothing is priced until both of those have landed
+- **Money cut from seven blocks to three** — the headline figure, the tier
+  portfolio, and the ledger. `YearComparison` and `StrategicFocusCard` are no
+  longer rendered (files kept, unreferenced). The opportunity-gap panel, the
+  duplicate deal-stats block and the "Kindred Advantage" claim block are gone
+- Page is ~25% shorter and the bundle 16KB smaller
+- A deliberately number-free section, *"The people who never show up in a
+  figure like that"*, sits second
+- Step 2 of the action plan is fixed at every score: write down five people no
+  deal depends on
+- `lost_contacts` was reframed around people who matter — safe, because that
+  field feeds **no** money calculation, only the attention model
+
+**Still unbalanced by pixel count** (money ~2,500px vs attention+people
+~1,400px), but the lead and the argument now favour attention.
 
 ---
 
@@ -208,6 +226,17 @@ calculation — only the attention model.
 - The assessment still asks for a deal value up front, which sets a
   transactional tone before the attention question lands. Worth testing the
   reverse order
+- **The ROI magnitudes strain credulity** — the reference founder gets
+  "$9.6M full potential". It is assumption stacked on assumption
+  (business-relevant % × maintenance rate × conversion × a 3.5–5x network
+  multiplier) and the ICP is exactly the audience that will notice. The
+  attention figure persuades *because* it is modest. Worth revisiting the
+  multipliers before this gets real traffic
+- **The assessment asks for counts when it could ask for names.** "The
+  five-name test" is already the awareness article, but the form never asks
+  anyone to name five people. Doing so would make the report personal rather
+  than statistical, make the family argument self-evident, and capture the
+  start of a real graph at signup. Highest-leverage change available
 - Founding members page is promised in copy but does not exist
 - Three older blog posts still in the pre-ICP voice
 - 39 dependabot vulnerabilities (pre-existing, from the old Vue/Vite tree)

@@ -101,6 +101,50 @@
              nothing rather than invent a number for them. -->
         <MentalLoadCard v-if="results.mental_load" :load="results.mental_load" />
 
+        <!-- Runs straight off the attention card, before any money. A page that
+             leads with revenue implies the people without a deal attached do not
+             count, and those are usually the ones that actually slip. Nothing
+             here is measured — deliberately the one section with no number. -->
+        <div class="rounded-2xl bg-ink p-6 text-paper sm:p-12">
+          <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred-300">
+            What the numbers leave out
+          </p>
+          <h2 class="mt-5 max-w-3xl font-display text-2xl font-medium leading-tight tracking-tight sm:text-4xl">
+            The people who never show up in a figure like that
+          </h2>
+
+          <div class="mt-8 grid gap-10 lg:grid-cols-2">
+            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
+              <p>
+                Below this, we price your relationships by what they return.
+                Before we do: your mother does not have a deal value. Neither
+                does the friend who sat with you through the bad year, or the
+                mentor who took the call when nobody else would.
+              </p>
+              <p>
+                They are in that contact list too. They are also, almost always,
+                the ones that go quiet first — because a client chasing you
+                creates a deadline and a brother does not.
+              </p>
+            </div>
+
+            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
+              <p>
+                This is the part we cannot put a number on, and would not want
+                to. But it is the part most people are actually thinking about
+                when a name arrives at 2am — and it is already counted in the
+                attention figure above, because that cost is real whether or not
+                anything is riding on it.
+              </p>
+              <p class="border-l-2 border-kindred pl-6 text-paper">
+                Kindred was built for the whole list. The business case below is
+                what makes it easy to justify; this is what makes it worth doing.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
         <!-- Key Metrics Grid -->
         <div class="grid md:grid-cols-2 gap-6">
           <!-- Conservative ROI -->
@@ -165,24 +209,8 @@
           </div>
         </div>
 
-        <!-- Year 1 vs 3-5 Year Comparison (NEW) -->
-        <YearComparison
-          v-if="hasTierBreakdown"
-          :year1-value="results.conservative_roi"
-          :full-potential="results.calculated_roi"
-          :conservative-percent="15"
-          :top-tier-count="topTierCount"
-          :top-tier-value="topTierValue"
-        />
-
-        <!-- Strategic Focus Card (NEW) -->
-        <StrategicFocusCard
-          v-if="hasTierBreakdown"
-          :tiers="tierBreakdown"
-          :year1-impact="results.conservative_roi"
-          :total-capacity="totalCapacity"
-        />
-
+        
+        
         <!-- Tier Breakdown Visualization (NEW) -->
         <TierBreakdownCard
           v-if="hasTierBreakdown"
@@ -231,56 +259,15 @@
           </div>
         </div>
 
-        <!-- The counterweight to everything above it. A page that only counts
-             money implies the people without a deal attached do not count, and
-             those are usually the ones that actually slip. Nothing here is
-             measured — it is deliberately the one section with no number in it. -->
-        <div class="rounded-2xl bg-ink p-6 text-paper sm:p-12">
-          <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred-300">
-            What the numbers leave out
-          </p>
-          <h2 class="mt-5 max-w-3xl font-display text-2xl font-medium leading-tight tracking-tight sm:text-4xl">
-            The people who never show up in a figure like that
-          </h2>
-
-          <div class="mt-8 grid gap-10 lg:grid-cols-2">
-            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
-              <p>
-                Everything above prices relationships by what they return. Your
-                mother does not have a deal value. Neither does the friend who
-                sat with you through the bad year, or the mentor who took the
-                call when nobody else would.
-              </p>
-              <p>
-                They are in that contact list too. They are also, almost always,
-                the ones that go quiet first — because a client chasing you
-                creates a deadline and a brother does not.
-              </p>
-            </div>
-
-            <div class="space-y-5 text-[1.05rem] leading-relaxed text-paper/75">
-              <p>
-                This is the part we cannot put a number on, and would not want
-                to. But it is the part most people are actually thinking about
-                when a name arrives at 2am — and it is counted in the attention
-                figure at the top of this page, because that cost is real
-                whether or not anything is riding on it.
-              </p>
-              <p class="border-l-2 border-kindred pl-6 text-paper">
-                Kindred was built for the whole list. The business case is what
-                makes it easy to justify; the rest is what makes it worth doing.
-              </p>
-            </div>
-          </div>
-        </div>
-
         <!-- Key Insights - Visual Breakdown -->
         <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8 space-y-8">
-          <div class="text-center">
-            <h2 class="font-display text-2xl sm:text-3xl font-medium text-ink mb-2">
-              Your Network Analysis
+          <div>
+            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
+              The shape of it
+            </p>
+            <h2 class="mt-4 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
+              What you are actually holding
             </h2>
-            <p class="text-ink/60">Here's the full breakdown of your relationship management</p>
           </div>
 
           <!-- Contact Breakdown. A funnel from everyone you know down to the
@@ -320,204 +307,6 @@
                 {{ getMaintainedPercent() }}% of the ones that matter
               </p>
             </div>
-          </div>
-
-          <!-- The Opportunity Gap / Optimization Potential -->
-          <div class="rounded-xl p-6 border-2"
-               :class="results.health_score >= 90 ? 'bg-kindred/[0.06] border-kindred/25' : 'bg-ember/[0.1] border-ember/30'">
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <h3 class="font-display text-xl font-medium text-ink mb-1">
-                  <span v-if="results.health_score >= 90">Optimization Potential</span>
-                  <span v-else>The Opportunity Gap</span>
-                </h3>
-                <p class="text-sm text-ink/60">
-                  <span v-if="results.health_score >= 90">How Kindred can help you exceed your limits</span>
-                  <span v-else>What you're missing by not maintaining more relationships</span>
-                </p>
-              </div>
-
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="bg-white rounded-xl p-4">
-                <div class="text-sm text-ink/60 mb-1">You're maintaining</div>
-                <div class="font-display text-2xl font-medium text-ink">
-                  {{ results.active_maintained }} contacts
-                </div>
-              </div>
-              <div class="bg-white rounded-xl p-4">
-                <div class="text-sm text-ink/60 mb-1">
-                  <span v-if="hasTierBreakdown">Full capacity (all tiers)</span>
-                  <span v-else>You could be maintaining</span>
-                </div>
-                <div class="font-display text-2xl font-medium text-kindred">
-                  {{ getOptimalContacts() }} contacts
-                </div>
-                <div class="text-xs text-kindred-700 mt-1 font-medium">
-                  <span v-if="hasTierBreakdown">(With Kindred's help)</span>
-                  <span v-else>(With Kindred's help)</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-4 p-6 rounded-xl border-2"
-                 :class="results.health_score >= 90 ? 'bg-kindred/[0.08] border-kindred/40' : 'bg-ember/[0.12] border-ember/40'">
-              <div class="text-center space-y-3">
-                <div v-if="hasTierBreakdown" class="space-y-2">
-                  <div class="text-sm text-ink/75 font-medium">
-                    <span v-if="results.health_score >= 90">
-                      With Kindred's automation, you could optimize:
-                    </span>
-                    <span v-else>
-                      But to unlock maximum value, focus on adding:
-                    </span>
-                  </div>
-                  <div class="font-display text-6xl font-medium text-kindred">
-                    {{ getStrategicGapContacts() }}
-                  </div>
-                  <div class="text-base text-ink/75 font-semibold">
-                    <span v-if="results.health_score >= 90">
-                      more VIP & Partner relationships
-                    </span>
-                    <span v-else>
-                      VIP & Strategic Partner relationships
-                    </span>
-                  </div>
-                </div>
-                <div v-else class="text-sm text-ink/75 font-medium">
-                  By maintaining just <strong class="text-3xl text-kindred block my-2">{{ getGapContacts() }}</strong> more strategic relationships
-                </div>
-
-                <div class="pt-4 border-t border-ink/15">
-                  <!-- Compact: at full precision this overflows its column on
-                       a phone. -->
-                  <div class="font-display text-3xl font-medium text-ink sm:text-4xl">
-                    {{ formatCurrency(hasTierBreakdown ? topTierValue : results.conservative_roi, true) }}
-                  </div>
-                  <div class="text-sm text-ink/60 font-medium mt-2">
-                    <span v-if="hasTierBreakdown">
-                      Value from these strategic relationships (3-5 years)
-                      <span class="block text-xs text-ink/45 mt-1">
-                        Year 1 conservative: {{ formatCurrency(Math.round(topTierValue * 0.15)) }}
-                      </span>
-                    </span>
-                    <span v-else>
-                      Year 1 opportunity you could capture
-                      <span class="block text-xs text-ink/45 mt-1">
-                        (3-5 year potential: {{ formatCurrency(results.calculated_roi) }})
-                      </span>
-                    </span>
-                  </div>
-                </div>
-
-                <div v-if="hasTierBreakdown" class="mt-3 pt-3 border-t border-ink/15">
-                  <div v-if="results.active_maintained < getOptimalContacts()">
-                    <!-- User is below capacity -->
-                    <div class="grid sm:grid-cols-2 gap-4 text-center">
-                      <div class="rounded-xl border border-ink/12 bg-white p-3">
-                        <div class="text-xs text-ink/60 mb-1">Strategic relationships</div>
-                        <div class="font-display text-2xl font-medium text-kindred">
-                          {{ results.active_maintained + getStrategicGapContacts() }}
-                        </div>
-                        <div class="text-xs text-ink/45">
-                          ({{ results.active_maintained }} current + {{ getStrategicGapContacts() }} new)
-                        </div>
-                      </div>
-                      <div class="rounded-xl border border-ink/12 bg-white p-3">
-                        <div class="text-xs text-ink/60 mb-1">Remaining capacity</div>
-                        <div class="font-display text-2xl font-medium text-ink">
-                          {{ getOptimalContacts() - (results.active_maintained + getStrategicGapContacts()) }}
-                        </div>
-                        <div class="text-xs text-ink/45">
-                          for other relationships
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-else>
-                    <!-- User already exceeds optimal capacity - focus on quality -->
-                    <div class="rounded-xl border border-ink/12 bg-white p-4 text-center">
-                      <div class="text-sm text-ink/75 font-semibold mb-2">
-                        🎯 You're already maintaining {{ results.active_maintained }} relationships!
-                      </div>
-                      <div class="text-xs text-ink/60">
-                        Focus on upgrading <strong class="text-kindred">{{ getStrategicGapContacts() }}</strong> of your existing relationships to VIP/Partner quality for maximum impact
-                      </div>
-                    </div>
-                  </div>
-                  <div class="text-xs text-ink/60 mt-3 text-center">
-                    These {{ getStrategicGapContacts() }} strategic relationships generate <strong class="text-ink">{{ topTierPercent }}% of your total network value</strong>
-                  </div>
-                </div>
-                <div v-else class="mt-3 pt-3 border-t border-ink/15">
-                  <div class="text-xs text-ink/60 mb-1">That's approximately</div>
-                  <div class="font-display text-2xl font-medium text-ink">
-                    {{ formatCurrency(Math.round(results.conservative_roi / getGapContacts())) }}
-                  </div>
-                  <div class="text-xs text-ink/60">per relationship nurtured</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Missed Deals Breakdown -->
-          <div class="bg-white rounded-2xl border border-ink/12 p-6 sm:p-8">
-            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred">
-              At your deal size
-            </p>
-            <h2 class="mt-4 font-display text-2xl sm:text-3xl font-medium tracking-tight text-ink">
-              What that works out to
-            </h2>
-
-            <!-- Currency uses a compact format and a responsive size here: at
-                 full precision a seven-figure number overflows its column on a
-                 phone. -->
-            <dl class="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
-              <div v-for="stat in dealStats" :key="stat.label" class="min-w-0">
-                <dd class="font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
-                  {{ stat.value }}
-                </dd>
-                <dt class="mt-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-ink/45">
-                  {{ stat.label }}
-                </dt>
-              </div>
-            </dl>
-
-            <p class="mt-8 border-l-2 border-ember pl-6 leading-relaxed text-ink/70">
-              None of this arrives as a single missable event. It goes one quiet
-              relationship at a time, which is exactly why it does not get noticed.
-            </p>
-          </div>
-
-          <!-- Kindred Advantage Banner -->
-          <div class="bg-ink rounded-xl p-6 border-2 border-kindred text-white">
-            <p class="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-kindred-300">
-              The ceiling
-            </p>
-            <h3 class="mt-4 mb-6 font-display text-2xl font-medium tracking-tight">
-              What changes when you are not the one remembering
-            </h3>
-
-            <div class="grid sm:grid-cols-2 gap-4 mb-4">
-              <div class="rounded-xl border border-white/15 p-4 text-center">
-                <div class="text-sm opacity-90 mb-1">Without Tools</div>
-                <div class="font-display text-3xl font-medium">80-100</div>
-                <div class="text-xs opacity-75 mt-1">Active relationships (manual effort)</div>
-              </div>
-              <div class="rounded-xl border-2 border-kindred/60 p-4 text-center">
-                <div class="text-sm opacity-90 mb-1">With Kindred</div>
-                <div class="font-display text-3xl font-medium">{{ getRoleMaintenanceCap() }}</div>
-                <div class="text-xs opacity-75 mt-1">Active relationships ({{ getCapacityIncrease() }}% increase)</div>
-              </div>
-            </div>
-
-            <p class="text-sm leading-relaxed opacity-95">
-              <strong>Reminders, conversation context, and the nudges Kindred writes for you</strong>
-              move the ceiling because they take the remembering off you. The
-              figure on the right is what that models out to for your role — not
-              a measured result from other users.
-            </p>
           </div>
 
           <!-- Benchmark Comparison -->
@@ -704,8 +493,6 @@ import { getAssessmentResults } from '@/services/assessmentApi'
 import { formatCurrency, getPercentileText, formatNumber } from '@/utils/formatters'
 import kindredLogo from '@/assets/kindred.svg'
 import TierBreakdownCard from '@/components/results/TierBreakdownCard.vue'
-import YearComparison from '@/components/results/YearComparison.vue'
-import StrategicFocusCard from '@/components/results/StrategicFocusCard.vue'
 import MentalLoadCard from '@/components/results/MentalLoadCard.vue'
 
 const route = useRoute()
@@ -724,27 +511,13 @@ const tierBreakdown = computed(() => {
   return results.value?.breakdown?.tier_breakdown || []
 })
 
-const topTierCount = computed(() => {
-  if (!hasTierBreakdown.value || tierBreakdown.value.length < 2) return 45
-  return tierBreakdown.value[0].target_count + tierBreakdown.value[1].target_count
-})
 
-const topTierValue = computed(() => {
-  if (!hasTierBreakdown.value || tierBreakdown.value.length < 2) return 0
-  return tierBreakdown.value[0].total_value + tierBreakdown.value[1].total_value
-})
 
 const totalCapacity = computed(() => {
   if (!hasTierBreakdown.value) return getRoleMaintenanceCap()
   return tierBreakdown.value.reduce((sum, tier) => sum + tier.target_count, 0)
 })
 
-const topTierPercent = computed(() => {
-  if (!hasTierBreakdown.value) return 0
-  const totalValue = tierBreakdown.value.reduce((sum, tier) => sum + tier.total_value, 0)
-  if (totalValue === 0) return 0
-  return Math.round((topTierValue.value / totalValue) * 100)
-})
 
 // Helper functions for calculations
 const getBusinessRelevantPercent = () => {
@@ -801,14 +574,6 @@ const getOptimalContacts = () => {
   return Math.min(calculated, cap)
 }
 
-const getStrategicGapContacts = () => {
-  // This is the gap to reach strategic tier count (VIPs + Partners)
-  // Assumes current contacts are NOT strategic quality
-  if (!results.value || !hasTierBreakdown.value) return 0
-
-  // The strategic target is the top 2 tiers
-  return topTierCount.value
-}
 
 const getGapContacts = () => {
   if (!results.value) return 0
@@ -846,17 +611,6 @@ const costRows = computed(() => {
   ]
 })
 
-// Compact currency throughout: full precision overflows a narrow column.
-const dealStats = computed(() => {
-  if (!results.value) return []
-  const missed = results.value.breakdown.missed_deals || 1
-  return [
-    { value: missed, label: 'Opportunities a year' },
-    { value: `1 / ${Math.ceil(12 / missed)} mo`, label: 'How often one slips' },
-    { value: formatCurrency(results.value.avg_deal_value, true), label: 'Your average deal' },
-    { value: formatCurrency(results.value.conservative_roi, true), label: 'Total, per year' },
-  ]
-})
 
 // The three comparison bars. This used to rank people against an "average
 // professional" and a "top performer" percentage — both invented, since we have
@@ -911,11 +665,6 @@ const getRoleMaintenanceCap = () => {
   return caps[role] || 180
 }
 
-const getCapacityIncrease = () => {
-  const baseline = 90 // Average without tools (midpoint of 80-100)
-  const withKindred = getRoleMaintenanceCap()
-  return Math.round(((withKindred - baseline) / baseline) * 100)
-}
 
 // Dynamic messaging based on score
 // Reclaimed attention, when we have it — it is the number people actually
